@@ -13,6 +13,7 @@ const { Title } = Typography;
 const cardStyle = {
    padding: '5%',
    background: '#ffffff',
+   fontSize: '24px',
 };
 
 const iconStyle = {
@@ -44,6 +45,7 @@ const insideCard = {
    height: '100%',
    width: '100%',
    marginTop: '10%',
+   fontSize: '20px',
 } as React.CSSProperties;
 
 const imageStyle = {
@@ -73,15 +75,15 @@ function HomePage() {
                               <p > <img style={iconStyle} src={icon} />
                                  You need to have a <a href='https://metamask.io/'>metamask</a> wallet.
                               </p>
-                              <br /> <br />
+                              <br />
                               <p  > <img style={iconStyle} src={icon} />
                                  You must have a certain amount of <a href='https://ethereum.org/en/'>ethereum</a> in your wallet.
                               </p>
                            </div>
                         </Card>
-                        <iframe width="420" height="315"
+                        {/* <iframe width="420" height="315"
                            src="https://www.youtube.com/embed/YVgfHZMFFFQ">
-                        </iframe>
+                        </iframe> */}
                      </div>
                   </Col>
 

@@ -3,6 +3,7 @@ import { Button, Descriptions, PageHeader, Row, Statistic, Tag } from 'antd';
 import logo from '../images/logo_infinity.png';
 import { Layout } from "antd";
 import { Typography } from "antd";
+import metamask from '../images/MetaMask.png';
 
 const { Title } = Typography;
 const { Header } = Layout;
@@ -45,6 +46,9 @@ const buttonStyle = {
 };
 
 const signUpButtonStyle = {
+   marginRight: '5%',
+   backgroundColor: '#fff',
+   color: '#000',
 };
 
 
@@ -52,10 +56,11 @@ const Navbar = () => {
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
-         <Title style={titleStyle}>Infinity</Title>
+         <h1 style={titleStyle}>Infinity</h1>
          <div style={buttonBoxStyle}>
-            <Button size="large" style={buttonStyle} shape='round'>Sign In</Button>
-            <Button size="large" style={signUpButtonStyle} type="primary" shape='round'>Sign Up</Button>
+            <Button size="large" style={signUpButtonStyle} shape='round'>
+               <img src={metamask} style={{ width: '20px', height: '20px' }}></img>
+               Log In with Metamask</Button>
          </div>
       </Header >
    );
