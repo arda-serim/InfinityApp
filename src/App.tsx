@@ -8,6 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/parent" element={<ParentPage />} />
     </Routes>
   );
