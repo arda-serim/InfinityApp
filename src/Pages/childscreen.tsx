@@ -4,7 +4,7 @@ import PieChartComponent from "../Components/PieChart";
 
 
 
-function childscreen() {
+function Childscreen() {
    const data = [
       {
          title: "Child 1",
@@ -29,4 +29,4 @@ function childscreen() {
    );
 }
 
-export default childscreen;
+export default Childscreen;
