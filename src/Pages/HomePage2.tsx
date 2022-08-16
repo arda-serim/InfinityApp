@@ -106,7 +106,7 @@ console.log(test);
       else {
          setErrorMessage('Please install MetaMask');
       }
-
+      console.log("yeni güncelleme")
    }
 
    const accountChangedHandler = (newAccount: React.SetStateAction<string>) => {
