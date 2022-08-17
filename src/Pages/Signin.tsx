@@ -1,4 +1,4 @@
-import { Layout  , Card , Typography ,Button ,Radio , Checkbox} from 'antd';
+import { Layout  , Card, Checkbox, Button,Radio , Typography , Input, AutoComplete} from 'antd';
 import React from 'react';
 import Navbar from '../Components/Navbar';
 import { Col, Row, Slider } from 'antd';
@@ -6,14 +6,10 @@ import { useState } from 'react';
 import signinpng from '../images/signin.png';
 import background from '../images/background2.png';
 import { url } from 'inspector';
-import { Input } from 'antd';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import logo from '../images/logo_infinity.png';
 import { LoginOutlined  } from '@ant-design/icons';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-
-
-
-
 
 
 const { Title } = Typography;
@@ -25,92 +21,71 @@ const contentStyle ={
 };
 
 const navbarStyle ={
+  display: 'flex',
+  flexDirection: 'row',
+  height: '10%',
   background: 'rgba(0,0,0,0)',
-};
+}as React.CSSProperties;
 
 const colStyle ={
   background: 'rgba(0,0,0,0)',
   padding: 24,
-  minHeight: 650
-}
+  minHeight: 850
+};
 
 const imageStyle = {
-  width: '500px',
-  height: '500px',
+  width: '600px',
+  height: '600px',
   borderRadius: '15px',
   marginRight: '50px',
   marginTop: '',
-};
-
-const cardStyle = {
-  width: '800px',
-  height: '800px',
-  borderRadius: '1500px',
-  marginLeft: '150px',
-  marginTop: '-25px',
-
 };
 
 const inputStyle = {
   borderRadius: '15px', 
   width: '350px',
   height: '40px',
-   background: '#0A103A', 
-   marginLeft : '250px',
-   marginTop : '10px',
-   border : 'none',
-  
+  background: '#0A103A', 
+  color : 'white'
 };
 
-const inputStyle2 = {
-    borderRadius: '15px', 
-    width: '350px',
-    height: '40px',
-    //  marginTop : '-25 px',
-    marginLeft: '250px',
-    background: '#0A103A', 
-    color : 'white'
-  };
+const signInButtonStyle = {
+  width: '350px',
+  height: '40px',
+  background: 'linear-gradient( #327FA3 , #1D1B65)',
+  color: '#fff',
+  border: 'none',
+};
 
-  const buttonDivStyle = {
-    marginLeft : '250px',
-    marginTop : '50px',
-    
-   
-  };
+const whitePlaceStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginLeft:'220'
+};
 
-  const buttonStyle ={
-    background: 'linear-gradient( #327FA3 , #1D1B65)',
-    border : 'none',
-    width: '350px',
-    height: '40px',
-    
-  };
+const titleStyle = {
+  color: '#fff',
+  paddingTop: '.5%',
+};
 
-
-  const titleStyle = {
-    textAligin : 'center',
-    fontSize : '20px',
-    marginLeft : '250px',
-    marginTop: '120px',
-
-  };
-
-  const titleStyle1 = {
-    textAligin : 'center',
-    fontSize : '20px',
-    marginLeft : '250px',
-    marginTop : '50px',
-
-  };
+const logoStyle = {
+  width: '86px',
+  height: '71px',
+  marginLeft: '1%',
+  marginTop: '.5%',
+  marginBottom: '.5%'
+};
 
 
-const { Header, Footer, Sider, Content } = Layout;
+const onChange = (e: CheckboxChangeEvent) => {
+  console.log(`checked = ${e.target.checked}`);
+};
 
+
+const { Header, Content } = Layout;
 
 function Signin(){
  
-  const [size, setSize] = useState<SizeType>('large');
   return(
 
     <Layout style={{ backgroundPosition: 'center',
@@ -118,47 +93,56 @@ function Signin(){
     backgroundRepeat: 'no-repeat',
     backgroundImage :'url('+background+')',
       }}>
+      <Header style={navbarStyle}>
+         <img src={logo} alt="logo" style={logoStyle} />
+         <h1 style={titleStyle}>Infinity</h1>
 
-      <div style={{background: 'rgba(0,0,0,0)'}}>
-        <Navbar/>
-      </div>
+      </Header >
         <div style={contentStyle}>
           <Content>
             <div style={colStyle}>
-              <Row gutter={[2, 16]}>
+              <Row gutter={[16, 8]}>
                 <Col span={12}>
                   <img src={signinpng} style={imageStyle}/>
                 </Col>
-                <Col span={12}> 
-               <div>
-               <Title style = {titleStyle}>
-                  Name
-                </Title >
-               </div>
-                  <div>
-                     <Input style={inputStyle} placeholder=""/>
-                  </div>  
-          
-                <div>
-                <Title style = {titleStyle1}>
-                  Surname
-                </Title >
-                </div>
-                
-                  <div >
-                     <Input style={inputStyle2} placeholder=""/>
-                  </div> 
-                 
-                 
-                  <div>
-                
+                <Col span={12}>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Title style={{color: '#0A103A', marginTop:'25'
+                    }}>LET'S YOU SIGN IN</Title>
+                   </div>
+                   <div style={whitePlaceStyle}> 
+                    <Title level={5} style={{color: '#0A103A', marginRight: '160px'}}>Welcome to our page</Title>
                   </div>
-
-
-                  <div style={buttonDivStyle}>
-                  <Button style={buttonStyle} type="primary" shape="round" icon={<LoginOutlined />} size={size}>
-                     Sign In
-                    </Button>
+                  <br>
+                  </br>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Title level ={2} style={{color: '#0A103A', marginRight: '230px'}}>Name</Title>,
+                  </div>
+                  <div style={whitePlaceStyle}>
+                    <Input style={inputStyle}/>
+                  </div>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Title level ={2} style={{color: '#0A103A',  marginRight: '200px'}}>Surname</Title>
+                  </div>
+                  <div style={whitePlaceStyle}>
+                    <Input style={inputStyle}/>
+                  </div> 
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Checkbox onChange={onChange} style={{marginRight: '170px'}} >Keep me logged in</Checkbox>;
+                  </div>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Button size="large" style={signInButtonStyle} shape='round'>
+                    Sıgn In</Button>
                   </div>
                 </Col>
               </Row>
