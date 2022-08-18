@@ -4,7 +4,7 @@ import Navbar from '../Components/Navbar';
 import { Col, Row, Slider } from 'antd';
 import { useState } from 'react';
 import signinpng from '../images/signin.png';
-import background from '../images/background2.png';
+import bg from '../images/bg2.png';
 import { url } from 'inspector';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
@@ -37,22 +37,24 @@ const imageStyle = {
   width: '600px',
   height: '600px',
   borderRadius: '15px',
-  marginRight: '50px',
-  marginTop: '',
+  marginLeft: '120px',
+  marginTop: '50px'
 };
 
 const inputStyle = {
-  borderRadius: '15px', 
+  borderRadius: '15px',
   width: '350px',
   height: '40px',
-  background: '#0A103A', 
-  color : 'white'
+  //background: '#0A103A', 
+  color : 'white',
+  border: `2px solid purple`,
 };
 
 const signInButtonStyle = {
   width: '350px',
   height: '40px',
-  background: 'linear-gradient( #327FA3 , #1D1B65)',
+  //background: 'linear-gradient( #327FA3 , #1D1B65)',
+  background: 'linear-gradient( %41.67,#327FA3,%100,#1D1B65)',
   color: '#fff',
   border: 'none',
 };
@@ -91,7 +93,7 @@ function Signin(){
     <Layout style={{ backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundImage :'url('+background+')',
+    backgroundImage :'url('+bg+')',
       }}>
       <Header style={navbarStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
