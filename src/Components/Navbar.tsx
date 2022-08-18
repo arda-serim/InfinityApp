@@ -21,7 +21,7 @@ const headerStyle = {
    display: 'flex',
    flexDirection: 'row',
    height: '10%',
-   background: 'linear-gradient(to left, #2F3C9E, #253184, #192364, #11194D, #0C1340, #0A113B, #000020)',
+   background: 'rgba(0,0,0,0)',
 } as React.CSSProperties;
 
 const titleStyle = {

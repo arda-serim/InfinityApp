@@ -8,12 +8,13 @@ import logo from '../images/logo_infinity.png';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useNavigate } from 'react-router-dom';
 // import vector from '../images/Vector.png';
+import edit from '../images/editfoto.png';
 
 
 
 
-localStorage.setItem('user2' , 'parent')
-localStorage.setItem('user' , 'child2')
+//localStorage.setItem('user2' , 'parent')
+//localStorage.setItem('user' , 'child2')
 
 const inputStyle = {
     borderRadius: '15px', 
@@ -21,12 +22,11 @@ const inputStyle = {
     height: '40px',
     background: 'rgba(0,0,0,0)',
     color : 'white',
-    marginLeft : '250px',
+    marginLeft : '350px',
     marginTop: '10%'
   };
 
 const contentStyle={
-    background: 'linear-gradient(to left, #2F3C9E, #253184, #192364, #11194D, #0C1340, #0A113B, #000020)',
     witdh : '100%',
     height : '100%',
     padding: 24,
@@ -47,14 +47,13 @@ const buttonStyle={
     borderRadius: '15px', 
     width: '150px',
     height: '40px',
-    marginLeft : '350px',
+    marginLeft : '450px',
     marginTop: '10%'
 };
 
 const fotoStyle={
-    marginLeft : '400px',
-    width: '200px',
-    marginTop: '150px'
+    marginLeft : '200px',
+     marginTop: '100px'
 };
 
 const imageStyle = {
@@ -67,21 +66,21 @@ const imageStyle = {
 
 function Childedit(){
    
-  let navigate = useNavigate();
+ // let navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (
-      localStorage.getItem('user') === 'child2'
-    ) {
-      navigate("/");
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (
+  //     localStorage.getItem('user') === 'child2'
+  //   ) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
 
     const [size, setSize] = useState<SizeType>('large');
 
     return(
-        <Layout> 
+        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)'}}> 
     
             <div>
             <Navbar/>
@@ -93,6 +92,7 @@ function Childedit(){
                     <div>
                     <Col span={12}>
                         <div style = {fotoStyle}>
+                        <img src={edit} alt="edit" style={{width : '600px' , height : '500px'}} />
                         </div>
                     </Col>
                     </div>
