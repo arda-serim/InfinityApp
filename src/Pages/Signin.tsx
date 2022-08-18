@@ -134,7 +134,7 @@ function Signin(){
                   <br>
                   </br>
                   <div style={whitePlaceStyle}>
-                    <Title level ={2} style={{color: '#0A103A', marginRight: '230px'}}>{lang.ad}</Title>,
+                    <Title level ={2} style={{color: '#0A103A', marginRight: '230px'}}>{lang.ad}</Title>
                   </div>
                   <div style={whitePlaceStyle}>
                     <Input style={inputStyle}/>
@@ -150,7 +150,7 @@ function Signin(){
                   <br>
                   </br>
                   <div style={whitePlaceStyle}>
-                    <Checkbox onChange={onChange} style={{marginRight: '170px'}} >{lang.checkbox}</Checkbox>;
+                    <Checkbox onChange={onChange} style={{marginRight: '170px'}} >{lang.checkbox}</Checkbox>
                   </div>
                   <br>
                   </br>
