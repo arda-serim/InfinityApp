@@ -55,8 +55,7 @@ const inputStyle = {
 const signInButtonStyle = {
   width: '350px',
   height: '40px',
-  //background: 'linear-gradient( #327FA3 , #1D1B65)',
-  background: 'linear-gradient( %41.67,#327FA3,%100,#1D1B65)',
+  background: 'linear-gradient(180deg, #327FA3 41.67%, #1D1B65 100%)',
   color: '#fff',
   border: 'none',
 };
