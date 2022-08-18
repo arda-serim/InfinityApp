@@ -22,26 +22,13 @@ const headerStyle = {
    flexDirection: 'row',
    height: '10%',
    background: 'linear-gradient(to left, #2F3C9E, #253184, #192364, #11194D, #0C1340, #0A113B, #000020)',
+   position: 'sticky',
+   top: '0',
 } as React.CSSProperties;
 
 const titleStyle = {
    color: '#fff',
    paddingTop: '.5%',
-};
-
-const buttonBoxStyle = {
-   display: 'flex',
-   flexDirection: 'row',
-   paddingTop: '1.3%',
-   marginLeft: 'auto',
-   justifyItems: 'space-between',
-   width: '15%',
-} as React.CSSProperties;
-
-const signUpButtonStyle = {
-   marginRight: '5%',
-   backgroundColor: '#fff',
-   color: '#000',
 };
 
 
