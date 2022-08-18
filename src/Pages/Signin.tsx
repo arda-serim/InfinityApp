@@ -49,7 +49,7 @@ const inputStyle = {
   width: '350px',
   height: '40px',
   //background: '#0A103A', 
-  color : 'white',
+  color : 'black',
   border: `2px solid purple`,
 };
 
@@ -110,7 +110,7 @@ function Signin(){
       <Header style={navbarStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>Infinity</h1>
-         <button style={{marginLeft : '80%' , background: 'rgba(0,0,0,0)', border : 'none'   }} onClick={switchLang} > Dil Değiştir </button>
+         <button style={{marginLeft : '80%' , background: 'rgba(0,0,0,0)', border : 'none'}} onClick={switchLang}> <u>Dil Değiştir </u> </button>
 
       </Header >
         <div style={contentStyle}>
