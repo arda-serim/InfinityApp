@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 import { Layout  , Card, Checkbox, Button,Radio , Typography , Input, AutoComplete} from 'antd';
 import React from 'react';
 import Navbar from '../Components/Navbar';
@@ -10,7 +14,11 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
 import { LoginOutlined  } from '@ant-design/icons';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
+<<<<<<< HEAD
 import LangContext, {langs} from './langContext';
+=======
+import LangContext, {langs} from './LangContext';
+>>>>>>> master
 
 
 
@@ -41,6 +49,7 @@ const imageStyle = {
   borderRadius: '15px',
   marginLeft: '120px',
   marginTop: '50px'
+<<<<<<< HEAD
 };
 
 const inputStyle = {
@@ -99,6 +108,64 @@ function Signin(){
     lang===langs.tr ? setLang(langs.en):setLang(langs.tr)
   }
 
+=======
+};
+
+const inputStyle = {
+  borderRadius: '15px',
+  width: '350px',
+  height: '40px',
+  //background: '#0A103A', 
+  color : 'black',
+  border: `2px solid purple`,
+};
+
+const signInButtonStyle = {
+  width: '350px',
+  height: '40px',
+  background: 'linear-gradient(180deg, #327FA3 41.67%, #1D1B65 100%)',
+  color: '#fff',
+  border: 'none',
+};
+
+const whitePlaceStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginLeft:'220'
+};
+
+const titleStyle = {
+  color: '#fff',
+  paddingTop: '.5%',
+};
+
+const logoStyle = {
+  width: '86px',
+  height: '71px',
+  marginLeft: '1%',
+  marginTop: '.5%',
+  marginBottom: '.5%'
+};
+
+
+const onChange = (e: CheckboxChangeEvent) => {
+  console.log(`checked = ${e.target.checked}`);
+};
+
+
+const { Header, Content } = Layout;
+
+function Signin(){
+ 
+  const [lang,setLang] = useState(langs.tr)
+  const [selectedLanguage , setSelectedLanguage] = useState("tr")
+
+  const switchLang=()=>{
+    setSelectedLanguage(selectedLanguage==="tr" ? "en" : "tr");
+    lang===langs.tr ? setLang(langs.en):setLang(langs.tr)
+  }
+
+>>>>>>> master
   return(
 
     <LangContext.Provider value={lang}>
@@ -111,7 +178,11 @@ function Signin(){
       <Header style={navbarStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>Infinity</h1>
+<<<<<<< HEAD
          <button style={{marginLeft : '80%' , background: 'rgba(0,0,0,0)', border : 'none'   }} onClick={switchLang} > Dil Değiştir </button>
+=======
+         <button style={{marginLeft : '80%' , background: 'rgba(0,0,0,0)', border : 'none'}} onClick={switchLang}> <u>Dil Değiştir </u> </button>
+>>>>>>> master
 
       </Header >
         <div style={contentStyle}>
