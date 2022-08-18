@@ -9,6 +9,9 @@ import metamask from '../images/MetaMask.png';
 import logo from '../images/logo_infinity.png';
 import { Button } from 'antd';
 import { ethers } from 'ethers';
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 const { Content } = Layout;
@@ -91,6 +94,8 @@ function HomePage() {
    const [userBalance, setUserBalance] = useState('');
    const [connButtonText, setConnButtonText] = useState('Log In with Metamask');
 
+   let navigate = useNavigate();
+
    const connectWalletHandler = async () => {
       if (window.ethereum) {
          const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -101,7 +106,9 @@ function HomePage() {
          let signer = provider.getSigner();
 
          const address = await signer.getAddress();
-         console.log(address, account);
+         //console.log(address, account);
+         localStorage.setItem('adres' , account)
+         navigate('/Signin');
       }
       else {
          setErrorMessage('Please install MetaMask');
