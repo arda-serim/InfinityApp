@@ -21,18 +21,27 @@ const headerStyle = {
    display: 'flex',
    flexDirection: 'row',
    height: '10%',
-
    background: 'rgba(0,0,0,0)',
-
-   
-   position: 'sticky',
-   top: '0',
-
 } as React.CSSProperties;
 
 const titleStyle = {
    color: '#fff',
    paddingTop: '.5%',
+};
+
+const buttonBoxStyle = {
+   display: 'flex',
+   flexDirection: 'row',
+   paddingTop: '1.3%',
+   marginLeft: 'auto',
+   justifyItems: 'space-between',
+   width: '15%',
+} as React.CSSProperties;
+
+const signUpButtonStyle = {
+   marginRight: '5%',
+   backgroundColor: '#fff',
+   color: '#000',
 };
 
 
