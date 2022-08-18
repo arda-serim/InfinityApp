@@ -14,7 +14,7 @@ interface DataType {
 
 const mystyle = {
 
-   marginTop: '5%',
+   marginTop: '1%',
    marginLeft: '10%',
    marginRight: '10%',
    padding: '10px',
@@ -62,7 +62,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             dataIndex: 'name',
             key: 'name',
             align: 'center',
-            width: '15%',
+            width: '17%',
          },
          {
             title: 'Age',

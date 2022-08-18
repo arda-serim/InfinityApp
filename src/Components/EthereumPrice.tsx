@@ -1,12 +1,13 @@
 import React from "react";
 import Card from "antd/es/card";
 import icon from '../images/ethereum.png';
+import { Button } from "antd";
 
 
 
 const cardStyle = {
    width: "500px",
-   height: "400px",
+   height: "475px",
    justifyContent: "center",
    alignItems: "center",
    background: "rgba(0, 0, 0, 0)",
@@ -46,6 +47,10 @@ const EthereumPrice = () => {
          <p style={lineStyle}>
             <text style={{ color: '#fff' }}>2.00 ETH = $1,000</text>
          </p>
+         <br />
+         <Button type="primary" style={{ width: '100%' }}>
+            <text style={{ color: '#fff' }}>Withdraw Ethereum</text>
+         </Button>
       </Card>
    );
 
