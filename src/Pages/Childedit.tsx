@@ -6,7 +6,14 @@ import { useState } from 'react';
 import { Button, Image, Space ,Empty ,Input ,Radio,} from 'antd';
 import logo from '../images/logo_infinity.png';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
+import { useNavigate } from 'react-router-dom';
 // import vector from '../images/Vector.png';
+
+
+
+
+localStorage.setItem('user2' , 'parent')
+localStorage.setItem('user' , 'child2')
 
 const inputStyle = {
     borderRadius: '15px', 
@@ -60,6 +67,17 @@ const imageStyle = {
 
 function Childedit(){
    
+  let navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (
+      localStorage.getItem('user') === 'child2'
+    ) {
+      navigate("/");
+    }
+  }, []);
+
+
     const [size, setSize] = useState<SizeType>('large');
 
     return(

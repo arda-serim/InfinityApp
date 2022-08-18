@@ -88,6 +88,8 @@ const onChange = (e: CheckboxChangeEvent) => {
 const { Header, Content } = Layout;
 
 function Signin(){
+
+  console.log(localStorage.getItem('adres'))
  
   const [lang,setLang] = useState(langs.tr)
   const [selectedLanguage , setSelectedLanguage] = useState("tr")
