@@ -98,10 +98,10 @@ const Signin = () => {
     if (address === null) {
       navigate('/');
     }
-
+    
   }, []);
 
-  let users = [{ name: "", surname: "", role: "", balance: "", address: "" }];
+  let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [] }];
   const [balance, setBalance] = useState("");
   const [lang, setLang] = useState(langs.tr)
   const [selectedLanguage, setSelectedLanguage] = useState("tr")
@@ -147,6 +147,7 @@ const Signin = () => {
         role: 'parent',
         balance: balance,
         address: adrs,
+        children: []
       }
       sessionStorage.removeItem('address');
       if (rememberMe) {

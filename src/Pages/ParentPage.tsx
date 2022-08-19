@@ -1,6 +1,6 @@
 import React from "react";
 import PieChartComponent from "../Components/PieChart";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/NavbarChildPage";
 import TableComponent from "../Components/TableComponent";
 import { Content } from "antd/lib/layout/layout";
 import logo from "../images/logo_infinity.png";

@@ -33,24 +33,36 @@ const titleStyle = {
 };
 
 const avatarStyle = {
-   marginLeft: "1080px",
-   marginTop: '20px',
-   width: "100px",
-   height: "90px",
-   paddingTop: "27px",
-   textAlign: "center",
-   fontSize:"25px",
-   color: "black",
- 
+   float: 'right',
+   marginLeft: 'auto',
+   alignSelf: 'center',
+   width: '50px',
+   height: '50px',
+   textAlign: 'center',
+   paddingTop: '10px',
+   color: '#000',
+
 } as React.CSSProperties;
+
+const buttonStyle = {
+   alignSelf: 'center',
+   marginLeft: '1%',
+} as React.CSSProperties;
+
+function onLogOut() {
+   localStorage.removeItem('user');
+   sessionStorage.removeItem('user');
+   window.location.href = '/';
+}
+
 
 const Navbar = () => {
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>Infinity</h1>
-
          <Avatar style={avatarStyle} >NS</Avatar>
+         <Button onClick={onLogOut} style={buttonStyle} type="primary" shape="round" danger>Log Out</Button>
       </Header >
    );
 }
