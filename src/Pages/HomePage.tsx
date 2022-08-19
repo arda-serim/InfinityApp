@@ -148,25 +148,7 @@ const HomePage = () => {
                JSON.parse(usr).role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
          }
 
-         // look if user is in database
-         let users = localStorage.getItem('users');
-         if (users) {
-            let usersArr = JSON.parse(users);
 
-            for (let i = 0; usersArr !== null ? i < usersArr.length : i < 0; i++) {
-               if (usersArr) {
-                  if (usersArr[i].address.toLowerCase() === address.toLowerCase()) {
-                     console.log(usersArr[i].role);
-                     // remember me buton eklenmeli
-                     console.log(usersArr[i])
-                     sessionStorage.setItem('user', JSON.stringify(usersArr[i]));
-                     console.log(usersArr[i])
-
-                     usersArr[i].role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
-                  }
-               }
-            }
-         }
 
          console.log('hereeee')
          sessionStorage.removeItem('user');

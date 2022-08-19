@@ -26,6 +26,7 @@ const topSideStyle = {
 } as React.CSSProperties;
 
 const ParentPage = () => {
+   console.log("ParentPage");
    let navigate = useNavigate();
    // check if user is parent or admin
    React.useEffect(() => {
