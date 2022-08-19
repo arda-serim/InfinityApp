@@ -5,6 +5,7 @@ import TableComponent from "../Components/TableComponent";
 import { Content } from "antd/lib/layout/layout";
 import logo from "../images/logo_infinity.png";
 import EthereumPrice from "../Components/EthereumPrice";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -24,7 +25,30 @@ const topSideStyle = {
    alignItems: 'center',
 } as React.CSSProperties;
 
-function ParentPage() {
+const ParentPage = () => {
+   let navigate = useNavigate();
+   // check if user is parent or admin
+   React.useEffect(() => {
+      let user = undefined;
+      if (localStorage.getItem("user")) {
+         user = localStorage.getItem("user");
+         if (user)
+            user = JSON.parse(user);
+      }
+      else if (sessionStorage.getItem("user")) {
+         user = sessionStorage.getItem("user");
+         if (user)
+            user = JSON.parse(user);
+      }
+      if (user === undefined) {
+         navigate("/");
+      }
+      else if (user.role !== "parent") {
+         navigate("/");
+      }
+   }, []);
+
+
    const data = [
       {
          title: "Child 1",

@@ -36,6 +36,8 @@ const table = {
    zIndex: '10',
 } as React.CSSProperties;
 
+
+
 // let user = JSON.parse(localStorage.getItem('user'));
 
 
@@ -118,7 +120,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          </div>
          <Table style={table}
             bordered={true}
-            rowSelection={rowSelection}
+            rowSelection={{
+
+               ...rowSelection,
+            }}
             pagination={
                {
                   hideOnSinglePage: true,

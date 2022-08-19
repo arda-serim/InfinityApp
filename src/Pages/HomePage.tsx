@@ -28,8 +28,7 @@ const iconStyle = {
 };
 
 const colStyle = {
-
-   background: 'linear-gradient(to left, #2F3C9E, #253184, #192364, #11194D, #0C1340, #0A113B, #000020)',
+   background: 'rgba(0, 0, 0, 0)',
    padding: 24,
    minHeight: 580
 };
@@ -59,9 +58,10 @@ const imageStyle = {
    width: '1087px',
    height: '954px',
    borderRadius: '15px',
+   float: 'right',
    marginLeft: '-15%',
    marginTop: '-13%',
-};
+} as React.CSSProperties;
 
 const contentStyle = {
    width: '100%',
@@ -85,16 +85,39 @@ const signUpButtonStyle = {
    border: 'none',
 };
 
+const pageStyle = {
+   background: 'linear-gradient(to bottom, #0A368B,#3B82A0)',
+   // full page
+   minHeight: '100vh',
+   minWidth: '100vw',
+
+};
+
 declare var window: any
 
 
-function HomePage() {
-   const [errorMessage, setErrorMessage] = useState('');
-   const [defaultAccount, setDefaultAccount] = useState('');
-   const [userBalance, setUserBalance] = useState('');
-   const [connButtonText, setConnButtonText] = useState('Log In with Metamask');
+const HomePage = () => {
 
    let navigate = useNavigate();
+
+   // if there is session send to next page
+   React.useEffect(() => {
+      let session;
+      if (localStorage.getItem('user')) {
+         session = localStorage.getItem('user')
+      }
+      else if (sessionStorage.getItem('user')) {
+         session = sessionStorage.getItem('user')
+      }
+      if (session) {
+         let role = JSON.parse(session).role;
+         role === 'parent' ? navigate('/parent') : navigate('/child');
+      }
+   }, []);
+
+
+   const [errorMessage, setErrorMessage] = useState('');
+
 
    const connectWalletHandler = async () => {
       if (window.ethereum) {
@@ -106,28 +129,41 @@ function HomePage() {
          let signer = provider.getSigner();
 
          const address = await signer.getAddress();
-         //console.log(address, account);
-         localStorage.setItem('adres' , account)
+
+         let usr;
+         let userAddress;
+         if (localStorage.getItem('user')) {
+            usr = localStorage.getItem('user')
+            if (usr)
+               userAddress = JSON.parse(usr).address;
+         }
+         else if (sessionStorage.getItem('user')) {
+            usr = sessionStorage.getItem('user')
+            if (usr)
+               userAddress = JSON.parse(usr).address;
+         }
+         if (userAddress === address) {
+
+            if (usr)
+               JSON.parse(usr).role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
+         }
+         sessionStorage.removeItem('user');
+         localStorage.removeItem('user');
+
+         sessionStorage.setItem('address', account)
          navigate('/Signin');
+
+
+
       }
       else {
-         setErrorMessage('Please install MetaMask');
+         alert('Please install MetaMask Extension');
       }
 
-   }
-
-   const accountChangedHandler = (newAccount: React.SetStateAction<string>) => {
-      console.log("bura?.");
-      setDefaultAccount(newAccount);
-      getUserBalance(newAccount);
-   }
-
-   const getUserBalance = (address: React.SetStateAction<string>) => {
-      console.log("peki?.");
    }
 
    return (
-      <Layout >
+      <Layout style={pageStyle}>
          <div style={navbarStyle}>
             <Navbar />
          </div>
