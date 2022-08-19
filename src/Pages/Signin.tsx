@@ -11,7 +11,7 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
 import { LoginOutlined  } from '@ant-design/icons';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import LangContext, {langs} from './LangContext';
+import LangContext, {langs} from '../Pages/langContext';
 
 
 
