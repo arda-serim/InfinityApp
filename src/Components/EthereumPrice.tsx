@@ -26,6 +26,21 @@ const lineStyle = {
 } as React.CSSProperties;
 
 const EthereumPrice = () => {
+
+   let user;
+   if (localStorage.getItem("user")) {
+      user = localStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+   }
+   else if (sessionStorage.getItem("user")) {
+      user = sessionStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+
+   }
+
+
    return (
       <Card style={cardStyle} >
          <h1 style={{ color: '#fff' }}>Welcome Username</h1>
@@ -45,7 +60,7 @@ const EthereumPrice = () => {
          </p>
          <br />
          <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>2.00 ETH = $1,000</text>
+            <text style={{ color: '#fff' }}>{user.balance} ETH = $1,000</text>
          </p>
          <br />
          <Button type="primary" style={{ width: '100%' }}>

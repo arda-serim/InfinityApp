@@ -57,11 +57,29 @@ function onLogOut() {
 
 
 const Navbar = () => {
+   let name;
+   let surname;
+   let user;
+   if (localStorage.getItem("user")) {
+      user = localStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+   }
+   else if (sessionStorage.getItem("user")) {
+      user = sessionStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+
+   }
+
+   name = user.name;
+
+
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>Infinity</h1>
-         <Avatar style={avatarStyle} >NS</Avatar>
+         <Avatar style={avatarStyle} >{name}</Avatar>
          <Button onClick={onLogOut} style={buttonStyle} type="primary" shape="round" danger>Log Out</Button>
       </Header >
    );

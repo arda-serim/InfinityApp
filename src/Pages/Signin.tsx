@@ -101,7 +101,7 @@ const Signin = () => {
 
   }, []);
 
-  let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [] }];
+  let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [{ name: "", surname: "", role: "", balance: "", address: "", age: "", receivalDate: "" }] }];
   const [balance, setBalance] = useState("");
   const [lang, setLang] = useState(langs.tr)
   const [selectedLanguage, setSelectedLanguage] = useState("tr")
