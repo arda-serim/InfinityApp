@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, DatePicker, Input, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
 
 interface DataType {
@@ -36,12 +36,17 @@ const table = {
    zIndex: '10',
 } as React.CSSProperties;
 
-// let user = JSON.parse(localStorage.getItem('user'));
+
+
 
 
 const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
+   let navigate = useNavigate();
 
+   function onAddChild() {
+      navigate("/childedit");
+   }
    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -105,7 +110,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let addButton;
    if (!hasSelected) {
-      addButton = <Button type="primary">Add Child</Button>;
+      addButton = <Button onClick={onAddChild} type="primary">Add Child</Button>;
    }
    else {
       addButton = <Button type="primary" danger>Delete Children</Button>;
@@ -118,7 +123,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          </div>
          <Table style={table}
             bordered={true}
-            rowSelection={rowSelection}
+            rowSelection={{
+
+               ...rowSelection,
+            }}
             pagination={
                {
                   hideOnSinglePage: true,

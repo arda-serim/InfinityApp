@@ -1,10 +1,12 @@
 import React from "react";
 import PieChartComponent from "../Components/PieChart";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/NavbarChildPage";
 import TableComponent from "../Components/TableComponent";
 import { Content } from "antd/lib/layout/layout";
 import logo from "../images/logo_infinity.png";
 import EthereumPrice from "../Components/EthereumPrice";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 
 
@@ -24,66 +26,74 @@ const topSideStyle = {
    alignItems: 'center',
 } as React.CSSProperties;
 
-function ParentPage() {
-   const data = [
-      {
-         title: "Child 1",
-         value: 10,
-         color: "#00ff00",
-         key: "0",
-      },
-      {
-         title: "Child 2",
-         value: 8,
-         color: "#ff0000",
-         key: "1",
-      },
-      {
-         title: "Child 3",
-         value: 3,
-         color: "#0000ff",
-         key: "2",
-      },
-      {
-         title: "Child 4",
-         value: 10,
-         color: "#ffff00",
-         key: "3",
-      },
-   ];
+const ParentPage = () => {
+   let navigate = useNavigate();
+   // check if user is parent or admin
+   let user: any = undefined;
+   React.useEffect(() => {
+      if (localStorage.getItem("user")) {
+         user = localStorage.getItem("user");
+         if (user)
+            user = JSON.parse(user);
+      }
+      else if (sessionStorage.getItem("user")) {
+         user = sessionStorage.getItem("user");
+         if (user)
+            user = JSON.parse(user);
 
-   const tableData = [
-      {
-         key: "1",
-         name: "John Brown",
-         age: 32,
-         recieval_date: '12/12/2020',
-         given_amount: '10',
-      },
-      {
-         key: "2",
-         name: "Jim Green",
-         age: 42,
-         recieval_date: "10/10/2020",
-         given_amount: '8',
+      }
+      if (user === undefined) {
+         navigate("/");
+      }
+      else if (user.role !== "parent") {
+         navigate("/");
+      }
+   }, []);
 
-      },
-      {
-         key: "3",
-         name: "Joe Black",
-         age: 32,
-         recieval_date: "10/10/2020",
-         given_amount: '3',
+   if (localStorage.getItem("user")) {
+      user = localStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+   }
+   else if (sessionStorage.getItem("user")) {
+      user = sessionStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+   }
+   console.log(user)
 
-      },
-      {
-         key: "4",
-         name: "Jim Red",
-         age: 32,
-         recieval_date: "10/10/2020",
-         given_amount: '10',
-      },
-   ];
+   const data = [];
+   const tableData = [];
+   let children;
+
+   if (user !== undefined)
+      children = user.children;
+   if (children !== undefined) {
+      for (let i = 0; i < children.length; i++) {
+         if (children[i].balance !== undefined && children[i].balance !== null) {
+            data.push({
+               title: children[i].name,
+               value: Number(children[i].given_amount),
+               key: i.toString(),
+            });
+         }
+         tableData.push({
+            key: i.toString(),
+            name: children[i].name,
+            age: children[i].age,
+            recieval_date: children[i].recievalDate,
+            given_amount: children[i].balance !== undefined ? children[i].balance : 0,
+         });
+      }
+   }
+
+   data.push({
+      key: 'parent',
+      title: 'You',
+      value: Number(user.balance),
+   });
+
+
    return (
       <body style={pageStyle}>
          <Navbar />
