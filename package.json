@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/plots": "^1.2.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,7 +11,7 @@
     "@types/node": "^16.11.48",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "antd": "^4.22.4",
+    "antd": "^4.22.7",
     "ethers": "^5.6.9",
     "ethers-react": "^1.1.0",
     "i18next": "^21.9.1",
