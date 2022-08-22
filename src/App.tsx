@@ -16,9 +16,8 @@ function App() {
       <Route path="/parent" element={<ParentPage />} />
       <Route path="/signin" element={<Signin />} />
       <Route path="/childedit" element={<Childedit />} />
-      <Route path="/ChildPage" element={<ChildPage />} />
+      <Route path="/childpage" element={<ChildPage />} />
       <Route path="/signin" element={<Signin />} />
-      <Route path="/childedit" element={<Childedit />} />
     </Routes>
   );
 }
