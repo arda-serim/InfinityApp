@@ -12,7 +12,7 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import connectToMetamask from '../contract';
 import { getRole } from '../contract/functions';
-import LangContext, { langs } from '../Pages/langContext';
+import LangContext, { langs } from '../Pages/LangContext';
 
 
 
