@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 // import vector from '../images/Vector.png';
 import edit from '../images/editfoto.png';
 import { addChild, withdrawMoneyByChild } from '../contract/functions';
+import { ML } from '../App';
 
 
 
@@ -126,7 +127,7 @@ function Childedit() {
               <div>
                 <Col span={12}>
                   <div style={{ marginTop: '25%' }} >
-                    <Input style={inputStyle} placeholder="Name" onChange={(e: any) => setName(e.target.value)} />
+                    <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
                   </div>
                   {/* <div >
                     <Input style={inputStyle} placeholder="Surname"/>
