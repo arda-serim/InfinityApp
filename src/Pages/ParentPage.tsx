@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import PieChartComponent from "../Components/PieChart";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/NavbarChildPage";
 import TableComponent from "../Components/TableComponent";
 import { Content } from "antd/lib/layout/layout";
 import logo from "../images/logo_infinity.png";
 import EthereumPrice from "../Components/EthereumPrice";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import { getChilds, showBalanceofParent } from "../contract/functions";
 
 
 
@@ -24,76 +27,73 @@ const topSideStyle = {
    alignItems: 'center',
 } as React.CSSProperties;
 
-function ParentPage() {
-   const data = [
-      {
-         title: "Child 1",
-         value: 10,
-         color: "#00ff00",
-         key: "0",
-      },
-      {
-         title: "Child 2",
-         value: 8,
-         color: "#ff0000",
-         key: "1",
-      },
-      {
-         title: "Child 3",
-         value: 3,
-         color: "#0000ff",
-         key: "2",
-      },
-      {
-         title: "Child 4",
-         value: 10,
-         color: "#ffff00",
-         key: "3",
-      },
-   ];
 
-   const tableData = [
-      {
-         key: "1",
-         name: "John Brown",
-         age: 32,
-         recieval_date: '12/12/2020',
-         given_amount: '10',
-      },
-      {
-         key: "2",
-         name: "Jim Green",
-         age: 42,
-         recieval_date: "10/10/2020",
-         given_amount: '8',
+const ParentPage = () => {
+   let navigate = useNavigate();
 
-      },
-      {
-         key: "3",
-         name: "Joe Black",
-         age: 32,
-         recieval_date: "10/10/2020",
-         given_amount: '3',
+   const [tableData, setTableData] = useState([]);
+   const [data, setData] = useState([]);
+   const [role, setRole] = useState("");
 
-      },
-      {
-         key: "4",
-         name: "Jim Red",
-         age: 32,
-         recieval_date: "10/10/2020",
-         given_amount: '10',
-      },
-   ];
+   React.useEffect(() => {
+      let tempRole = localStorage.getItem("role");
+      if (tempRole) {
+         setRole(tempRole);
+      }
+      console.log(role)
+      if (localStorage.getItem("role") === "child") {
+         navigate("/childpage");
+      }
+      if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
+         navigate("/");
+      }
+
+      const getChildHandler = async () => {
+
+         const response = await getChilds();
+
+         const tempData = response.map((child: any) => ({
+            title: child.name,
+            key: child.walletaddress,
+            value: parseInt(child.amountOfMoney)
+         }),
+         )
+
+         tempData.push({
+            title: "You",
+            value: parseInt(await showBalanceofParent()),
+            key: "you"
+         })
+
+         setData(tempData);
+
+         const edit = response.map((child: any) => (
+            {
+               ...child,
+               releaseTime: child.releaseTime.toNumber(),
+               amountOfMoney: parseInt(child.amountOfMoney),
+               key: child.walletaddress
+            }),
+         )
+
+         setTableData(edit);
+      }
+
+      getChildHandler();
+
+   }, [])
+
+
    return (
       <body style={pageStyle}>
          <Navbar />
-         <Content>
+         {<Content>
             <div style={topSideStyle}>
                <PieChartComponent data={data} />
                <EthereumPrice />
             </div>
             <TableComponent data={tableData} />
-         </Content>
+         </Content>}
       </body>
    );
 }

@@ -1,0 +1,86 @@
+import { ethers } from "ethers";
+import connectToMetamask from "."
+
+export const addParent = async (name: any, surname: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.addParent(name, surname);
+
+   await tx.wait();
+
+}
+
+export const addChild = async (name: any, releaseTime: any, walletaddress: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.addChild(name, releaseTime, walletaddress);
+
+   await tx.wait();
+
+}
+
+export const getChilds = async () => {
+   const { contract, signerAddress } = await connectToMetamask();
+
+   const response = await contract.getChilds();
+
+   return response;
+}
+
+export const sendMoneyToContract = async (amount: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   await contract.sendMoney({ value: ethers.utils.parseEther(amount) });
+   // reload page
+   window.location.reload();
+}
+
+export const showBalanceofParent = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+   const balance = await contract.showMyBalance();
+   return balance;
+}
+
+export const withdrawMoneyByParent = async (amount: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   console.log("amount: ", amount)
+   const tx = await contract.withdrawMoneyByParent(ethers.utils.parseEther(amount));
+
+   await tx.wait();
+
+}
+
+export const sendMoneyToChild = async (amount: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.sendMoneyToChild("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", ethers.utils.parseEther(amount))
+
+   await tx.wait();
+
+}
+
+export const withdrawMoneyByParentFromChild = async (amount: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.withdrawMoneyByParentFromChild("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", ethers.utils.parseEther(amount))
+
+   await tx.wait();
+}
+
+export const withdrawMoneyByChild = async (amount: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   console.log("amount: ", amount);
+   const tx = await contract.withdrawMoneyByChild(ethers.utils.parseEther(amount));
+
+   await tx.wait();
+}
+export const getRole = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const response = await contract.getRole();
+
+   return response;
+
+}

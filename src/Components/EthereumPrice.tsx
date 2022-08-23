@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "antd/es/card";
 import icon from '../images/ethereum.png';
 import { Button } from "antd";
+import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from "../contract/functions";
 
 
 
@@ -25,7 +26,57 @@ const lineStyle = {
    whiteSpace: "pre-wrap",
 } as React.CSSProperties;
 
-const EthereumPrice = () => {
+const buttons = {
+   display: 'flex',
+   flexDirection: 'row',
+   justifyContent: 'space-evenly',
+   alignItems: 'center',
+   marginTop: '-7%',
+} as React.CSSProperties;
+
+
+
+const EthereumPrice = (props: any) => {
+   const [amountOfEthToDeposit, setAmountOfEthToDeposit] = useState('');
+   const [amountOfEthToWithdraw, setAmountOfEthToWithdraw] = useState();
+   const [balance, setBalance] = useState(0);
+
+
+   React.useEffect(() => {
+      async function getBalance() {
+         const balance = await showBalanceofParent();
+         setBalance(parseInt(balance));
+      }
+
+      getBalance();
+   }, []);
+
+
+
+
+   const sendMoneyHandler = async () => {
+      await sendMoneyToContract(amountOfEthToDeposit);
+   }
+
+
+   const withdrawHandler = async () => {
+      await withdrawMoneyByParent(amountOfEthToWithdraw);
+   }
+
+   let user;
+   if (localStorage.getItem("user")) {
+      user = localStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+   }
+   else if (sessionStorage.getItem("user")) {
+      user = sessionStorage.getItem("user");
+      if (user)
+         user = JSON.parse(user);
+
+   }
+
+
    return (
       <Card style={cardStyle} >
          <h1 style={{ color: '#fff' }}>Welcome Username</h1>
@@ -45,12 +96,23 @@ const EthereumPrice = () => {
          </p>
          <br />
          <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>2.00 ETH = $1,000</text>
+            <text style={{ color: '#fff' }}>{balance} ETH = $1,000</text>
          </p>
          <br />
-         <Button type="primary" style={{ width: '100%' }}>
-            <text style={{ color: '#fff' }}>Withdraw Ethereum</text>
-         </Button>
+         <div style={buttons}>
+            <div>
+               <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
+               <Button type="primary" style={{ width: '165px' }} onClick={sendMoneyHandler}>
+                  <text style={{ color: '#fff' }}>Deposit Ethereum</text>
+               </Button>
+            </div>
+            <div>
+               <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
+               <Button type="primary" style={{ width: '165px' }} onClick={withdrawHandler}>
+                  <text style={{ color: '#fff' }} >Withdraw Ethereum</text>
+               </Button>
+            </div>
+         </div>
       </Card>
    );
 

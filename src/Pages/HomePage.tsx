@@ -10,6 +10,8 @@ import logo from '../images/logo_infinity.png';
 import { Button } from 'antd';
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
+import connectToMetamask from '../contract';
+import { getRole } from '../contract/functions';
 
 
 
@@ -28,8 +30,7 @@ const iconStyle = {
 };
 
 const colStyle = {
-
-   background: 'linear-gradient(to left, #2F3C9E, #253184, #192364, #11194D, #0C1340, #0A113B, #000020)',
+   background: 'rgba(0, 0, 0, 0)',
    padding: 24,
    minHeight: 580
 };
@@ -59,9 +60,10 @@ const imageStyle = {
    width: '1087px',
    height: '954px',
    borderRadius: '15px',
+   float: 'right',
    marginLeft: '-15%',
    marginTop: '-13%',
-};
+} as React.CSSProperties;
 
 const contentStyle = {
    width: '100%',
@@ -85,49 +87,71 @@ const signUpButtonStyle = {
    border: 'none',
 };
 
+const pageStyle = {
+   background: 'linear-gradient(to bottom, #0A368B,#3B82A0)',
+   // full page
+   minHeight: '100vh',
+   minWidth: '100vw',
+
+};
+
 declare var window: any
 
 
-function HomePage() {
-   const [errorMessage, setErrorMessage] = useState('');
-   const [defaultAccount, setDefaultAccount] = useState('');
-   const [userBalance, setUserBalance] = useState('');
-   const [connButtonText, setConnButtonText] = useState('Log In with Metamask');
+const HomePage = () => {
 
    let navigate = useNavigate();
 
+   // if there is session send to next page
+   // React.useEffect(() => {
+
+   //    let session;
+   //    if (localStorage.getItem('user')) {
+   //       session = localStorage.getItem('user')
+   //    }
+   //    else if (sessionStorage.getItem('user')) {
+   //       session = sessionStorage.getItem('user')
+   //    }
+   //    if (session) {
+   //       let role = JSON.parse(session).role;
+   //       role === 'parent' ? navigate('/parent') : navigate('/ChildPage');
+   //    }
+   // }, []);
+
+
+   const [errorMessage, setErrorMessage] = useState('');
+
+
    const connectWalletHandler = async () => {
+      console.log('connectWalletHandler');
       if (window.ethereum) {
-         const provider = new ethers.providers.Web3Provider(window.ethereum);
-         let accounts = await provider.send("eth_requestAccounts", []);
-         let account = accounts[0];
-         provider.on('accountsChanged', (accounts: any) => { account = accounts[0]; console.log(address); });
+         const role = await getRole();
+         console.log("role: ", role)
+         localStorage.setItem('role', role);
 
-         let signer = provider.getSigner();
+         const { signerAddress } = await connectToMetamask();
 
-         const address = await signer.getAddress();
-         //console.log(address, account);
-         localStorage.setItem('adres' , account)
-         navigate('/Signin');
+
+         if (role === 'parent') {
+            navigate('/parent');
+         }
+         else if (role === 'child') {
+            navigate('/childpage');
+         }
+         else {
+            navigate('/signin');
+         }
+
+
       }
       else {
-         setErrorMessage('Please install MetaMask');
+         alert('Please install MetaMask Extension');
       }
 
-   }
-
-   const accountChangedHandler = (newAccount: React.SetStateAction<string>) => {
-      console.log("bura?.");
-      setDefaultAccount(newAccount);
-      getUserBalance(newAccount);
-   }
-
-   const getUserBalance = (address: React.SetStateAction<string>) => {
-      console.log("peki?.");
    }
 
    return (
-      <Layout >
+      <Layout style={pageStyle}>
          <div style={navbarStyle}>
             <Navbar />
          </div>
