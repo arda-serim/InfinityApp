@@ -26,6 +26,16 @@ const lineStyle = {
    whiteSpace: "pre-wrap",
 } as React.CSSProperties;
 
+const buttons = {
+   display: 'flex',
+   flexDirection: 'row',
+   justifyContent: 'space-evenly',
+   alignItems: 'center',
+   marginTop: '-7%',
+} as React.CSSProperties;
+
+
+
 const EthereumPrice = (props: any) => {
    const [amountOfEthToDeposit, setAmountOfEthToDeposit] = useState('');
    const [amountOfEthToWithdraw, setAmountOfEthToWithdraw] = useState();
@@ -89,14 +99,20 @@ const EthereumPrice = (props: any) => {
             <text style={{ color: '#fff' }}>{balance} ETH = $1,000</text>
          </p>
          <br />
-         <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
-         <Button type="primary" style={{ width: '100%', marginBottom: '10px' }} onClick={sendMoneyHandler}>
-            <text style={{ color: '#fff' }}>Deposit Ethereum</text>
-         </Button>
-         <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
-         <Button type="primary" style={{ width: '100%' }} onClick={withdrawHandler}>
-            <text style={{ color: '#fff' }} >Withdraw Ethereum</text>
-         </Button>
+         <div style={buttons}>
+            <div>
+               <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
+               <Button type="primary" style={{ width: '165px' }} onClick={sendMoneyHandler}>
+                  <text style={{ color: '#fff' }}>Deposit Ethereum</text>
+               </Button>
+            </div>
+            <div>
+               <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
+               <Button type="primary" style={{ width: '165px' }} onClick={withdrawHandler}>
+                  <text style={{ color: '#fff' }} >Withdraw Ethereum</text>
+               </Button>
+            </div>
+         </div>
       </Card>
    );
 
