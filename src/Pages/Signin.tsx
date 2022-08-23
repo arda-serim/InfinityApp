@@ -1,36 +1,16 @@
 
-import { Layout, Card, Checkbox, Button, Radio, Typography, Input, AutoComplete } from 'antd';
+import { Layout, Checkbox, Button, Typography, Input } from 'antd';
 import React from 'react';
-import Navbar from '../Components/Navbar';
-import { Col, Row, Slider } from 'antd';
+import { Col, Row } from 'antd';
 import { useState } from 'react';
 import signinpng from '../images/signin.png';
 import bg from '../images/bg2.png';
-import { url } from 'inspector';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
-import { LoginOutlined } from '@ant-design/icons';
-import type { SizeType } from 'antd/es/config-provider/SizeContext';
-<<<<<<< HEAD
-
-
-
-
-import LangContext, { langs } from '../Pages/langContext';
-=======
-import LangContext, { langs } from './langContext';
->>>>>>> 70640beca24b214ac17ce366788831e841e3ddb4
-import userEvent from '@testing-library/user-event';
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
-import { stringify } from 'querystring';
-<<<<<<< HEAD
-
-=======
-// @ts-ignore
-import { PATENT_ABI } from '../constants/Constant';
 import { addParent } from '../contract/functions';
->>>>>>> 70640beca24b214ac17ce366788831e841e3ddb4
+import LangContext, { langs } from './LangugeContext';
 
 declare var window: any;
 
