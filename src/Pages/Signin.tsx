@@ -11,7 +11,7 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
 import { LoginOutlined } from '@ant-design/icons';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import LangContext, { langs } from './langContext';
+import LangContext, { langs } from '../Pages/langContext';
 import userEvent from '@testing-library/user-event';
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
