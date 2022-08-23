@@ -123,14 +123,14 @@ const HomePage = () => {
 
 
    const connectWalletHandler = async () => {
+      console.log('connectWalletHandler');
       if (window.ethereum) {
          const role = await getRole();
-         localStorage.setItem('role', role);
          console.log("role: ", role)
+         localStorage.setItem('role', role);
 
          const { signerAddress } = await connectToMetamask();
 
-         localStorage.setItem('adres', signerAddress);
 
          if (role === 'parent') {
             navigate('/parent');

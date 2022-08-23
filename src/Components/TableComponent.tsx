@@ -26,10 +26,9 @@ const mystyle = {
 const buttonStyle = {
    position: 'relative',
    float: 'right',
-   marginBottom: '-35px',
    paddingTop: '5px',
    zIndex: '12',
-   marginRight: '20px',
+   marginBottom: '10px',
 } as React.CSSProperties;
 
 const table = {
@@ -164,5 +163,3 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
 
 export default TableComponent;
-
-

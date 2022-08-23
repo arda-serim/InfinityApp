@@ -1,7 +1,8 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import Card from "antd/es/card";
+
 import { Pie } from '@ant-design/plots';
+import { Card } from "antd";
 
 
 interface DataType {
