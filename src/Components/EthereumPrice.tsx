@@ -24,6 +24,7 @@ const lineStyle = {
    color: '#fff',
    fontSize: '20px',
    whiteSpace: "pre-wrap",
+   
 } as React.CSSProperties;
 
 const buttons = {

@@ -1,7 +1,7 @@
 
-import { Layout, Checkbox, Button, Typography, Input } from 'antd';
+
 import React from 'react';
-import { Col, Row } from 'antd';
+
 import { useState } from 'react';
 import signinpng from '../images/signin.png';
 import bg from '../images/bg2.png';
@@ -11,6 +11,7 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import { addParent } from '../contract/functions';
 import LangContext, { langs } from './LangugeContext';
+import { Typography, Layout, Row, Col, Input, Checkbox, Button } from 'antd';
 
 declare var window: any;
 
