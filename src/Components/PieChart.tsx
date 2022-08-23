@@ -1,21 +1,16 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import Card from "antd/es/card";
+
+import { Pie } from '@ant-design/plots';
+import { Card } from "antd";
 
 
 interface DataType {
    title: string;
    value: number;
-   color: string;
+   key: string;
 }
 
-const chartStyle = {
-   marginBottom: '25%',
-   width: "300px",
-   height: "300px",
-   fontSize: 8,
-   color: '#fff',
-};
 
 const cardStyle = {
    display: "flex",
@@ -46,33 +41,44 @@ const legendStyle = {
 
 
 const PieChartComponent = ({ data }: { data: Array<DataType> }) => {
-   let legend = [];
 
-   for (let i = 0; i < data.length; i++) {
-      let color = data[i].color;
-      legend.push(<text key={i}><img style={{
-         width: '13px', height: '13px', ['backgroundColor' as any]: data[i].color, marginBottom: '5px'
-      }}></img> {''}{data[i].title} {'   '}</text >);
-   }
+   const config = {
+      data,
+      angleField: 'value',
+      colorField: 'title',
+      appendPadding: 10,
+      label: {
+         type: 'inner',
+         offset: '-35%',
+         style: {
+            fontSize: 16,
+            textAlign: 'center',
+            color: '#fff',
+         },
+         interactions: [{
+            type: 'element-active',
+         }],
+      },
+      legend: {
+         visible: true,
+         offsetX: 25,
+         label: {
+            style: {
+               fill: 'white',
+               color: '#fff',
+            },
+
+         },
+      },
+   };
 
    return (
-
-      <div style={boxStyle}>
+      console.log('data', data),
+      <div style={boxStyle} >
          <Card style={cardStyle}>
-            <PieChart style={chartStyle}
-               animate={true}
-               animationDuration={500}
-               animationEasing="ease-out"
-               center={[50, 50]}
-               label={(props) => { return props.dataEntry.value + ' ETH'; }}
-               labelPosition={70}
-               lineWidth={98}
-               labelStyle={{ color: 'white' }}
-               onMouseOver={(e) => { }}
-               data={data} />
-            <p style={legendStyle}> {legend}</p>
+            <Pie {...config} />
          </Card>
-      </div>
+      </div >
    );
 }
 

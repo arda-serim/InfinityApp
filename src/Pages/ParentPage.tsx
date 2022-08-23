@@ -27,41 +27,9 @@ const topSideStyle = {
    alignItems: 'center',
 } as React.CSSProperties;
 
+
 const ParentPage = () => {
    let navigate = useNavigate();
-   // // check if user is parent or admin
-   // let user: any = undefined;
-   // React.useEffect(() => {
-   //    if (localStorage.getItem("user")) {
-   //       user = localStorage.getItem("user");
-   //       if (user)
-   //          user = JSON.parse(user);
-   //    }
-   //    else if (sessionStorage.getItem("user")) {
-   //       user = sessionStorage.getItem("user");
-   //       if (user)
-   //          user = JSON.parse(user);
-
-   //    }
-   //    if (user === undefined) {
-   //       navigate("/");
-   //    }
-   //    else if (user.role !== "parent") {
-   //       navigate("/");
-   //    }
-   // }, []);
-
-   // if (localStorage.getItem("user")) {
-   //    user = localStorage.getItem("user");
-   //    if (user)
-   //       user = JSON.parse(user);
-   // }
-   // else if (sessionStorage.getItem("user")) {
-   //    user = sessionStorage.getItem("user");
-   //    if (user)
-   //       user = JSON.parse(user);
-   // }
-   // console.log(user)
 
    const [tableData, setTableData] = useState([]);
    const [data, setData] = useState([]);
@@ -76,7 +44,7 @@ const ParentPage = () => {
       if (localStorage.getItem("role") === "child") {
          navigate("/childpage");
       }
-      if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null) {
+      if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
          navigate("/");
       }
 
@@ -114,37 +82,6 @@ const ParentPage = () => {
       getChildHandler();
 
    }, [])
-
-   //const data = [];
-   //const tableData = [];
-   let children;
-
-   // if (user !== undefined)
-   //    children = user.children;
-   // if (children !== undefined) {
-   //    for (let i = 0; i < children.length; i++) {
-   //       if (children[i].balance !== undefined && children[i].balance !== null) {
-   //          data.push({
-   //             title: children[i].name,
-   //             value: Number(children[i].given_amount),
-   //             key: i.toString(),
-   //          });
-   //       }
-   //       tableData.push({
-   //          key: i.toString(),
-   //          name: children[i].name,
-   //          age: children[i].age,
-   //          recieval_date: children[i].recievalDate,
-   //          given_amount: children[i].balance !== undefined ? children[i].balance : 0,
-   //       });
-   //    }
-   // }
-
-   // data.push({
-   //    key: 'parent',
-   //    title: 'You',
-   //    value: Number(user.balance),
-   // });
 
 
    return (

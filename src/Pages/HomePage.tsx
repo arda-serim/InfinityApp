@@ -12,7 +12,6 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import connectToMetamask from '../contract';
 import { getRole } from '../contract/functions';
-import LangContext, { langs } from '../Pages/LangContext';
 
 
 
@@ -103,16 +102,6 @@ const HomePage = () => {
 
    let navigate = useNavigate();
 
-
-   const [lang, setLang] = useState(langs.tr)
-   const [selectedLanguage, setSelectedLanguage] = useState("tr")
-
-
-   const switchLang = () => {
-      setSelectedLanguage(selectedLanguage === "tr" ? "en" : "tr");
-      lang === langs.tr ? setLang(langs.en) : setLang(langs.tr)
-    }
-
    // if there is session send to next page
    // React.useEffect(() => {
 
@@ -134,14 +123,14 @@ const HomePage = () => {
 
 
    const connectWalletHandler = async () => {
+      console.log('connectWalletHandler');
       if (window.ethereum) {
          const role = await getRole();
-         localStorage.setItem('role', role);
          console.log("role: ", role)
+         localStorage.setItem('role', role);
 
          const { signerAddress } = await connectToMetamask();
 
-         localStorage.setItem('adres', signerAddress);
 
          if (role === 'parent') {
             navigate('/parent');
@@ -162,8 +151,6 @@ const HomePage = () => {
    }
 
    return (
-
-      <LangContext.Provider value={lang}>
       <Layout style={pageStyle}>
          <div style={navbarStyle}>
             <Navbar />
@@ -216,7 +203,6 @@ const HomePage = () => {
             </Content >
          </div >
       </Layout >
-      </LangContext.Provider>
    );
 }
 

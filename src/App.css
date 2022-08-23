@@ -1,52 +1,60 @@
 .ant-table-content {
-    border: 10px;
-    color: aliceblue;
-    border-color: yellow;
- }
- 
- .ant-table-thead>tr>th {
-    background: rgba(0, 0, 0, 0);
-    color: aliceblue;
- }
- 
- .ant-table-cell {
-    background: rgba(0, 0, 0, 0);
- }
- 
- .ant-table {
-    background: rgba(0, 0, 0, 0);
- }
- 
- .ant-table.ant-table-bordered>.ant-table-container {
-    border-color: yellow;
- }
- 
- 
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table {
-    border-color: yellow;
- }
- 
- .ant-table-tbody>tr>td {
-    border-color: yellow;
- }
- 
- 
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tbody>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tfoot>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tfoot>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>thead>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tbody>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tfoot>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tfoot>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>thead>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>tbody>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>tfoot>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>tfoot>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>thead>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>tbody>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>tfoot>tr>td,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>tfoot>tr>th,
- .ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>thead>tr>th {
-    border-color: yellow;
- }
+   border: 10px;
+   color: aliceblue;
+   border-color: yellow;
+}
+
+.ant-table-thead>tr>th {
+   background: rgba(0, 0, 0, 0);
+   color: aliceblue;
+}
+
+.ant-table-cell {
+   background: rgba(0, 0, 0, 0);
+}
+
+.ant-table {
+   background: rgba(0, 0, 0, 0);
+}
+
+.ant-table.ant-table-bordered>.ant-table-container {
+   border-color: yellow;
+}
+
+
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table {
+   border-color: yellow;
+}
+
+.ant-table-tbody>tr>td {
+   border-color: yellow;
+}
+
+
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tbody>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tfoot>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tfoot>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>thead>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tbody>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tfoot>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tfoot>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>thead>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>tbody>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>tfoot>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>tfoot>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table>thead>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>tbody>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>tfoot>tr>td,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>tfoot>tr>th,
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>thead>tr>th {
+   border-color: yellow;
+}
+
+
+.ant-table-thead>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-thead>tr:hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+   background: rgba(0, 0, 0, 0.2);
+}
