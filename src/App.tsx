@@ -12,7 +12,7 @@ import { initReactI18next } from 'react-i18next';
 
 import HtppApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { langs } from "./Pages/LangContext";
+import { langs } from "./Pages/LangugeContext";
 import { Dropdown, Typography, Space, Menu } from "antd";
 import menu from "antd/lib/menu";
 
