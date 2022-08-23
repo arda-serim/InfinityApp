@@ -7,6 +7,13 @@ import signinpng from '../images/signin.png';
 import bg from '../images/bg2.png';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
+
+
+import { LoginOutlined } from '@ant-design/icons';
+import type { SizeType } from 'antd/es/config-provider/SizeContext';
+
+import userEvent from '@testing-library/user-event';
+
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import { addParent } from '../contract/functions';
