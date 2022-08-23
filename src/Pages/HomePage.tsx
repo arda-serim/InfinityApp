@@ -10,6 +10,8 @@ import logo from '../images/logo_infinity.png';
 import { Button } from 'antd';
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
+import connectToMetamask from '../contract';
+import { getRole } from '../contract/functions';
 
 
 
@@ -101,19 +103,20 @@ const HomePage = () => {
    let navigate = useNavigate();
 
    // if there is session send to next page
-   React.useEffect(() => {
-      let session;
-      if (localStorage.getItem('user')) {
-         session = localStorage.getItem('user')
-      }
-      else if (sessionStorage.getItem('user')) {
-         session = sessionStorage.getItem('user')
-      }
-      if (session) {
-         let role = JSON.parse(session).role;
-         role === 'parent' ? navigate('/parent') : navigate('/ChildPage');
-      }
-   }, []);
+   // React.useEffect(() => {
+
+   //    let session;
+   //    if (localStorage.getItem('user')) {
+   //       session = localStorage.getItem('user')
+   //    }
+   //    else if (sessionStorage.getItem('user')) {
+   //       session = sessionStorage.getItem('user')
+   //    }
+   //    if (session) {
+   //       let role = JSON.parse(session).role;
+   //       role === 'parent' ? navigate('/parent') : navigate('/ChildPage');
+   //    }
+   // }, []);
 
 
    const [errorMessage, setErrorMessage] = useState('');
@@ -121,42 +124,23 @@ const HomePage = () => {
 
    const connectWalletHandler = async () => {
       if (window.ethereum) {
-         const provider = new ethers.providers.Web3Provider(window.ethereum);
-         let accounts = await provider.send("eth_requestAccounts", []);
-         let account = accounts[0];
-         provider.on('accountsChanged', (accounts: any) => { account = accounts[0]; console.log(address); });
+         const role = await getRole();
+         localStorage.setItem('role', role);
+         console.log("role: ", role)
 
-         let signer = provider.getSigner();
+         const { signerAddress } = await connectToMetamask();
 
-         const address = await signer.getAddress();
+         localStorage.setItem('adres', signerAddress);
 
-         let usr;
-         let userAddress;
-         if (localStorage.getItem('user')) {
-            usr = localStorage.getItem('user')
-            if (usr)
-               userAddress = JSON.parse(usr).address;
+         if (role === 'parent') {
+            navigate('/parent');
          }
-         else if (sessionStorage.getItem('user')) {
-            usr = sessionStorage.getItem('user')
-            if (usr)
-               userAddress = JSON.parse(usr).address;
+         else if (role === 'child') {
+            navigate('/childpage');
          }
-         if (userAddress === address) {
-
-            if (usr)
-               JSON.parse(usr).role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
+         else {
+            navigate('/signin');
          }
-
-
-
-         console.log('hereeee')
-         sessionStorage.removeItem('user');
-         localStorage.removeItem('user');
-
-         sessionStorage.setItem('address', account)
-         navigate('/Signin');
-
 
 
       }

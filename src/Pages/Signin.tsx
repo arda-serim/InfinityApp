@@ -16,6 +16,9 @@ import userEvent from '@testing-library/user-event';
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import { stringify } from 'querystring';
+// @ts-ignore
+import { PATENT_ABI } from '../constants/Constant';
+import { addParent } from '../contract/functions';
 
 declare var window: any;
 
@@ -101,6 +104,8 @@ const Signin = () => {
 
   }, []);
 
+
+
   let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [{ name: "", surname: "", role: "", balance: "", address: "", age: "", receivalDate: "" }] }];
   const [balance, setBalance] = useState("");
   const [lang, setLang] = useState(langs.tr)
@@ -127,33 +132,35 @@ const Signin = () => {
     );
 
     // look if user is in database
-    let users = localStorage.getItem('users');
-    if (users) {
-      let usersArr = JSON.parse(users);
-      let address = sessionStorage.getItem('address');
-      if (address === null) {
-        address = "";
-        navigate('/');
-      }
-      for (let i = 0; usersArr !== null ? i < usersArr.length : i < 0; i++) {
-        if (usersArr) {
-          if (usersArr[i].address.toLowerCase() === address.toLowerCase()) {
-            console.log(usersArr[i].role);
-            // remember me buton eklenmeli
-            console.log(usersArr[i])
-            sessionStorage.setItem('user', JSON.stringify(usersArr[i]));
-            console.log(usersArr[i])
+    // let users = localStorage.getItem('users');
+    // if (users) {
+    //   let usersArr = JSON.parse(users);
+    //   let address = sessionStorage.getItem('address');
+    //   if (address === null) {
+    //     address = "";
+    //     navigate('/');
+    //   }
+    //   for (let i = 0; usersArr !== null ? i < usersArr.length : i < 0; i++) {
+    //     if (usersArr) {
+    //       if (usersArr[i].address.toLowerCase() === address.toLowerCase()) {
+    //         console.log(usersArr[i].role);
+    //         // remember me buton eklenmeli
+    //         console.log(usersArr[i])
+    //         sessionStorage.setItem('user', JSON.stringify(usersArr[i]));
+    //         console.log(usersArr[i])
 
-            usersArr[i].role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
-          }
-        }
-      }
-    }
+    //         usersArr[i].role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
+    //       }
+    //     }
+    //   }
+    // }
 
   }
     , []);
 
-  function OnSignIn() {
+  async function OnSignIn() {
+
+    await addParent(name, surname);
 
     if (name === "" || surname === "") {
       alert("Please fill all the fields")
