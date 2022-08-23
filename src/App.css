@@ -50,3 +50,11 @@
 .ant-table.ant-table-bordered>.ant-table-container>.ant-table-summary>table>thead>tr>th {
    border-color: yellow;
 }
+
+
+.ant-table-thead>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-thead>tr:hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+   background: rgba(0, 0, 0, 0.2);
+}
