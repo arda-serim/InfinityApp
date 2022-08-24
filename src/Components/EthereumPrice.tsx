@@ -48,7 +48,7 @@ const EthereumPrice = (props: any) => {
    React.useEffect(() => {
       async function getBalance() {
          const balance = await showBalanceofParent();
-         setBalance(parseInt(balance));
+         setBalance(Number(balance));
       }
 
       getBalance();
@@ -103,7 +103,7 @@ const EthereumPrice = (props: any) => {
          </p>
          <br />
          <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>{balance} ETH = $1,000</text>
+            <text style={{ color: '#fff' }}>{balance / (Math.pow(10,18))} ETH = $1,000</text>
          </p>
          <br />
          <div style={buttons}>

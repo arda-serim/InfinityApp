@@ -159,7 +159,7 @@ const ChildPage = () => {
             const { signerAddress } = await connectToMetamask();
 
             const tempChild = await getChild(signerAddress);
-            console.log(parseInt(tempChild.amountOfMoney));
+            console.log(Number(tempChild.amountOfMoney));
             setChild(tempChild);
             console.log(tempChild);
             console.log(child.releaseTime)
@@ -200,7 +200,7 @@ const ChildPage = () => {
                                 <div style={cardStyle}>
                                     <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
                                         <p style={lineStyle}>
-                                            <text style={{ color: 'black' }}>{parseInt(child.amountOfMoney)} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
+                                            <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10,18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
 
                                         </p>
                                         <p style={textStyle}>

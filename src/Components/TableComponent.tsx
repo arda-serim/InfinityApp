@@ -95,7 +95,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             width: '17%',
          },
          {
-            title: 'Money',
+            title: 'Money(ETH)',
             dataIndex: 'amountOfMoney',
             key: 'amountOfMoney',
             align: 'center',
