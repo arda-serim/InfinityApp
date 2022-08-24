@@ -144,8 +144,17 @@ const { Title } = Typography;
 const ChildPage = () => {
     const [input, setInput] = useState();
     const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '' });
-
+    let navigate = useNavigate();
     useEffect(() => {
+
+        let role = localStorage.getItem('role');
+        if (role === 'parent') {
+            navigate('/parent');
+        }
+        else {
+            navigate('/');
+        }
+
 
         async function getThisChild() {
             const { signerAddress } = await connectToMetamask();
