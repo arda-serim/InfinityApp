@@ -49,6 +49,7 @@ const card = {
    color: '#fff',
    background: 'rgba(0, 0, 0, 0)',
    marginLeft: '-3%',
+   zIndex : 2
 
 } as React.CSSProperties;
 
@@ -92,6 +93,7 @@ const imageStyle1 = {
 const contentStyle = {
    width: '100%',
    height: '100%',
+   
 };
 
 const navbarStyle = {
@@ -110,6 +112,7 @@ const signUpButtonStyle = {
    background: 'linear-gradient(180deg, #091058 , #305367)',
    color: '#fff',
    border: 'none',
+   zIndex : 2
 };
 
 const pageStyle = {
@@ -275,6 +278,7 @@ const HomePage = () => {
 
             </Content >
          </div >
+         
 
       </Layout >
    );
