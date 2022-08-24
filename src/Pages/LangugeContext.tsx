@@ -11,7 +11,7 @@ export const langs = {
         checkbox: 'Beni hatırla',
         //homepage
         homePageGiris: "InTeritance'a ",
-        homePageGiris1: "hoş geldiniz  ",
+        homePageGiris1: "Hoş geldiniz  ",
         need: 'Neye ihtiyacınız var',
         appInfo: 'InTeritance çocuğunuzun büyümesine eşlik edecek bir birikim uygulamasıdır. InTeritance size sunduğu esnek fonksiyonlarla çocuğunuzun hayattaki dönüm noktalarına destek olabilir , geleceğini şekillendirebilirsiniz.',
         first: 'Bir',
