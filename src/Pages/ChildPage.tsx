@@ -2,9 +2,9 @@ import Navbar from '../Components/NavbarChildPage';
 import Sayac from '../Components/Sayac';
 import React, { useEffect } from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider, Typography , Card, Statistic} from 'antd'; 
+import { Col, Row, Slider, Typography, Card, Statistic } from 'antd';
 import { useState } from 'react';
-import { Button, Image, Space ,Empty ,Input ,Radio,} from 'antd';
+import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
 import logo from '../images/logo_infinity.png';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useNavigate } from 'react-router-dom';
@@ -12,11 +12,9 @@ import picture from '../images/newPicture.png';
 import edit from '../images/editfoto.png';
 import TRY from '../images/pngwing.com.png';
 import type { countdownValueType } from 'antd/es/statistic/utils';
+import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../contract/functions';
+import connectToMetamask from '../contract';
 const { Countdown } = Statistic;
-
-
-
-
 
 
 
@@ -26,10 +24,10 @@ const colStyle = {
 
 };
 
-const contentStyle = { 
+const contentStyle = {
     width: '100%',
     heigth: '100%',
-    
+
 };
 const cardStyle = {
     width: '500px',
@@ -53,10 +51,10 @@ const lineStyle = {
     marginTop: "30px",
     background: "#D9D9D9",
     paddingTop: "9px",
-    
- } as React.CSSProperties;
 
- 
+} as React.CSSProperties;
+
+
 const textStyle = {
     display: "flex",
     flexDirection: "row",
@@ -67,9 +65,9 @@ const textStyle = {
     width: "200px",
     marginLeft: "130px",
     marginTop: "-15px",
- } as React.CSSProperties;
+} as React.CSSProperties;
 
- const inputStyle = {
+const inputStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -82,9 +80,9 @@ const textStyle = {
     border: "#1D1B65",
     borderRadius: "30px",
     background: "linear-gradient(#FFFFFF, #1D1B65)",
- } as React.CSSProperties;
+} as React.CSSProperties;
 
- const buttonStyle = {
+const buttonStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -100,9 +98,9 @@ const textStyle = {
     background: "linear-gradient(#EF886C, #EFAA45)",
     textAlign: "center",
 
- } as React.CSSProperties;
- 
- const imageStyle = {
+} as React.CSSProperties;
+
+const imageStyle = {
     //width: '500px',
     //height: '400px',
     width: "80%",
@@ -112,8 +110,8 @@ const textStyle = {
     marginLeft: "30px",
     border: "1px solid #40D8D8",
 
- }
- const buttonStyle2 = {
+}
+const buttonStyle2 = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -128,9 +126,9 @@ const textStyle = {
     borderRadius: "30px",
     background: "linear-gradient(#5E7D8B  50.02%, #1D1B65  99.95%)",
     textAlign: "center",
- } as React.CSSProperties;
+} as React.CSSProperties;
 
-const tryStyle ={
+const tryStyle = {
     width: "25px",
     paddingBottom: "5px",
 }
@@ -140,71 +138,85 @@ export interface child {
     address: string;
 
 }
-const {Title} = Typography;
+const { Title } = Typography;
 
 
-const ChildPage = ()  => {
-    const [child, setChild] = useState<child | undefined> (undefined)
+const ChildPage = () => {
+    const [input, setInput] = useState();
+    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '' });
 
     useEffect(() => {
-    setChild({
-        name: "sude",
-        releaseTime: new Date("2023-08-23"),
-        address: "ev ev ",
-    })
-    }, [ ])
-    
-    const onFinish = () => {
 
+        async function getThisChild() {
+            const { signerAddress } = await connectToMetamask();
 
-        console.log('finished!');
-      };
+            const tempChild = await getChild(signerAddress);
+            console.log(parseInt(tempChild.amountOfMoney));
+            setChild(tempChild);
+            console.log(tempChild);
+            console.log(child.releaseTime)
+        }
+        getThisChild();
+
+    }, [])
+
+    const onWithdrawAll = async () => {
+
+        await withdrawAllMoneyByChild();
+
+        window.location.reload();
+    };
+
+    const setClick = async () => {
+        await withdrawMoneyByChild(input);
+
+    }
     return (
 
-        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)'}}>
+        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
             <div>
-        
-                <Navbar/>
-                
+
+                <Navbar />
+
             </div>
             <div style={contentStyle}>
                 <Content>
                     <div style={colStyle} >
-                        <Row gutter={[16,8]}>
-                                <Col span={12}>
-                                    <div>
-                                    <Title level={2} style={{marginLeft: "260px", width:"400px", marginTop:"50px", color:"white"}} >
+                        <Row gutter={[16, 8]}>
+                            <Col span={12}>
+                                <div>
+                                    <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
                                         Welcome User!
                                     </Title>
-                                    </div>
-                                    <div style={cardStyle}>
-                                        <Card style= {{background: "#4268B1  50.02%", border:"#4268B1" ,borderRadius: "30px", height: "450px"}}>
+                                </div>
+                                <div style={cardStyle}>
+                                    <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
                                         <p style={lineStyle}>
-                                             <text style={{ color: 'black' }}>18,100,650 <img src={TRY} style={tryStyle} /></text>
+                                            <text style={{ color: 'black' }}>{parseInt(child.amountOfMoney)} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
 
                                         </p>
                                         <p style={textStyle}>
-                                             <text style={{ color: '#FFFFFF', opacity:"0.18" }}>Release Time: 18.08.2024 </text>
+                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{parseInt(child.releaseTime)} </text>
                                         </p>
                                         <br />
-                                        { child?.releaseTime && child?.releaseTime>new Date() && <>
-                                            <Countdown /*title="Day Level" */ value={child?.releaseTime.getTime()} format="DD Gün HH:mm:ss kaldı" valueStyle={{color: "white", width: "100%", textAlign: "center",}}  />
-                                        </>}
+                                        {/* {child?.releaseTime && child?.releaseTime > new Date() && <>
+                                            <Countdown /*title="Day Level"  value={child?.releaseTime.getTime()} format="DD Gün HH:mm:ss kaldı" valueStyle={{ color: "white", width: "100%", textAlign: "center", }} />
+                                        </>} */}
 
                                         <br />
-                                        <Input style={inputStyle} />
+                                        <Input style={inputStyle} onChange={(event: any) => setInput(event.target.value)} />
                                         <br />
-                                        <Button style={buttonStyle}>Withdraw Money</Button>
+                                        <Button style={buttonStyle} onClick={setClick} >Withdraw Money</Button>
                                         <br />
-                                        <Button style={buttonStyle2}>Withdraw All The Money</Button>
+                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >Withdraw All The Money</Button>
 
-                                        </Card>
-                                        
-                                    </div>
-                                </Col>
-                                <Col span={12} >
-                                    <img src={picture} style={imageStyle}/>
-                                </Col>
+                                    </Card>
+
+                                </div>
+                            </Col>
+                            <Col span={12} >
+                                <img src={picture} style={imageStyle} />
+                            </Col>
                         </Row>
                     </div>
 
