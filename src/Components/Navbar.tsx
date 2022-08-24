@@ -36,7 +36,7 @@ const Navbar = () => {
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
-         <h1 style={titleStyle}>inTeritance</h1>
+         <h1 style={titleStyle}>INTERITANCE</h1>
 
       </Header >
    );

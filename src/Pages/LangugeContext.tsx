@@ -40,6 +40,12 @@ export const langs = {
         send: 'Gönder',
         money: 'Hesabındaki para',
         given: 'Verilen tutar',
+        ethprice : 'Fiyatı',
+        yourWallet: 'Senin cüzdanın',
+        withdraweth : 'Ethereumu geri çek',
+        sendeth: 'Ethereum gönder',
+        logout : 'Çıkış yap',
+        withdrawback : 'Geri çek'
 
     },
 
@@ -82,6 +88,13 @@ export const langs = {
         money: 'Current amonunt of money',
         given: 'Given amount',
         dildesgis: 'Change language',
+        ethprice : 'Price',
+        yourWallet: 'Your wallet',
+        withdraweth : 'Withdraw Ethereum',
+        sendeth: 'Send ethereum',
+        logout : 'Log Out',
+        withdrawback : 'Withdraw Back'
+       
     }
 }
 

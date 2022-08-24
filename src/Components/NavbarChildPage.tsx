@@ -5,6 +5,7 @@ import { Layout } from "antd";
 import { Avatar } from 'antd';
 import { Typography } from "antd";
 import metamask from '../images/MetaMask.png';
+import { ML } from "../App";
 
 const { Title } = Typography;
 const { Header } = Layout;
@@ -80,9 +81,9 @@ const Navbar = () => {
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
-         <h1 style={titleStyle}>inTeritance</h1>
-         <Avatar style={avatarStyle} >Name</Avatar>
-         <Button onClick={onLogOut} style={buttonStyle} type="primary" shape="round" danger>Log Out</Button>
+         <h1 style={titleStyle}>INTERITANCE</h1>
+         <Avatar style={avatarStyle} >{ML('AD')}</Avatar>
+         <Button onClick={onLogOut} style={buttonStyle} type="primary" shape="round" danger>{ML('logout')}</Button>
       </Header >
    );
 }
