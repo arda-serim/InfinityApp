@@ -12,11 +12,8 @@ import picture from '../images/newPicture.png';
 import edit from '../images/editfoto.png';
 import TRY from '../images/pngwing.com.png';
 import type { countdownValueType } from 'antd/es/statistic/utils';
+import { withdrawMoneyByChild } from '../contract/functions';
 const { Countdown } = Statistic;
-
-
-
-
 
 
 
@@ -145,6 +142,7 @@ const {Title} = Typography;
 
 const ChildPage = ()  => {
     const [child, setChild] = useState<child | undefined> (undefined)
+    const [input, setInput] = useState();
 
     useEffect(() => {
     setChild({
@@ -159,6 +157,11 @@ const ChildPage = ()  => {
 
         console.log('finished!');
       };
+
+      const setClick= async()=> {
+        await withdrawMoneyByChild(input);
+
+      }
     return (
 
         <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)'}}>
@@ -192,9 +195,9 @@ const ChildPage = ()  => {
                                         </>}
 
                                         <br />
-                                        <Input style={inputStyle} />
+                                        <Input style={inputStyle} onChange={(event:any)=>setInput(event.target.value)} />
                                         <br />
-                                        <Button style={buttonStyle}>Withdraw Money</Button>
+                                        <Button style={buttonStyle} onClick={setClick} >Withdraw Money</Button>
                                         <br />
                                         <Button style={buttonStyle2}>Withdraw All The Money</Button>
 
