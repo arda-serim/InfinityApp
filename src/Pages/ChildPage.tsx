@@ -147,12 +147,11 @@ const ChildPage = () => {
     let navigate = useNavigate();
     useEffect(() => {
 
-        let role = localStorage.getItem('role');
-        if (role === 'parent') {
-            navigate('/parent');
+        if (localStorage.getItem("role") === "parent") {
+            navigate("/parent");
         }
-        else {
-            navigate('/');
+        if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
+            navigate("/");
         }
 
 
