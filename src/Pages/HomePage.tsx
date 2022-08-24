@@ -13,6 +13,11 @@ import { useNavigate } from 'react-router-dom';
 import connectToMetamask from '../contract';
 import { getRole } from '../contract/functions';
 import { ML } from '../App';
+import test1 from '../images/smart-contracts.png';
+import test2 from '../images/target.png';
+import { Footer } from 'antd/lib/layout/layout';
+import test3 from '../images/homepage2.png';
+import test4 from '../images/Vector.png'
 
 
 
@@ -58,13 +63,31 @@ const insideCard = {
 } as React.CSSProperties;
 
 const imageStyle = {
-   width: '1087px',
-   height: '954px',
+   width: '1000px',
+   height: '800px',
+   borderRadius: '15px',
+   float: 'right',
+  // marginLeft: '-15%',
+  // marginTop: '-13%',
+  marginRight : '0',
+   zIndex : '1',
+   position : 'absolute',
+   right :'0'
+} as React.CSSProperties;
+
+const imageStyle1 = {
+   width: '2000px',
+   height: '900px',
    borderRadius: '15px',
    float: 'right',
    marginLeft: '-15%',
    marginTop: '-13%',
+   zIndex :'-1',
+   opacity : '0.4',
+  
 } as React.CSSProperties;
+
+
 
 const contentStyle = {
    width: '100%',
@@ -72,6 +95,7 @@ const contentStyle = {
 };
 
 const navbarStyle = {
+   zIndex : 2
 };
 
 const buttonBoxStyle = {
@@ -95,6 +119,8 @@ const pageStyle = {
    minWidth: '100vw',
 
 };
+
+
 
 declare var window: any
 
@@ -197,13 +223,60 @@ const HomePage = () => {
                         </div>
                      </Col>
 
-                     <Col span={12} >
-                        <img src={test} style={imageStyle} />
+                     <Col span={12} > 
+                        <img src={test4} style={imageStyle1} />
+                        <img src={test3} style={imageStyle} />
                      </Col>
                   </Row>
                </div>
+               <div style={contentStyle}>
+               <Row gutter={[24, 8]}>
+                 
+                  <Col span={12}  >
+                     
+                     <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1  , marginLeft : '20%' , marginTop: '10%'}}>
+                     <img src={test1} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%', zIndex :2}}/>
+                     </div>
+                     
+                  </Col>
+                  <Col span={12} >
+                     <p style={{ color : 'white' , marginLeft : '30%' , fontSize : '20px' , marginTop : '20%'}}>
+                        Why Ethereum ?
+                     </p>
+                     <p style={{marginTop : '5%' , color : 'white' , marginRight : '20%' , fontSize : '20px'}} >
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga </p>
+                  </Col>
+                  
+              
+               </Row>
+               </div>
+
+               <div style={contentStyle}>
+               <Row gutter={[24, 8]}>
+               <Col span={12} >
+
+                  <p style={{marginTop : '25%' , color : 'white' , marginLeft : '40%' , fontSize : '20px'}}>
+                      Our vision and mission
+                  </p>
+               <p style={{marginTop : '5%' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}} >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                   numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga </p>
+               </Col>
+               <Col span={12} >
+                  <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1 , marginLeft : '20%' , marginTop: '20%' }}>
+                  <img src={test2} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%' , zIndex :2}}/>
+                  </div>
+                
+               </Col>
+               </Row>
+               </div>
+
             </Content >
          </div >
+
       </Layout >
    );
 }
