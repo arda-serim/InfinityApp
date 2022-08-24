@@ -22,7 +22,7 @@ export const langs = {
         third: 'Çocuklarınızın hesaplarını oluşturun ve ayarlayın.',
         fourth: 'Çocuklarınızın hesaplarını dilediğiniz gibi yönetebilir, dilediğiniz kadar yatırım yapabilirsiniz.',
         fifth: 'Belirlediğiniz tarih geldiğinde çocuğunuz cüzdanına erişebilecek.',
-        loginwm: 'Metamask ile giriş yap',
+        loginwm: ' Metamask ile giriş yap',
         dildesgis: 'Dil değiştir',
         clickhere: 'Buraya tıklayın.',
         //childedit
@@ -59,7 +59,7 @@ export const langs = {
         checkbox: 'Keep me logged in',
         //homepage
         homePageGiris: ' InTeritance ',
-        homePageGiris1: 'Welcome to ',
+        homePageGiris1: 'Welcome  ',
         need: 'What do you need',
         appInfo: 'InTeritance is a saving app that accompanies your childs growth.  You can support your children’s milestones with the flexible functions our app offers you and shape your children’s future',
         first: 'You need to have a ',

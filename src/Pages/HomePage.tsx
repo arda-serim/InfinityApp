@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar';
 import { Col, Row, Layout, Card } from 'antd';
 import icon from '../images/ethereum.png';
 import { Typography } from 'antd';
-import test from '../images/homeImage.png';
+import test from '../images/homepage.png';
 import { title } from 'process';
 import metamask from '../images/MetaMask.png';
 import logo from '../images/logo_infinity.png';
@@ -162,7 +162,9 @@ const HomePage = () => {
                   <Row gutter={[24, 8]}>
                      <Col span={12} >
                         <div style={cardStyle}>
-                           <Title level={2} style={{ color: '#fff' }}>{ML('homePageGiris1')} <text style={{ color: '#723BFA' }}>INTERITANCE</text></Title>
+                           { <Title level={2} style={{ color: '#EFAA45' }}>{ML('homePageGiris1')}
+                            {/* <text style={{ color: '#723BFA' }}>INTERITANCE</text> */}
+                           </Title> }
                            <p style={{ color: '#fff' }}>{ML('appInfo')} </p>
                         </div>
                         <div style={buttonBoxStyle}>
