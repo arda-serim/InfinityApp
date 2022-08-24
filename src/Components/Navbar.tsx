@@ -32,14 +32,20 @@ const titleStyle = {
    paddingTop: '.5%',
 };
 
+const langStyle = {
+   float: 'right',
+   marginRight: 'auto',
+   position: 'relative'
+} as React.CSSProperties;
 
 const Navbar = () => {
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>INTERITANCE</h1>
-         <Language/>
-
+         <div style={langStyle}>
+            <Language/>
+         </div>
       </Header >
    );
 }
