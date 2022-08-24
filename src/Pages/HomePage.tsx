@@ -127,7 +127,6 @@ const HomePage = () => {
       console.log('connectWalletHandler');
       if (window.ethereum) {
          const role = await getRole();
-         console.log("role: ", role)
          localStorage.setItem('role', role);
 
          const { signerAddress } = await connectToMetamask();
@@ -162,22 +161,22 @@ const HomePage = () => {
                   <Row gutter={[24, 8]}>
                      <Col span={12} >
                         <div style={cardStyle}>
-                           { <Title level={2} style={{ color: '#EFAA45' }}>{ML('homePageGiris1')}
-                            {/* <text style={{ color: '#723BFA' }}>INTERITANCE</text> */}
-                           </Title> }
+                           {<Title level={2} style={{ color: '#EFAA45' }}>{ML('homePageGiris1')}
+                              {/* <text style={{ color: '#723BFA' }}>INTERITANCE</text> */}
+                           </Title>}
                            <p style={{ color: '#fff' }}>{ML('appInfo')} </p>
                         </div>
                         <div style={buttonBoxStyle}>
                            <Button size="large" onClick={connectWalletHandler} style={signUpButtonStyle} shape='round'>
                               <img src={metamask} style={{ width: '20px', height: '20px' }}></img>
-                             {ML('loginwm')}</Button>
+                              {ML('loginwm')}</Button>
                         </div>
                         <div style={cardStyle}>
                            <Card bordered={false} style={card}>
                               <h1 style={{ color: '#fff', fontSize: 32, fontStyle: 'italic' }}>{ML('need')}</h1>
                               <div style={insideCard}>
                                  <p > <img style={iconStyle} src={icon} />
-                                   {ML('first')} <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
+                                    {ML('first')} <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
                                     <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' > {ML('click here')}</a></text>
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
@@ -187,10 +186,10 @@ const HomePage = () => {
                                     {ML('third')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                  {ML('fourth')}
+                                    {ML('fourth')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                   {ML('fifth')}
+                                    {ML('fifth')}
                                  </p>
                               </div>
                            </Card>

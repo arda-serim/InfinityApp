@@ -76,6 +76,16 @@ export const withdrawMoneyByChild = async (amount: any) => {
 
    await tx.wait();
 }
+
+export const withdrawAllMoneyByChild = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.withdrawAllMoneyByChild();
+
+   await tx.wait();
+}
+
+
 export const getRole = async () => {
    const { signerAddress, contract } = await connectToMetamask();
 
@@ -83,4 +93,12 @@ export const getRole = async () => {
 
    return response;
 
+}
+
+export const getChild = async (address: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const child = await contract.childs(address);
+
+   return child;
 }
