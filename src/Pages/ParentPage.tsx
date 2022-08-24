@@ -40,7 +40,6 @@ const ParentPage = () => {
       if (tempRole) {
          setRole(tempRole);
       }
-      console.log(role)
       if (localStorage.getItem("role") === "child") {
          navigate("/childpage");
       }

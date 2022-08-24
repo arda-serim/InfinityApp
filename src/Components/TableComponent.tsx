@@ -56,7 +56,6 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
 
    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-      console.log('selectedRowKeys changed: ', selectedRowKeys);
       setSelectedRowKeys(newSelectedRowKeys);
    };
 
@@ -74,12 +73,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
       setAmountWithdraw(e.target.value);
    }
 
-   const sendToChild = async () => {
-      await sendMoneyToChild(amount);
+   const sendToChild = async (address: any) => {
+      await sendMoneyToChild(amount, address);
+      window.location.reload();
+
    }
 
-   const withdrawBackHandler = async () => {
-      await withdrawMoneyByParentFromChild(amountWithdraw);
+   const withdrawBackHandler = async (address: any) => {
+      await withdrawMoneyByParentFromChild(amountWithdraw, address);
+      window.location.reload();
+
    }
 
    const columns: ColumnsType<DataType> =
@@ -116,13 +119,13 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             title: 'Given Amount (ETH)',
             dataIndex: 'given_amount',
             key: 'given_amount',
-            render: (text) => (
+            render: (text, record) => (
                <Space size="middle">
                   <Input.Group compact>
-                     <Input style={{ width: '30%' }} defaultValue={text} onChange={amountInput} />
-                     <Button type="primary" /*onClick={onClickMoney()}*/ onClick={sendToChild}>{ML('send')}</Button>
-                     <Input style={{ width: '30%' }} defaultValue={text} onChange={amountInputToWithdraw} />
-                     <Button style={{ marginLeft: '5%' }} type="primary" /*onClick={onClickSendAll()}*/ onClick={withdrawBackHandler}>{ML('withdrawback')}</Button>
+                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInput} />
+                     <Button type="primary" onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
+                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInputToWithdraw} />
+                     <Button style={{ marginLeft: '5%' }} type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
                   </Input.Group>
                </Space>
             ),

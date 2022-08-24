@@ -73,7 +73,6 @@ const PieChartComponent = ({ data }: { data: Array<DataType> }) => {
    };
 
    return (
-      console.log('data', data),
       <div style={boxStyle} >
          <Card style={cardStyle}>
             <Pie {...config} />
