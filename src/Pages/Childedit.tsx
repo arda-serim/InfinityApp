@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 // import vector from '../images/Vector.png';
 import edit from '../images/editfoto.png';
 import { addChild, withdrawMoneyByChild } from '../contract/functions';
+import { ML } from '../App';
 
 
 
@@ -106,8 +107,8 @@ function Childedit() {
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
 
-      <input style={{ width: '30%' }} onChange={(e: any) => setAmountInputToWithdrawFromChild(e.target.value)} />
-      <button style={{ marginLeft: '5%' }} /*onClick={onClickSendAll()}*/ onClick={withdrawFromChildHandler}>Withdraw(Child)</button>
+      {/* <input style={{ width: '30%' }} onChange={(e: any) => setAmountInputToWithdrawFromChild(e.target.value)} />
+      <button style={{ marginLeft: '5%' }} onClick={onClickSendAll()} onClick={withdrawFromChildHandler}>Withdraw(Child)</button> */}
 
       <div>
         <Navbar />
@@ -126,23 +127,23 @@ function Childedit() {
               <div>
                 <Col span={12}>
                   <div style={{ marginTop: '25%' }} >
-                    <Input style={inputStyle} placeholder="Name" onChange={(e: any) => setName(e.target.value)} />
+                    <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
                   </div>
                   {/* <div >
                     <Input style={inputStyle} placeholder="Surname"/>
                   </div> */}
                   <div >
-                    <Input style={inputStyle} placeholder="Release time" type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
+                    <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children}type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
                   </div>
                   {/* <div >
                     <Input style={inputStyle} placeholder="Date of birth"/>
                   </div> */}
                   <div >
-                    <Input style={inputStyle} placeholder="Wallet adress of child" onChange={(e: any) => setAddress(e.target.value)} />
+                    <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
                   </div>
                   <div>
                     <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={addChildHandler}>
-                      save
+                     {ML('kaydet')}
                     </Button>
                   </div>
                 </Col>

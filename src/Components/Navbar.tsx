@@ -4,6 +4,7 @@ import logo from '../images/logo_infinity.png';
 import { Layout } from "antd";
 import { Typography } from "antd";
 import metamask from '../images/MetaMask.png';
+import { Language } from "../App";
 
 const { Title } = Typography;
 const { Header } = Layout;
@@ -36,7 +37,8 @@ const Navbar = () => {
    return (
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
-         <h1 style={titleStyle}>inTeritance</h1>
+         <h1 style={titleStyle}>INTERITANCE</h1>
+         <Language/>
 
       </Header >
    );

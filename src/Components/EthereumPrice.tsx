@@ -3,6 +3,7 @@ import Card from "antd/es/card";
 import icon from '../images/ethereum.png';
 import { Button } from "antd";
 import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from "../contract/functions";
+import { ML } from "../App";
 
 
 
@@ -80,10 +81,10 @@ const EthereumPrice = (props: any) => {
 
    return (
       <Card style={cardStyle} >
-         <h1 style={{ color: '#fff' }}>Welcome Username</h1>
+         <h1 style={{ color: '#fff' }}>{ML('user')} Username</h1>
          <br />
          <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>Ethereum Price</text>
+            <text style={{ color: '#fff' }}>Ethereum{ML('ethprice')}</text>
          </p>
          <br />
          <p style={lineStyle}>
@@ -93,7 +94,7 @@ const EthereumPrice = (props: any) => {
          <br />
          <br />
          <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>Your Wallet</text>
+            <text style={{ color: '#fff' }}>{ML('yourWallet')}</text>
          </p>
          <br />
          <p style={lineStyle}>
@@ -104,13 +105,13 @@ const EthereumPrice = (props: any) => {
             <div>
                <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
                <Button type="primary" style={{ width: '165px' }} onClick={sendMoneyHandler}>
-                  <text style={{ color: '#fff' }}>Deposit Ethereum</text>
+                  <text style={{ color: '#fff' }}>{ML('sendeth')} </text>
                </Button>
             </div>
             <div>
                <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
                <Button type="primary" style={{ width: '165px' }} onClick={withdrawHandler}>
-                  <text style={{ color: '#fff' }} >Withdraw Ethereum</text>
+                  <text style={{ color: '#fff' }} >{ML('withdraweth')}</text>
                </Button>
             </div>
          </div>

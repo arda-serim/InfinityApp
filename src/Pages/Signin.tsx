@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { addParent } from '../contract/functions';
 import LangContext, { langs } from './LangugeContext';
 import { Typography, Layout, Row, Col, Input, Checkbox, Button } from 'antd';
+import { ML } from '../App';
 
 declare var window: any;
 
@@ -232,7 +233,7 @@ const Signin = () => {
         <Header style={navbarStyle}>
           <img src={logo} alt="logo" style={logoStyle} />
           <h1 style={titleStyle}>Infinity</h1>
-          <button style={{ marginLeft: '80%', background: 'rgba(0,0,0,0)', border: 'none' }} onClick={switchLang}> <u>Dil Değiştir </u> </button>
+          {/* <button style={{ marginLeft: '80%', background: 'rgba(0,0,0,0)', border: 'none' }} onClick={switchLang}> <u>Dil Değiştir </u> </button> */}
 
         </Header >
         <div style={contentStyle}>
@@ -248,39 +249,39 @@ const Signin = () => {
                   <div style={whitePlaceStyle}>
                     <Title style={{
                       color: '#0A103A', marginTop: '25'
-                    }}>{lang.giris}</Title>
+                    }}>{ML('giris')}</Title>
                   </div>
                   <div style={whitePlaceStyle}>
-                    <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{lang.hosgeldin}</Title>
-                  </div>
-                  <br>
-                  </br>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{lang.ad}</Title>
-                  </div>
-                  <div style={whitePlaceStyle}>
-                    <Input style={inputStyle} type='text' name='name' value={name} onChange={handleNameChange} />
+                    <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
                   </div>
                   <br>
                   </br>
+                  <br>
+                  </br>
                   <div style={whitePlaceStyle}>
-                    <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{lang.soyad}</Title>
+                    <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
                   </div>
                   <div style={whitePlaceStyle}>
-                    <Input style={inputStyle} type='text' name='surname' value={surname} onChange={handleSurnameChange} />
+                    <Input style={inputStyle} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
                   </div>
                   <br>
                   </br>
                   <div style={whitePlaceStyle}>
-                    <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{lang.checkbox}</Checkbox>
+                    <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
+                  </div>
+                  <div style={whitePlaceStyle}>
+                    <Input style={inputStyle} type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
+                  </div>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
                   </div>
                   <br>
                   </br>
                   <div style={whitePlaceStyle}>
                     <Button onClick={OnSignIn} size="large" style={signInButtonStyle} shape='round'>
-                      {lang.kayıtol}</Button>
+                      {ML('kayıtol')}</Button>
                   </div>
                 </Col>
               </Row>

@@ -4,6 +4,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
+import { ML } from '../App';
 
 interface DataType {
    key: string;
@@ -119,9 +120,9 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
                <Space size="middle">
                   <Input.Group compact>
                      <Input style={{ width: '30%' }} defaultValue={text} onChange={amountInput} />
-                     <Button type="primary" /*onClick={onClickMoney()}*/ onClick={sendToChild}>Submit</Button>
+                     <Button type="primary" /*onClick={onClickMoney()}*/ onClick={sendToChild}>{ML('send')}</Button>
                      <Input style={{ width: '30%' }} defaultValue={text} onChange={amountInputToWithdraw} />
-                     <Button style={{ marginLeft: '5%' }} type="primary" /*onClick={onClickSendAll()}*/ onClick={withdrawBackHandler}>Withdraw Back</Button>
+                     <Button style={{ marginLeft: '5%' }} type="primary" /*onClick={onClickSendAll()}*/ onClick={withdrawBackHandler}>{ML('withdrawback')}</Button>
                   </Input.Group>
                </Space>
             ),
@@ -132,10 +133,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let addButton;
    if (!hasSelected) {
-      addButton = <Button onClick={onAddChild} type="primary">Add Child</Button>;
+      addButton = <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
    }
    else {
-      addButton = <Button type="primary" danger>Delete Children</Button>;
+      addButton = <Button type="primary" danger>{ML('cocuksil')}</Button>;
    }
 
    return (

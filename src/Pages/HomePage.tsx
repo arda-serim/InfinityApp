@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar';
 import { Col, Row, Layout, Card } from 'antd';
 import icon from '../images/ethereum.png';
 import { Typography } from 'antd';
-import test from '../images/homeImage.png';
+import test from '../images/homepage.png';
 import { title } from 'process';
 import metamask from '../images/MetaMask.png';
 import logo from '../images/logo_infinity.png';
@@ -12,6 +12,7 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import connectToMetamask from '../contract';
 import { getRole } from '../contract/functions';
+import { ML } from '../App';
 
 
 
@@ -161,34 +162,35 @@ const HomePage = () => {
                   <Row gutter={[24, 8]}>
                      <Col span={12} >
                         <div style={cardStyle}>
-                           <Title level={2} style={{ color: '#fff' }}>Welcome to <text style={{ color: '#723BFA' }}>INFINITY</text></Title>
-                           <p style={{ color: '#fff' }}>Infinity is the investing app for your child. If you want to
-                              leave a legacy to your children, join us now. </p>
+                           { <Title level={2} style={{ color: '#EFAA45' }}>{ML('homePageGiris1')}
+                            {/* <text style={{ color: '#723BFA' }}>INTERITANCE</text> */}
+                           </Title> }
+                           <p style={{ color: '#fff' }}>{ML('appInfo')} </p>
                         </div>
                         <div style={buttonBoxStyle}>
                            <Button size="large" onClick={connectWalletHandler} style={signUpButtonStyle} shape='round'>
                               <img src={metamask} style={{ width: '20px', height: '20px' }}></img>
-                              Log In with Metamask</Button>
+                             {ML('loginwm')}</Button>
                         </div>
                         <div style={cardStyle}>
                            <Card bordered={false} style={card}>
-                              <h1 style={{ color: '#fff', fontSize: 32, fontStyle: 'italic' }}>What You Need</h1>
+                              <h1 style={{ color: '#fff', fontSize: 32, fontStyle: 'italic' }}>{ML('need')}</h1>
                               <div style={insideCard}>
                                  <p > <img style={iconStyle} src={icon} />
-                                    You need to have a <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
-                                    <text style={{ fontSize: 12, marginLeft: 20 }}>  If you don't have a metamask account, < a href='https://metamask.io/download/' > click here.</a></text>
+                                   {ML('first')} <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
+                                    <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' > {ML('click here')}</a></text>
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                    You must have a certain amount of <a href='https://ethereum.org/en/'>ethereum</a> in your wallet.
+                                    {ML('second')} <a href='https://ethereum.org/en/'>ethereum</a> {ML('second_')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                    Create and set up your children's accounts.
+                                    {ML('third')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                    You can manage your children’s accounts as you wish and invest as much as you want.
+                                  {ML('fourth')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                    When the date you set comes, your child will have access to their wallet.
+                                   {ML('fifth')}
                                  </p>
                               </div>
                            </Card>

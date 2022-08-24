@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import picture from '../images/picture.png';
 import edit from '../images/editfoto.png';
 import { withdrawMoneyByChild } from '../contract/functions';
+import { ML } from '../App';
 
 const colStyle = {
     background: "rgba(0 ,0 ,0 ,0)",
@@ -164,7 +165,7 @@ const ChildPage = () => {
                             <Col span={12}>
                                 <div>
                                     <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                        Welcome User!
+                                       {ML('user')} User!
                                     </Title>
                                 </div>
                                 <div style={cardStyle}>
@@ -173,15 +174,15 @@ const ChildPage = () => {
                                             <text style={{ color: 'black' }}>18,454534</text>
                                         </p>
                                         <p style={textStyle}>
-                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>Release Time: 18.08.2024 </text>
+                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{ML('erisimTarihi')} 18.08.2024 </text>
                                         </p>
                                         <br />
                                         <br />
                                         <Input style={inputStyle} onChange={(e: any) => { setAmount(e.target.value) }} />
                                         <br />
-                                        <Button style={buttonStyle} onClick={handleWithdraw}>Withdraw Money</Button>
+                                        <Button style={buttonStyle} onClick={handleWithdraw}>{ML('geriCek')}</Button>
                                         <br />
-                                        <Button style={buttonStyle2}>Primary Button</Button>
+                                        <Button style={buttonStyle2}>{ML('tumParayıCek')}</Button>
 
                                     </Card>
 
