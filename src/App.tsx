@@ -46,8 +46,8 @@ export function ML(key: string) {
 
 
 export const supportedLanguages = [
-  { flag: '👿', code: 'tr' },
-  { flag: '/U+1F1FA', code: 'en' },
+  { flag: 'TR', code: 'tr' },
+  { flag: 'EN', code: 'en' },
 ];
 
 
