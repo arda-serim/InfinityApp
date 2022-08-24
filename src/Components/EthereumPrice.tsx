@@ -4,6 +4,7 @@ import icon from '../images/ethereum.png';
 import { Button } from "antd";
 import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from "../contract/functions";
 import { ML } from "../App";
+import { useHref } from "react-router-dom";
 
 
 
@@ -25,7 +26,7 @@ const lineStyle = {
    color: '#fff',
    fontSize: '20px',
    whiteSpace: "pre-wrap",
-   
+
 } as React.CSSProperties;
 
 const buttons = {
@@ -58,11 +59,15 @@ const EthereumPrice = (props: any) => {
 
    const sendMoneyHandler = async () => {
       await sendMoneyToContract(amountOfEthToDeposit);
+
+      window.location.reload();
    }
 
 
    const withdrawHandler = async () => {
       await withdrawMoneyByParent(amountOfEthToWithdraw);
+      window.location.reload();
+
    }
 
    let user;
