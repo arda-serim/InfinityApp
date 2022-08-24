@@ -1,16 +1,24 @@
 import Navbar from '../Components/NavbarChildPage';
-import React from 'react';
+import Sayac from '../Components/Sayac';
+import React, { useEffect } from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider, Typography, Card, Statistic } from 'antd';
+import { Col, Row, Slider, Typography , Card, Statistic} from 'antd'; 
 import { useState } from 'react';
-import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
+import { Button, Image, Space ,Empty ,Input ,Radio,} from 'antd';
 import logo from '../images/logo_infinity.png';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useNavigate } from 'react-router-dom';
-import picture from '../images/picture.png';
+import picture from '../images/newPicture.png';
 import edit from '../images/editfoto.png';
-import { withdrawMoneyByChild } from '../contract/functions';
-import { ML } from '../App';
+import TRY from '../images/pngwing.com.png';
+import type { countdownValueType } from 'antd/es/statistic/utils';
+const { Countdown } = Statistic;
+
+
+
+
+
+
 
 const colStyle = {
     background: "rgba(0 ,0 ,0 ,0)",
@@ -18,10 +26,10 @@ const colStyle = {
 
 };
 
-const contentStyle = {
+const contentStyle = { 
     width: '100%',
     heigth: '100%',
-
+    
 };
 const cardStyle = {
     width: '500px',
@@ -45,10 +53,10 @@ const lineStyle = {
     marginTop: "30px",
     background: "#D9D9D9",
     paddingTop: "9px",
+    
+ } as React.CSSProperties;
 
-} as React.CSSProperties;
-
-
+ 
 const textStyle = {
     display: "flex",
     flexDirection: "row",
@@ -59,9 +67,9 @@ const textStyle = {
     width: "200px",
     marginLeft: "130px",
     marginTop: "-15px",
-} as React.CSSProperties;
+ } as React.CSSProperties;
 
-const inputStyle = {
+ const inputStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -74,123 +82,129 @@ const inputStyle = {
     border: "#1D1B65",
     borderRadius: "30px",
     background: "linear-gradient(#FFFFFF, #1D1B65)",
-} as React.CSSProperties;
+ } as React.CSSProperties;
 
-const buttonStyle = {
+ const buttonStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     color: 'white',
     fontSize: '13px',
     whiteSpace: "pre-wrap",
-    width: '150px',
+    width: '200px',
     height: '40px',
-    marginLeft: "155px",
+    marginLeft: "135px",
     paddingTop: "8px",
     border: "#327FA3",
     borderRadius: "30px",
-    background: "linear-gradient(#327FA3, #1D1B65)",
+    background: "linear-gradient(#EF886C, #EFAA45)",
     textAlign: "center",
 
-} as React.CSSProperties;
-
-const imageStyle = {
-    width: '500px',
-    height: '400px',
+ } as React.CSSProperties;
+ 
+ const imageStyle = {
+    //width: '500px',
+    //height: '400px',
+    width: "80%",
+    heigth: "40%",
     borderRadius: '15px',
-    marginTop: '130px',
-    marginLeft: "50px",
-}
-const buttonStyle2 = {
+    marginTop: '170px',
+    marginLeft: "30px",
+    border: "1px solid #40D8D8",
+
+ }
+ const buttonStyle2 = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     color: 'white',
     fontSize: '13px',
     whiteSpace: "pre-wrap",
-    width: '150px',
+    width: '200px',
     height: '40px',
-    marginLeft: "155px",
+    marginLeft: "135px",
     paddingTop: "8px",
     border: "#5E7D8B",
     borderRadius: "30px",
     background: "linear-gradient(#5E7D8B  50.02%, #1D1B65  99.95%)",
     textAlign: "center",
-} as React.CSSProperties;
+ } as React.CSSProperties;
+
+const tryStyle ={
+    width: "25px",
+    paddingBottom: "5px",
+}
+export interface child {
+    name: string;
+    releaseTime: Date;
+    address: string;
+
+}
+const {Title} = Typography;
 
 
-const { Title } = Typography;
+const ChildPage = ()  => {
+    const [child, setChild] = useState<child | undefined> (undefined)
 
-
-const ChildPage = () => {
-    let navigate = useNavigate();
-    const [role, setRole] = useState("");
-    const [amount, setAmount] = useState();
-    const [balance, setBalance] = useState();
-
-    React.useEffect(() => {
-        let tempRole = localStorage.getItem("role");
-        if (tempRole) {
-            setRole(tempRole);
-        }
-        console.log(role)
-        if (localStorage.getItem("role") === "parent") {
-            navigate("/parent");
-        }
-        if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null) {
-            navigate("/");
-        }
-    }, []);
+    useEffect(() => {
+    setChild({
+        name: "sude",
+        releaseTime: new Date("2023-08-23"),
+        address: "ev ev ",
+    })
+    }, [ ])
+    
     const onFinish = () => {
+
+
         console.log('finished!');
-    };
-
-    async function handleWithdraw() {
-        await withdrawMoneyByChild(amount);
-    }
-
-
+      };
     return (
 
-        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
+        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)'}}>
             <div>
-
-                <Navbar />
-
+        
+                <Navbar/>
+                
             </div>
             <div style={contentStyle}>
                 <Content>
                     <div style={colStyle} >
-                        <Row gutter={[16, 8]}>
-                            <Col span={12}>
-                                <div>
-                                    <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                       {ML('user')} User!
+                        <Row gutter={[16,8]}>
+                                <Col span={12}>
+                                    <div>
+                                    <Title level={2} style={{marginLeft: "260px", width:"400px", marginTop:"50px", color:"white"}} >
+                                        Welcome User!
                                     </Title>
-                                </div>
-                                <div style={cardStyle}>
-                                    <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
+                                    </div>
+                                    <div style={cardStyle}>
+                                        <Card style= {{background: "#4268B1  50.02%", border:"#4268B1" ,borderRadius: "30px", height: "450px"}}>
                                         <p style={lineStyle}>
-                                            <text style={{ color: 'black' }}>18,454534</text>
+                                             <text style={{ color: 'black' }}>18,100,650 <img src={TRY} style={tryStyle} /></text>
+
                                         </p>
                                         <p style={textStyle}>
-                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{ML('erisimTarihi')} 18.08.2024 </text>
+                                             <text style={{ color: '#FFFFFF', opacity:"0.18" }}>Release Time: 18.08.2024 </text>
                                         </p>
                                         <br />
-                                        <br />
-                                        <Input style={inputStyle} onChange={(e: any) => { setAmount(e.target.value) }} />
-                                        <br />
-                                        <Button style={buttonStyle} onClick={handleWithdraw}>{ML('geriCek')}</Button>
-                                        <br />
-                                        <Button style={buttonStyle2}>{ML('tumParayıCek')}</Button>
+                                        { child?.releaseTime && child?.releaseTime>new Date() && <>
+                                            <Countdown /*title="Day Level" */ value={child?.releaseTime.getTime()} format="DD Gün HH:mm:ss kaldı" valueStyle={{color: "white", width: "100%", textAlign: "center",}}  />
+                                        </>}
 
-                                    </Card>
+                                        <br />
+                                        <Input style={inputStyle} />
+                                        <br />
+                                        <Button style={buttonStyle}>Withdraw Money</Button>
+                                        <br />
+                                        <Button style={buttonStyle2}>Withdraw All The Money</Button>
 
-                                </div>
-                            </Col>
-                            <Col span={12} >
-                                <img src={picture} style={imageStyle} />
-                            </Col>
+                                        </Card>
+                                        
+                                    </div>
+                                </Col>
+                                <Col span={12} >
+                                    <img src={picture} style={imageStyle}/>
+                                </Col>
                         </Row>
                     </div>
 
