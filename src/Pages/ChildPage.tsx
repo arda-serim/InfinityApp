@@ -1,5 +1,6 @@
 import Navbar from '../Components/NavbarChildPage';
-import React from 'react';
+import Sayac from '../Components/Sayac';
+import React, { useEffect } from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
 import { Col, Row, Slider, Typography , Card, Statistic} from 'antd'; 
 import { useState } from 'react';
@@ -7,8 +8,17 @@ import { Button, Image, Space ,Empty ,Input ,Radio,} from 'antd';
 import logo from '../images/logo_infinity.png';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useNavigate } from 'react-router-dom';
-import picture from '../images/picture.png';
+import picture from '../images/newPicture.png';
 import edit from '../images/editfoto.png';
+import TRY from '../images/pngwing.com.png';
+import type { countdownValueType } from 'antd/es/statistic/utils';
+const { Countdown } = Statistic;
+
+
+
+
+
+
 
 const colStyle = {
     background: "rgba(0 ,0 ,0 ,0)",
@@ -81,23 +91,27 @@ const textStyle = {
     color: 'white',
     fontSize: '13px',
     whiteSpace: "pre-wrap",
-    width: '150px',
+    width: '200px',
     height: '40px',
-    marginLeft: "155px",
+    marginLeft: "135px",
     paddingTop: "8px",
     border: "#327FA3",
     borderRadius: "30px",
-    background: "linear-gradient(#327FA3, #1D1B65)",
+    background: "linear-gradient(#EF886C, #EFAA45)",
     textAlign: "center",
 
  } as React.CSSProperties;
  
  const imageStyle = {
-    width: '500px',
-    height: '400px',
+    //width: '500px',
+    //height: '400px',
+    width: "80%",
+    heigth: "40%",
     borderRadius: '15px',
-    marginTop: '130px',
-    marginLeft: "50px",
+    marginTop: '170px',
+    marginLeft: "30px",
+    border: "1px solid #40D8D8",
+
  }
  const buttonStyle2 = {
     display: "flex",
@@ -106,9 +120,9 @@ const textStyle = {
     color: 'white',
     fontSize: '13px',
     whiteSpace: "pre-wrap",
-    width: '150px',
+    width: '200px',
     height: '40px',
-    marginLeft: "155px",
+    marginLeft: "135px",
     paddingTop: "8px",
     border: "#5E7D8B",
     borderRadius: "30px",
@@ -116,12 +130,33 @@ const textStyle = {
     textAlign: "center",
  } as React.CSSProperties;
 
- 
+const tryStyle ={
+    width: "25px",
+    paddingBottom: "5px",
+}
+export interface child {
+    name: string;
+    releaseTime: Date;
+    address: string;
+
+}
 const {Title} = Typography;
 
 
 const ChildPage = ()  => {
+    const [child, setChild] = useState<child | undefined> (undefined)
+
+    useEffect(() => {
+    setChild({
+        name: "sude",
+        releaseTime: new Date("2023-08-23"),
+        address: "ev ev ",
+    })
+    }, [ ])
+    
     const onFinish = () => {
+
+
         console.log('finished!');
       };
     return (
@@ -145,18 +180,23 @@ const ChildPage = ()  => {
                                     <div style={cardStyle}>
                                         <Card style= {{background: "#4268B1  50.02%", border:"#4268B1" ,borderRadius: "30px", height: "450px"}}>
                                         <p style={lineStyle}>
-                                             <text style={{ color: 'black' }}>18,454534</text>
+                                             <text style={{ color: 'black' }}>18,100,650 <img src={TRY} style={tryStyle} /></text>
+
                                         </p>
                                         <p style={textStyle}>
                                              <text style={{ color: '#FFFFFF', opacity:"0.18" }}>Release Time: 18.08.2024 </text>
                                         </p>
                                         <br />
+                                        { child?.releaseTime && child?.releaseTime>new Date() && <>
+                                            <Countdown /*title="Day Level" */ value={child?.releaseTime.getTime()} format="DD Gün HH:mm:ss kaldı" valueStyle={{color: "white", width: "100%", textAlign: "center",}}  />
+                                        </>}
+
                                         <br />
                                         <Input style={inputStyle} />
                                         <br />
-                                        <Button style={buttonStyle}>Primary Button</Button>
+                                        <Button style={buttonStyle}>Withdraw Money</Button>
                                         <br />
-                                        <Button style={buttonStyle2}>Primary Button</Button>
+                                        <Button style={buttonStyle2}>Withdraw All The Money</Button>
 
                                         </Card>
                                         
