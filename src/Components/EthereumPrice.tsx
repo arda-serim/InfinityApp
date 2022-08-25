@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Card from "antd/es/card";
 import icon from '../images/ethereum.png';
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from "../contract/functions";
 import { ML } from "../App";
 import { useHref } from "react-router-dom";
+import ModalComponent from "./ModalComponent";
 
 
 
@@ -44,6 +45,7 @@ const EthereumPrice = (props: any) => {
    const [amountOfEthToWithdraw, setAmountOfEthToWithdraw] = useState();
    const [balance, setBalance] = useState(0);
 
+   const [error, setError] = useState();
 
    React.useEffect(() => {
       async function getBalance() {
@@ -65,8 +67,13 @@ const EthereumPrice = (props: any) => {
 
 
    const withdrawHandler = async () => {
-      await withdrawMoneyByParent(amountOfEthToWithdraw);
-      window.location.reload();
+      try {
+         await withdrawMoneyByParent(amountOfEthToWithdraw);
+         window.location.reload();
+      }
+      catch (error: any) {
+         setError((error.reason.split(":"))[1])
+      }
 
    }
 
@@ -83,44 +90,54 @@ const EthereumPrice = (props: any) => {
 
    }
 
+   const clearError = () => {
+      //@ts-ignore
+      setError('');
+   }
 
    return (
-      <Card style={cardStyle} >
-         <h1 style={{ color: '#fff' }}>{ML('user')} Username</h1>
-         <br />
-         <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>Ethereum{ML('ethprice')}</text>
-         </p>
-         <br />
-         <p style={lineStyle}>
-            <img src={icon} style={{ width: '25px', height: '40px' }}></img>
-            <text style={{ color: '#fff' }}>{'\t=\t'}$1,000</text>
-         </p>
-         <br />
-         <br />
-         <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>{ML('yourWallet')}</text>
-         </p>
-         <br />
-         <p style={lineStyle}>
-            <text style={{ color: '#fff' }}>{balance / (Math.pow(10,18))} ETH = $1,000</text>
-         </p>
-         <br />
-         <div style={buttons}>
-            <div>
-               <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
-               <Button type="primary" style={{ width: '165px' }} onClick={sendMoneyHandler}>
-                  <text style={{ color: '#fff' }}>{ML('sendeth')} </text>
-               </Button>
+      <>
+         {
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{color:'red'}} onClear={clearError} />
+         }
+         <Card style={cardStyle} >
+            <h1 style={{ color: '#fff' }}>{ML('user')} Username</h1>
+            <br />
+            <p style={lineStyle}>
+               <text style={{ color: '#fff' }}>Ethereum{ML('ethprice')}</text>
+            </p>
+            <br />
+            <p style={lineStyle}>
+               <img src={icon} style={{ width: '25px', height: '40px' }}></img>
+               <text style={{ color: '#fff' }}>{'\t=\t'}$1,000</text>
+            </p>
+            <br />
+            <br />
+            <p style={lineStyle}>
+               <text style={{ color: '#fff' }}>{ML('yourWallet')}</text>
+            </p>
+            <br />
+            <p style={lineStyle}>
+               <text style={{ color: '#fff' }}>{balance / (Math.pow(10, 18))} ETH = $1,000</text>
+            </p>
+            <br />
+            <div style={buttons}>
+               <div>
+                  <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
+                  <Button type="primary" style={{ width: '165px' }} onClick={sendMoneyHandler}>
+                     <text style={{ color: '#fff' }}>{ML('sendeth')} </text>
+                  </Button>
+               </div>
+               <div>
+                  <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
+                  <Button type="primary" style={{ width: '165px' }} onClick={withdrawHandler}>
+                     <text style={{ color: '#fff' }} >{ML('withdraweth')}</text>
+                  </Button>
+               </div>
             </div>
-            <div>
-               <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
-               <Button type="primary" style={{ width: '165px' }} onClick={withdrawHandler}>
-                  <text style={{ color: '#fff' }} >{ML('withdraweth')}</text>
-               </Button>
-            </div>
-         </div>
-      </Card>
+         </Card>
+      </>
+
    );
 
 }
