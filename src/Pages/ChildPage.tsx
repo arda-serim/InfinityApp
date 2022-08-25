@@ -15,6 +15,9 @@ import type { countdownValueType } from 'antd/es/statistic/utils';
 import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../contract/functions';
 import connectToMetamask from '../contract';
 import { ML } from '../App';
+import ModalComponent from '../Components/ModalComponent';
+const { Countdown } = Statistic;
+
 
 const { Countdown } = Statistic;
 
@@ -151,7 +154,8 @@ const { Title } = Typography;
 
 const ChildPage = () => {
     const [input, setInput] = useState();
-    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '' });
+    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '', name: '' });
+    const [error, setError] = useState();
     let navigate = useNavigate();
     useEffect(() => {
 
@@ -180,16 +184,36 @@ const ChildPage = () => {
     }, [])
 
     const onWithdrawAll = async () => {
+        try {
+            await withdrawAllMoneyByChild();
 
-        await withdrawAllMoneyByChild();
-
-        window.location.reload();
+            window.location.reload();
+        }
+        catch (error: any) {
+            setError((error.reason.split(":"))[1])
+        }
     };
 
     const setClick = async () => {
-        await withdrawMoneyByChild(input);
-
+        try {
+            await withdrawMoneyByChild(input);
+            //@ts-ignore
+            setInput('');
+            window.location.reload();
+        }
+        catch (error: any) {
+            setError((error.reason.split(":"))[1])
+        }
     }
+
+    //@ts-ignore
+    const date = new Date(child.releaseTime * 1000).toLocaleDateString();
+
+    const clearError = () => {
+        //@ts-ignore
+        setError('');
+    }
+
     return (
 
         <Layout style={pageStyle}>
@@ -198,6 +222,9 @@ const ChildPage = () => {
                 <Navbar />
 
             </div>
+            {
+                error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+            }
             <div style={contentStyle}>
                 <Content>
                     <div style={colStyle} >
@@ -205,17 +232,17 @@ const ChildPage = () => {
                             <Col span={12}>
                                 <div>
                                     <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                        {ML('user')}
+                                        {ML('user')} {' '} {String(child.name)}!
                                     </Title>
                                 </div>
                                 <div style={cardStyle}>
                                     <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
                                         <p style={lineStyle}>
-                                            <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10,18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
+                                            <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10, 18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
 
                                         </p>
                                         <p style={textStyle}>
-                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{parseInt(child.releaseTime)} </text>
+                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{date}</text>
                                         </p>
                                         <br />
                                         {/* {child?.releaseTime && child?.releaseTime > new Date() && <>
@@ -242,7 +269,6 @@ const ChildPage = () => {
                 </Content>
             </div>
         </Layout>
-
 
     );
 }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Button, DatePicker, Input, Space, Table } from 'antd';
+import { Button, DatePicker, Input, Modal, Space, Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
 import { ML } from '../App';
+import ModalComponent from './ModalComponent';
 
 interface DataType {
    key: string;
@@ -44,6 +45,8 @@ const table = {
 const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let navigate = useNavigate();
+   const [error, setError] = useState();
+   const [isModalVisible, setIsModalVisible] = useState(false);
 
    function onAddChild() {
       navigate("/childedit");
@@ -52,7 +55,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const [amount, setAmount] = useState();
    const [amountWithdraw, setAmountWithdraw] = useState();
    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
+   const [isLoading, setIsLoading] = useState(false);
 
 
    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -74,16 +77,29 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    }
 
    const sendToChild = async (address: any) => {
-      await sendMoneyToChild(amount, address);
-      window.location.reload();
+      try {
+         setIsLoading(true);
+         await sendMoneyToChild(amount, address);
+         setIsLoading(false);
+         window.location.reload();
+      }
+      catch (error: any) {
+         setError((error.reason.split(":"))[1])
+      }
 
    }
 
    const withdrawBackHandler = async (address: any) => {
-      await withdrawMoneyByParentFromChild(amountWithdraw, address);
-      window.location.reload();
-
+      try {
+         await withdrawMoneyByParentFromChild(amountWithdraw, address);
+         window.location.reload();
+      }
+      catch (error: any) {
+         setError((error.reason.split(":"))[1])
+         setIsModalVisible(true);
+      }
    }
+
 
    const columns: ColumnsType<DataType> =
       [
@@ -92,12 +108,19 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             dataIndex: 'name',
             key: 'name',
             align: 'center',
-            width: '17%',
+            width: '10%',
          },
          {
-            title: 'Money(ETH)',
+            title: 'Current Money(ETH)',
             dataIndex: 'amountOfMoney',
             key: 'amountOfMoney',
+            align: 'center',
+            width: '10%',
+         },
+         {
+            title: 'Given Amount(ETH)',
+            dataIndex: 'givenAmount',
+            key: 'givenAmount',
             align: 'center',
             width: '10%',
          },
@@ -122,10 +145,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             render: (text, record) => (
                <Space size="middle">
                   <Input.Group compact>
-                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInput} />
+                     <Input style={{ width: '10%' }} defaultValue={0} onChange={amountInput} />
                      <Button type="primary" onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
-                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInputToWithdraw} />
-                     <Button style={{ marginLeft: '5%' }} type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
+                     <Input style={{ marginLeft: '5%', width: '10%' }} defaultValue={0} onChange={amountInputToWithdraw} />
+                     <Button type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
                   </Input.Group>
                </Space>
             ),
@@ -134,25 +157,24 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          },
       ]
 
-   let addButton;
-   if (!hasSelected) {
-      addButton = <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
-   }
-   else {
-      addButton = <Button type="primary" danger>{ML('cocuksil')}</Button>;
+   const clearError = () => {
+      //@ts-ignore
+      setError();
    }
 
    return (
       <div style={mystyle}>
+         {
+            isLoading && <ModalComponent title="SENDING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+         }
+         {
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
+         }
          <div style={buttonStyle}>
-            {addButton}
+            <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
          </div>
          <Table style={table}
             bordered={true}
-            rowSelection={{
-
-               ...rowSelection,
-            }}
             pagination={
                {
                   hideOnSinglePage: true,

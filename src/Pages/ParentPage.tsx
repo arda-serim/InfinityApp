@@ -55,13 +55,13 @@ const ParentPage = () => {
          const tempData = response.map((child: any) => ({
             title: child.name,
             key: child.walletaddress,
-            value: (Number(child.amountOfMoney) / (Math.pow(10,18)))
+            value: (Number(child.amountOfMoney) / (Math.pow(10, 18)))
          }),
          )
 
          tempData.push({
             title: "You",
-            value: (Number(await showBalanceofParent()) / Math.pow(10,18)),
+            value: (Number(await showBalanceofParent()) / Math.pow(10, 18)),
             key: "you"
          })
 
@@ -70,8 +70,9 @@ const ParentPage = () => {
          const edit = response.map((child: any) => (
             {
                ...child,
-               releaseTime: child.releaseTime.toNumber(),
-               amountOfMoney: (Number(child.amountOfMoney) / (Math.pow(10,18))),
+               releaseTime: new Date(child.releaseTime * 1000).toLocaleDateString(),
+               amountOfMoney: (Number(child.amountOfMoney) / (Math.pow(10, 18))),
+               givenAmount: ((Number(child.amountOfMoney) + Number(child.totalWithdrawnMoney)) / (Math.pow(10, 18))),
                key: child.walletaddress
             }),
          )
