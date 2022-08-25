@@ -17,7 +17,6 @@ const logoStyle = {
    marginBottom: '.5%'
 };
 
-
 const headerStyle = {
    display: 'flex',
    flexDirection: 'row',
@@ -32,10 +31,15 @@ const titleStyle = {
    paddingTop: '.5%',
 };
 
-const langStyle = {
+const languageStyle = {
    float: 'right',
-   marginRight: 'auto',
-   position: 'relative'
+   marginLeft: 'auto',
+   alignSelf: 'center',
+   width: '40px',
+   height: '40px',
+   background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',
+   borderRadius : '20px',
+   textAlign :"center",
 } as React.CSSProperties;
 
 const Navbar = () => {
@@ -43,8 +47,8 @@ const Navbar = () => {
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>INTERITANCE</h1>
-         <div style={langStyle}>
-            <Language/>
+         <div style={languageStyle}>
+         <Language/>
          </div>
       </Header >
    );

@@ -51,19 +51,19 @@ export const withdrawMoneyByParent = async (amount: any) => {
 
 }
 
-export const sendMoneyToChild = async (amount: any) => {
+export const sendMoneyToChild = async (amount: any, address: any) => {
    const { signerAddress, contract } = await connectToMetamask();
 
-   const tx = await contract.sendMoneyToChild("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", ethers.utils.parseEther(amount))
+   const tx = await contract.sendMoneyToChild(address, ethers.utils.parseEther(amount))
 
    await tx.wait();
 
 }
 
-export const withdrawMoneyByParentFromChild = async (amount: any) => {
+export const withdrawMoneyByParentFromChild = async (amount: any, address: any) => {
    const { signerAddress, contract } = await connectToMetamask();
 
-   const tx = await contract.withdrawMoneyByParentFromChild("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", ethers.utils.parseEther(amount))
+   const tx = await contract.withdrawMoneyByParentFromChild(address, ethers.utils.parseEther(amount))
 
    await tx.wait();
 }
@@ -76,6 +76,16 @@ export const withdrawMoneyByChild = async (amount: any) => {
 
    await tx.wait();
 }
+
+export const withdrawAllMoneyByChild = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.withdrawAllMoneyByChild();
+
+   await tx.wait();
+}
+
+
 export const getRole = async () => {
    const { signerAddress, contract } = await connectToMetamask();
 
@@ -83,4 +93,12 @@ export const getRole = async () => {
 
    return response;
 
+}
+
+export const getChild = async (address: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const child = await contract.childs(address);
+
+   return child;
 }

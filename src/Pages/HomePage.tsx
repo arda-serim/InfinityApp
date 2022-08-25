@@ -13,6 +13,11 @@ import { useNavigate } from 'react-router-dom';
 import connectToMetamask from '../contract';
 import { getRole } from '../contract/functions';
 import { ML } from '../App';
+import test1 from '../images/smart-contracts.png';
+import test2 from '../images/target.png';
+import { Footer } from 'antd/lib/layout/layout';
+import test3 from '../images/homepage2.png';
+import test4 from '../images/Vector.png'
 
 
 
@@ -44,6 +49,7 @@ const card = {
    color: '#fff',
    background: 'rgba(0, 0, 0, 0)',
    marginLeft: '-3%',
+   zIndex : 2
 
 } as React.CSSProperties;
 
@@ -58,20 +64,40 @@ const insideCard = {
 } as React.CSSProperties;
 
 const imageStyle = {
-   width: '1087px',
-   height: '954px',
+   width: '1000px',
+   height: '800px',
+   borderRadius: '15px',
+   float: 'right',
+  // marginLeft: '-15%',
+  // marginTop: '-13%',
+  marginRight : '0',
+   zIndex : '1',
+   position : 'absolute',
+   right :'0'
+} as React.CSSProperties;
+
+const imageStyle1 = {
+   width: '2000px',
+   height: '900px',
    borderRadius: '15px',
    float: 'right',
    marginLeft: '-15%',
    marginTop: '-13%',
+   zIndex :'-1',
+   opacity : '0.4',
+  
 } as React.CSSProperties;
+
+
 
 const contentStyle = {
    width: '100%',
    height: '100%',
+   
 };
 
 const navbarStyle = {
+   zIndex : 2
 };
 
 const buttonBoxStyle = {
@@ -86,6 +112,7 @@ const signUpButtonStyle = {
    background: 'linear-gradient(180deg, #091058 , #305367)',
    color: '#fff',
    border: 'none',
+   zIndex : 2
 };
 
 const pageStyle = {
@@ -95,6 +122,8 @@ const pageStyle = {
    minWidth: '100vw',
 
 };
+
+
 
 declare var window: any
 
@@ -127,7 +156,6 @@ const HomePage = () => {
       console.log('connectWalletHandler');
       if (window.ethereum) {
          const role = await getRole();
-         console.log("role: ", role)
          localStorage.setItem('role', role);
 
          const { signerAddress } = await connectToMetamask();
@@ -162,22 +190,22 @@ const HomePage = () => {
                   <Row gutter={[24, 8]}>
                      <Col span={12} >
                         <div style={cardStyle}>
-                           { <Title level={2} style={{ color: '#EFAA45' }}>{ML('homePageGiris1')}
-                            {/* <text style={{ color: '#723BFA' }}>INTERITANCE</text> */}
-                           </Title> }
+                           {<Title level={2} style={{ color: '#EFAA45' }}>{ML('homePageGiris1')}
+                              {/* <text style={{ color: '#723BFA' }}>INTERITANCE</text> */}
+                           </Title>}
                            <p style={{ color: '#fff' }}>{ML('appInfo')} </p>
                         </div>
                         <div style={buttonBoxStyle}>
                            <Button size="large" onClick={connectWalletHandler} style={signUpButtonStyle} shape='round'>
                               <img src={metamask} style={{ width: '20px', height: '20px' }}></img>
-                             {ML('loginwm')}</Button>
+                              {ML('loginwm')}</Button>
                         </div>
                         <div style={cardStyle}>
                            <Card bordered={false} style={card}>
                               <h1 style={{ color: '#fff', fontSize: 32, fontStyle: 'italic' }}>{ML('need')}</h1>
                               <div style={insideCard}>
                                  <p > <img style={iconStyle} src={icon} />
-                                   {ML('first')} <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
+                                    {ML('first')} <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
                                     <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' > {ML('click here')}</a></text>
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
@@ -187,23 +215,71 @@ const HomePage = () => {
                                     {ML('third')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                  {ML('fourth')}
+                                    {ML('fourth')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                   {ML('fifth')}
+                                    {ML('fifth')}
                                  </p>
                               </div>
                            </Card>
                         </div>
                      </Col>
 
-                     <Col span={12} >
-                        <img src={test} style={imageStyle} />
+                     <Col span={12} > 
+                        <img src={test4} style={imageStyle1} />
+                        <img src={test3} style={imageStyle} />
                      </Col>
                   </Row>
                </div>
+               <div style={contentStyle}>
+               <Row gutter={[24, 8]}>
+                 
+                  <Col span={12}  >
+                     
+                     <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1  , marginLeft : '20%' , marginTop: '10%'}}>
+                     <img src={test1} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%', zIndex :2}}/>
+                     </div>
+                     
+                  </Col>
+                  <Col span={12} >
+                     <p style={{ color : 'white' , marginLeft : '30%' , fontSize : '20px' , marginTop : '20%'}}>
+                        Why Ethereum ?
+                     </p>
+                     <p style={{marginTop : '5%' , color : 'white' , marginRight : '20%' , fontSize : '20px'}} >
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga </p>
+                  </Col>
+                  
+              
+               </Row>
+               </div>
+
+               <div style={contentStyle}>
+               <Row gutter={[24, 8]}>
+               <Col span={12} >
+
+                  <p style={{marginTop : '25%' , color : 'white' , marginLeft : '40%' , fontSize : '20px'}}>
+                      Our vision and mission
+                  </p>
+               <p style={{marginTop : '5%' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}} >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                   numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga </p>
+               </Col>
+               <Col span={12} >
+                  <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1 , marginLeft : '20%' , marginTop: '20%' }}>
+                  <img src={test2} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%' , zIndex :2}}/>
+                  </div>
+                
+               </Col>
+               </Row>
+               </div>
+
             </Content >
          </div >
+         
+
       </Layout >
    );
 }

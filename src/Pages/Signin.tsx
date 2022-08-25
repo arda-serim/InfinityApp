@@ -96,7 +96,6 @@ const { Header, Content } = Layout;
 const Signin = () => {
   let rememberMe = false;
   let navigate = useNavigate();
- 
   let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [{ name: "", surname: "", role: "", balance: "", address: "", age: "", receivalDate: "" }] }];
   const [balance, setBalance] = useState("");
   const [lang, setLang] = useState(langs.tr)
@@ -114,37 +113,15 @@ const Signin = () => {
   };
 
   React.useEffect(() => {
-    window.ethereum.request({
-      method: 'eth_getBalance',
-      params: [sessionStorage.getItem('address'), 'latest'],
-    }).then((blnce: any) => {
-      setBalance(ethers.utils.formatEther(blnce));
-    }
-    );
-
-    // look if user is in database
-    // let users = localStorage.getItem('users');
-    // if (users) {
-    //   let usersArr = JSON.parse(users);
-    //   let address = sessionStorage.getItem('address');
-    //   if (address === null) {
-    //     address = "";
-    //     navigate('/');
-    //   }
-    //   for (let i = 0; usersArr !== null ? i < usersArr.length : i < 0; i++) {
-    //     if (usersArr) {
-    //       if (usersArr[i].address.toLowerCase() === address.toLowerCase()) {
-    //         console.log(usersArr[i].role);
-    //         // remember me buton eklenmeli
-    //         console.log(usersArr[i])
-    //         sessionStorage.setItem('user', JSON.stringify(usersArr[i]));
-    //         console.log(usersArr[i])
-
-    //         usersArr[i].role === 'parent' ? navigate('/parent') : navigate('/ChildScreen');
-    //       }
-    //     }
-    //   }
+    // window.ethereum.request({
+    //   method: 'eth_getBalance',
+    //   params: [sessionStorage.getItem('address'), 'latest'],
+    // }).then((blnce: any) => {
+    //   setBalance(ethers.utils.formatEther(blnce));
     // }
+    // );
+
+
 
   }
     , []);
