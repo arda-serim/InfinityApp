@@ -36,35 +36,40 @@ const titleStyle = {
 };
 
 const avatarStyle = {
-   marginLeft:'10px',
+   // marginLeft: '10px',
    alignSelf: 'center',
    width: '40px',
    height: '40px',
    background: 'linear-gradient(#5E7D8B  50.02%, #1D1B65  99.95%)',
-   borderRadius : '20px',
-   textAlign :"center",
-   justifyContent: 'center', 
-   alignItems:"center",
-   lineHeight:"40px",
+   borderRadius: '20px',
+   textAlign: "center",
+   justifyContent: 'center',
+   alignItems: "center",
+   lineHeight: "40px",
 
 } as React.CSSProperties;
 
-const buttonStyle = {
-   alignSelf: 'center',
-   marginLeft: '1%',
+const buttonsStyle = {
+   float: 'right',
+   marginLeft: 'auto',
+   display: 'flex',
+   flexDirection: 'row',
+   justifyContent: 'space-evenly',
+   width: '10%',
+   alignItems: 'center',
 } as React.CSSProperties;
 
 const languageStyle = {
-   marginLeft: '980px',
+   // marginLeft: '980px',
    alignSelf: 'center',
    width: '40px',
    height: '40px',
    background: "linear-gradient(#EF886C, #EFAA45)",
-   borderRadius : '20px',
-   textAlign :"center",
-   justifyContent: 'center', 
-   alignItems:"center",
-   lineHeight:"40px",
+   borderRadius: '20px',
+   textAlign: "center",
+   justifyContent: 'center',
+   alignItems: "center",
+   lineHeight: "40px",
 } as React.CSSProperties;
 
 function onLogOut() {
@@ -99,11 +104,13 @@ const Navbar = () => {
       <Header style={headerStyle}>
          <img src={logo} alt="logo" style={logoStyle} />
          <h1 style={titleStyle}>INTERITANCE</h1>
-         <div style={languageStyle}>
-            <Language/>
-         </div>   
-         <Avatar style={avatarStyle} >PM</Avatar>
-         <Button onClick={onLogOut} type="link" icon={<LogoutOutlined />} size={"large"} style={{color:'white', width:'100px', height:'100px' }}/>
+         <div style={buttonsStyle}>
+            <div style={languageStyle}>
+               <Language />
+            </div>
+            <Avatar style={avatarStyle} >PM</Avatar>
+            <Button onClick={onLogOut} type="link" icon={<LogoutOutlined />} size={"large"} style={{ color: 'white' }} />
+         </div>
       </Header >
    );
 }

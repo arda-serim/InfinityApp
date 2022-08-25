@@ -19,8 +19,6 @@ import ModalComponent from '../Components/ModalComponent';
 const { Countdown } = Statistic;
 
 
-const { Countdown } = Statistic;
-
 const colStyle = {
     background: "rgba(0 ,0 ,0 ,0)",
     minHeight: 850,
@@ -147,8 +145,8 @@ const pageStyle = {
     // full page
     minHeight: '100vh',
     minWidth: '100vw',
- 
- };
+
+};
 const { Title } = Typography;
 
 
@@ -162,12 +160,12 @@ const ChildPage = () => {
         if (localStorage.getItem("role") === "parent") {
             navigate("/parent");
         }
-        
 
 
-         if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
-             navigate("/");
-         }
+
+        if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
+            navigate("/");
+        }
 
 
         async function getThisChild() {
