@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useState } from 'react';
 import signinpng from '../images/signin.png';
-import bg from '../images/bg2.png';
+import bg from '../images/bg.png';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '../images/logo_infinity.png';
 
@@ -20,6 +20,7 @@ import { addParent } from '../contract/functions';
 import LangContext, { langs } from './LangugeContext';
 import { Typography, Layout, Row, Col, Input, Checkbox, Button } from 'antd';
 import { ML } from '../App';
+import Navbar from '../Components/Navbar';
 
 declare var window: any;
 
@@ -49,14 +50,13 @@ const imageStyle = {
   height: '600px',
   borderRadius: '15px',
   marginLeft: '120px',
-  marginTop: '50px'
+  marginTop: '50px',
 };
 
 const inputStyle = {
   borderRadius: '15px',
   width: '350px',
   height: '40px',
-  //background: '#0A103A', 
   color: 'black',
   border: `2px solid purple`,
 };
@@ -64,7 +64,7 @@ const inputStyle = {
 const signInButtonStyle = {
   width: '350px',
   height: '40px',
-  background: 'linear-gradient(180deg, #327FA3 41.67%, #1D1B65 100%)',
+  background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
   color: '#fff',
   border: 'none',
 };
@@ -96,10 +96,6 @@ const { Header, Content } = Layout;
 const Signin = () => {
   let rememberMe = false;
   let navigate = useNavigate();
-  // check if user is parent or admin
-
-
-
   let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [{ name: "", surname: "", role: "", balance: "", address: "", age: "", receivalDate: "" }] }];
   const [balance, setBalance] = useState("");
   const [lang, setLang] = useState(langs.tr)
@@ -187,8 +183,6 @@ const Signin = () => {
 
   return (
 
-    <LangContext.Provider value={lang}>
-
       <Layout style={{
         backgroundPosition: 'center',
         backgroundSize: 'cover',
@@ -196,10 +190,7 @@ const Signin = () => {
         backgroundImage: 'url(' + bg + ')',
       }}>
         <Header style={navbarStyle}>
-          <img src={logo} alt="logo" style={logoStyle} />
-          <h1 style={titleStyle}>Infinity</h1>
-          {/* <button style={{ marginLeft: '80%', background: 'rgba(0,0,0,0)', border: 'none' }} onClick={switchLang}> <u>Dil Değiştir </u> </button> */}
-
+          <Navbar/>
         </Header >
         <div style={contentStyle}>
           <Content>
@@ -254,8 +245,6 @@ const Signin = () => {
           </Content>
         </div>
       </Layout>
-
-    </LangContext.Provider>
   );
 }
 
