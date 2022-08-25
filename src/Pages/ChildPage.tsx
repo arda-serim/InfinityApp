@@ -179,6 +179,10 @@ const ChildPage = () => {
         await withdrawMoneyByChild(input);
 
     }
+
+    //@ts-ignore
+    const date = new Date(child.releaseTime * 1000).toLocaleDateString();
+
     return (
 
         <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
@@ -204,7 +208,7 @@ const ChildPage = () => {
 
                                         </p>
                                         <p style={textStyle}>
-                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{parseInt(child.releaseTime)} </text>
+                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{date}</text>
                                         </p>
                                         <br />
                                         {/* {child?.releaseTime && child?.releaseTime > new Date() && <>

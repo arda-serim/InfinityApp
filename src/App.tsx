@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import ParentPage from "./Pages/ParentPage";
@@ -15,6 +15,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { langs } from "./Pages/LangugeContext";
 import { Dropdown, Typography, Space, Menu } from "antd";
 import menu from "antd/lib/menu";
+import { getRole } from "./contract/functions";
 
 
 
@@ -80,13 +81,33 @@ export function Language() {
 }
 
 function App() {
+  const [role, setRole] = useState();
+
+  useEffect(() => {
+    const gettingRole = async () => {
+      const response = await getRole();
+      setRole(response);
+    }
+    gettingRole();
+  }, [])
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/parent" element={<ParentPage />} />
+      {role === "parent" &&
+        <>
+          <Route path="/parent" element={<ParentPage />} />
+          <Route path="/childedit" element={<Childedit />} />
+        </>
+      }
+
       <Route path="/signin" element={<Signin />} />
-      <Route path="/childedit" element={<Childedit />} />
-      <Route path="/childpage" element={<ChildPage />} />
+      {role === "child" &&
+        <>
+          <Route path="/childpage" element={<ChildPage />} />
+
+        </>
+      }
       <Route path="/signin" element={<Signin />} />
     </Routes>
 

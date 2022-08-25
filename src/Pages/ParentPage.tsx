@@ -69,7 +69,7 @@ const ParentPage = () => {
          const edit = response.map((child: any) => (
             {
                ...child,
-               releaseTime: child.releaseTime.toNumber(),
+               releaseTime: new Date(child.releaseTime * 1000).toLocaleDateString(),
                amountOfMoney: (Number(child.amountOfMoney) / (Math.pow(10,18))),
                key: child.walletaddress
             }),
