@@ -3,7 +3,7 @@ import { Button, DatePicker, Input, Modal, Space, Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
-import { sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
+import { changeReleaseTime, sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
 import { ML } from '../App';
 import ModalComponent from './ModalComponent';
 
@@ -39,7 +39,20 @@ const table = {
 } as React.CSSProperties;
 
 
+const signInButtonStyle = {
+   height: '32px',
+   background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
+   color: '#fff',
+   border: 'none',
+   marginLeft: '-20%',
+};
 
+const buttonsStyle = {
+   display: 'flex',
+   flexDirection: 'row',
+   justifyContent: 'space-evenly',
+   alignItems: 'center',
+} as React.CSSProperties;
 
 
 const TableComponent = ({ data }: { data: Array<DataType> }) => {
@@ -47,6 +60,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    let navigate = useNavigate();
    const [error, setError] = useState();
    const [isModalVisible, setIsModalVisible] = useState(false);
+   const [date, setDate] = useState('');
 
    function onAddChild() {
       navigate("/childedit");
@@ -100,6 +114,18 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
       }
    }
 
+   const onClickDate = async (date: any, address: any) => {
+      try {
+         console.log(date, '  date  ', address);
+
+         await changeReleaseTime(address, date);
+      }
+      catch (error: any) {
+         setError((error.reason.split(":"))[1])
+         setIsModalVisible(true);
+      }
+   }
+
 
    const columns: ColumnsType<DataType> =
       [
@@ -128,13 +154,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             title: 'Recieval Date',
             dataIndex: 'releaseTime',
             key: 'releaseTime',
-            // render: (text) => (
-            //    <Space size="middle">
-            //       <DatePicker format={'DD/MM/YYYY'} defaultValue={moment(text, 'DD/MM/YYYY')} />
-            //       <Button type="primary" /*onClick={onClickDate()}*/>Submit</Button>
-            //    </Space>
+            render: (text, record) => (
+               <Space size="middle">
+                  <DatePicker format={'DD/MM/YYYY'} defaultValue={moment(text, 'DD/MM/YYYY')} onChange={(date: any) => {
+                     const d = new Date(date).toLocaleDateString();
+                     setDate(d);
+                  }} />
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={() => onClickDate(date, record.key)} >Save</Button>
+               </Space>
 
-            // ),
+            ),
             align: 'center',
             width: '32.5%',
          },
@@ -143,14 +172,12 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             dataIndex: 'given_amount',
             key: 'given_amount',
             render: (text, record) => (
-               <Space size="middle">
-                  <Input.Group compact>
-                     <Input style={{ width: '10%' }} defaultValue={0} onChange={amountInput} />
-                     <Button type="primary" onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
-                     <Input style={{ marginLeft: '5%', width: '10%' }} defaultValue={0} onChange={amountInputToWithdraw} />
-                     <Button type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
-                  </Input.Group>
-               </Space>
+               <Space size="middle" style={buttonsStyle}>
+                  <Input style={{ width: '60%', textAlign: 'center' }} defaultValue={0} onChange={amountInput} />
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
+                  <Input style={{ width: '60%', textAlign: 'center' }} defaultValue={0} onChange={amountInputToWithdraw} />
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
+               </Space >
             ),
             align: 'center',
             width: '37.5%',
@@ -171,7 +198,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
          }
          <div style={buttonStyle}>
-            <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
+            <Button onClick={onAddChild} style={signInButtonStyle} shape='round' type="primary">{ML('cocukekle')}</Button>
          </div>
          <Table style={table}
             bordered={true}
