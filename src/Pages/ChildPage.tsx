@@ -144,7 +144,7 @@ const { Title } = Typography;
 
 const ChildPage = () => {
     const [input, setInput] = useState();
-    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '' });
+    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '', name: '' });
     const [error, setError] = useState();
     let navigate = useNavigate();
     useEffect(() => {
@@ -219,7 +219,7 @@ const ChildPage = () => {
                             <Col span={12}>
                                 <div>
                                     <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                        Welcome User!
+                                        Welcome {String(child.name)}!
                                     </Title>
                                 </div>
                                 <div style={cardStyle}>

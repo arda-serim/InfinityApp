@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "antd/es/card";
 import icon from '../images/ethereum.png';
-import { Button, Modal } from "antd";
+import { Button, Modal, Spin } from "antd";
 import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from "../contract/functions";
 import { ML } from "../App";
 import { useHref } from "react-router-dom";
@@ -47,6 +47,8 @@ const EthereumPrice = (props: any) => {
 
    const [error, setError] = useState();
 
+   const [loading, setLoading] = useState(false);
+
    React.useEffect(() => {
       async function getBalance() {
          const balance = await showBalanceofParent();
@@ -60,8 +62,9 @@ const EthereumPrice = (props: any) => {
 
 
    const sendMoneyHandler = async () => {
+      setLoading(true);
       await sendMoneyToContract(amountOfEthToDeposit);
-
+      setLoading(false);
       window.location.reload();
    }
 
@@ -98,7 +101,10 @@ const EthereumPrice = (props: any) => {
    return (
       <>
          {
-            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{color:'red'}} onClear={clearError} />
+            loading && <ModalComponent title="Loadıng" modalVisibility={true} message={ <Spin /> }  />
+         }
+         {
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
          }
          <Card style={cardStyle} >
             <h1 style={{ color: '#fff' }}>{ML('user')} Username</h1>

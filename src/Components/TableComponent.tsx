@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, DatePicker, Input, Modal, Space, Table } from 'antd';
+import { Button, DatePicker, Input, Modal, Space, Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
@@ -55,7 +55,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const [amount, setAmount] = useState();
    const [amountWithdraw, setAmountWithdraw] = useState();
    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
+   const [isLoading, setIsLoading] = useState(false);
 
 
    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -78,7 +78,9 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    const sendToChild = async (address: any) => {
       try {
+         setIsLoading(true);
          await sendMoneyToChild(amount, address);
+         setIsLoading(false);
          window.location.reload();
       }
       catch (error: any) {
@@ -93,7 +95,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          window.location.reload();
       }
       catch (error: any) {
-         setError(error.message)
+         setError((error.reason.split(":"))[1])
          setIsModalVisible(true);
       }
    }
@@ -163,7 +165,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+            isLoading && <ModalComponent title="SENDING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+         }
+         {
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
          }
          <div style={buttonStyle}>
             <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
