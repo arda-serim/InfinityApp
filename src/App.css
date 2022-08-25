@@ -59,7 +59,8 @@
    background: rgba(0, 0, 0, 0.2);
 }
 
-.ant-typography a, a.ant-typography {
+.ant-typography a,
+a.ant-typography {
    color: #FFFFFF;
    outline: none;
    cursor: pointer;
