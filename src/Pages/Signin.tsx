@@ -128,44 +128,13 @@ const Signin = () => {
 
   async function OnSignIn() {
 
-    await addParent(name, surname);
+
 
     if (name === "" || surname === "") {
       alert("Please fill all the fields")
     }
     else {
-      // getBalance(sessionStorage.getItem('address'));
-
-      let adrs = sessionStorage.getItem('address');
-      if (adrs === null) {
-        adrs = "";
-      }
-      const user = {
-        name: name,
-        surname: surname,
-        role: 'parent',
-        balance: balance,
-        address: adrs,
-        children: []
-      }
-      sessionStorage.removeItem('address');
-      if (rememberMe) {
-        localStorage.setItem("user", JSON.stringify(user));
-
-      }
-      else {
-        sessionStorage.setItem("user", JSON.stringify(user));
-      }
-
-
-      let usrs = localStorage.getItem("users");
-
-      if (usrs) {
-        users = JSON.parse(usrs);
-      }
-      users.push(user);
-
-      localStorage.setItem("users", JSON.stringify(users));
+      await addParent(name, surname);
 
 
       navigate('/parent');
@@ -183,68 +152,68 @@ const Signin = () => {
 
   return (
 
-      <Layout style={{
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: 'url(' + bg + ')',
-      }}>
-        <Header style={navbarStyle}>
-          <Navbar/>
-        </Header >
-        <div style={contentStyle}>
-          <Content>
-            <div style={colStyle}>
-              <Row gutter={[16, 8]}>
-                <Col span={12}>
-                  <img src={signinpng} style={imageStyle} />
-                </Col>
-                <Col span={12}>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title style={{
-                      color: '#0A103A', marginTop: '25'
-                    }}>{ML('giris')}</Title>
-                  </div>
-                  <div style={whitePlaceStyle}>
-                    <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
-                  </div>
-                  <br>
-                  </br>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
-                  </div>
-                  <div style={whitePlaceStyle}>
-                    <Input style={inputStyle} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
-                  </div>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
-                  </div>
-                  <div style={whitePlaceStyle}>
-                    <Input style={inputStyle} type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
-                  </div>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
-                  </div>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Button onClick={OnSignIn} size="large" style={signInButtonStyle} shape='round'>
-                      {ML('kayıtol')}</Button>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </Content>
-        </div>
-      </Layout>
+    <Layout style={{
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundImage: 'url(' + bg + ')',
+    }}>
+      <Header style={navbarStyle}>
+        <Navbar />
+      </Header >
+      <div style={contentStyle}>
+        <Content>
+          <div style={colStyle}>
+            <Row gutter={[16, 8]}>
+              <Col span={12}>
+                <img src={signinpng} style={imageStyle} />
+              </Col>
+              <Col span={12}>
+                <br>
+                </br>
+                <div style={whitePlaceStyle}>
+                  <Title style={{
+                    color: '#0A103A', marginTop: '25'
+                  }}>{ML('giris')}</Title>
+                </div>
+                <div style={whitePlaceStyle}>
+                  <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
+                </div>
+                <br>
+                </br>
+                <br>
+                </br>
+                <div style={whitePlaceStyle}>
+                  <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
+                </div>
+                <div style={whitePlaceStyle}>
+                  <Input style={inputStyle} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
+                </div>
+                <br>
+                </br>
+                <div style={whitePlaceStyle}>
+                  <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
+                </div>
+                <div style={whitePlaceStyle}>
+                  <Input style={inputStyle} type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
+                </div>
+                <br>
+                </br>
+                <div style={whitePlaceStyle}>
+                  <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
+                </div>
+                <br>
+                </br>
+                <div style={whitePlaceStyle}>
+                  <Button onClick={OnSignIn} size="large" style={signInButtonStyle} shape='round'>
+                    {ML('kayıtol')}</Button>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Content>
+      </div>
+    </Layout>
   );
 }
 
