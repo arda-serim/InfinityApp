@@ -47,11 +47,13 @@ const EthereumPrice = (props: any) => {
 
    const [error, setError] = useState();
 
-   const [loading, setLoading] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
 
    React.useEffect(() => {
       async function getBalance() {
+         setIsLoading(true)
          const balance = await showBalanceofParent();
+         setIsLoading(false)
          setBalance(Number(balance));
       }
 
@@ -62,20 +64,29 @@ const EthereumPrice = (props: any) => {
 
 
    const sendMoneyHandler = async () => {
-      setLoading(true);
-      await sendMoneyToContract(amountOfEthToDeposit);
-      setLoading(false);
-      window.location.reload();
+      try {
+         setIsLoading(true);
+         await sendMoneyToContract(amountOfEthToDeposit);
+         setIsLoading(false);
+         window.location.reload();
+
+      }
+      catch (error) {
+         setIsLoading(false);
+      }
    }
 
 
    const withdrawHandler = async () => {
       try {
+         setIsLoading(true)
          await withdrawMoneyByParent(amountOfEthToWithdraw);
+         setIsLoading(false)
          window.location.reload();
       }
       catch (error: any) {
          setError((error.reason.split(":"))[1])
+         setIsLoading(false)
       }
 
    }
@@ -101,7 +112,7 @@ const EthereumPrice = (props: any) => {
    return (
       <>
          {
-            loading && <ModalComponent title="Loadıng" modalVisibility={true} message={ <Spin /> }  />
+            isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
          }
          {
             error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />

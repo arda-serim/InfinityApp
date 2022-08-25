@@ -16,7 +16,8 @@ const ModalComponent = (props:any) => {
    };
 
    return (
-      <Modal title={props.title ? props.title : 'ERROR OCCURED'} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} style={props.style}>
+      <Modal title={props.title ? props.title : 'ERROR OCCURED'} visible={isModalVisible} okButtonProps={props.loading && { loading: true }}
+      cancelButtonProps={ props.loading && { loading: true }} onOk={handleOk} onCancel={handleCancel} style={props.style}>
          <p>{props.message}</p>
       </Modal>
 
