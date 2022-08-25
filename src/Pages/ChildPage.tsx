@@ -14,9 +14,9 @@ import TRY from '../images/pngwing.com.png';
 import type { countdownValueType } from 'antd/es/statistic/utils';
 import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../contract/functions';
 import connectToMetamask from '../contract';
+import { ML } from '../App';
+
 const { Countdown } = Statistic;
-
-
 
 const colStyle = {
     background: "rgba(0 ,0 ,0 ,0)",
@@ -138,6 +138,14 @@ export interface child {
     address: string;
 
 }
+
+const pageStyle = {
+    background: 'linear-gradient(to bottom, #0A368B,#3B82A0)',
+    // full page
+    minHeight: '100vh',
+    minWidth: '100vw',
+ 
+ };
 const { Title } = Typography;
 
 
@@ -150,9 +158,12 @@ const ChildPage = () => {
         if (localStorage.getItem("role") === "parent") {
             navigate("/parent");
         }
-        if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
-            navigate("/");
-        }
+        
+
+
+         if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
+             navigate("/");
+         }
 
 
         async function getThisChild() {
@@ -181,7 +192,7 @@ const ChildPage = () => {
     }
     return (
 
-        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
+        <Layout style={pageStyle}>
             <div>
 
                 <Navbar />
@@ -194,7 +205,7 @@ const ChildPage = () => {
                             <Col span={12}>
                                 <div>
                                     <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                        Welcome User!
+                                        {ML('user')}
                                     </Title>
                                 </div>
                                 <div style={cardStyle}>
@@ -214,9 +225,9 @@ const ChildPage = () => {
                                         <br />
                                         <Input style={inputStyle} onChange={(event: any) => setInput(event.target.value)} />
                                         <br />
-                                        <Button style={buttonStyle} onClick={setClick} >Withdraw Money</Button>
+                                        <Button style={buttonStyle} onClick={setClick} >{ML('geriCek')}</Button>
                                         <br />
-                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >Withdraw All The Money</Button>
+                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >{ML('tumParayıCek')}</Button>
 
                                     </Card>
 
