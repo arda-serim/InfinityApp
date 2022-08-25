@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Button, DatePicker, Input, Space, Table } from 'antd';
+import { Button, DatePicker, Input, Modal, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
 import { ML } from '../App';
+import ModalComponent from './ModalComponent';
 
 interface DataType {
    key: string;
@@ -44,6 +45,8 @@ const table = {
 const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let navigate = useNavigate();
+   const [error, setError] = useState();
+   const [isModalVisible, setIsModalVisible] = useState(false);
 
    function onAddChild() {
       navigate("/childedit");
@@ -74,16 +77,25 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    }
 
    const sendToChild = async (address: any) => {
-      await sendMoneyToChild(amount, address);
-      window.location.reload();
+      try{await sendMoneyToChild(amount, address);
+      window.location.reload();}
+      catch(error:any) {
+         setError((error.reason.split(":"))[1])
+      }
 
    }
 
    const withdrawBackHandler = async (address: any) => {
-      await withdrawMoneyByParentFromChild(amountWithdraw, address);
-      window.location.reload();
-
+      try {
+         await withdrawMoneyByParentFromChild(amountWithdraw, address);
+         window.location.reload();
+      }
+      catch (error: any) {
+         setError(error.message)
+         setIsModalVisible(true);
+      }
    }
+
 
    const columns: ColumnsType<DataType> =
       [
@@ -142,8 +154,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
       addButton = <Button type="primary" danger>{ML('cocuksil')}</Button>;
    }
 
+   const clearError = () => {
+      //@ts-ignore
+      setError();
+   }
+
    return (
       <div style={mystyle}>
+         {
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{color: 'red'}} onClear={clearError} />
+         }
          <div style={buttonStyle}>
             {addButton}
          </div>
