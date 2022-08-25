@@ -77,9 +77,11 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    }
 
    const sendToChild = async (address: any) => {
-      try{await sendMoneyToChild(amount, address);
-      window.location.reload();}
-      catch(error:any) {
+      try {
+         await sendMoneyToChild(amount, address);
+         window.location.reload();
+      }
+      catch (error: any) {
          setError((error.reason.split(":"))[1])
       }
 
@@ -141,10 +143,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             render: (text, record) => (
                <Space size="middle">
                   <Input.Group compact>
-                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInput} />
+                     <Input style={{ width: '10%' }} defaultValue={0} onChange={amountInput} />
                      <Button type="primary" onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
-                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInputToWithdraw} />
-                     <Button style={{ marginLeft: '5%' }} type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
+                     <Input style={{ marginLeft: '5%', width: '10%' }} defaultValue={0} onChange={amountInputToWithdraw} />
+                     <Button type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
                   </Input.Group>
                </Space>
             ),
@@ -152,14 +154,6 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             width: '37.5%',
          },
       ]
-
-   let addButton;
-   if (!hasSelected) {
-      addButton = <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
-   }
-   else {
-      addButton = <Button type="primary" danger>{ML('cocuksil')}</Button>;
-   }
 
    const clearError = () => {
       //@ts-ignore
@@ -169,17 +163,13 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{color: 'red'}} onClear={clearError} />
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
          }
          <div style={buttonStyle}>
-            {addButton}
+            <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
          </div>
          <Table style={table}
             bordered={true}
-            rowSelection={{
-
-               ...rowSelection,
-            }}
             pagination={
                {
                   hideOnSinglePage: true,
