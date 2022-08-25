@@ -172,13 +172,7 @@ const Signin = () => {
       localStorage.setItem("users", JSON.stringify(users));
 
 
-      if (user.role === 'parent') {
-        window.location.href = "/parent";
-      }
-      else if (user.role === 'child') {
-        window.location.href = "/childScreen";
-      }
-
+      navigate('/parent');
     }
   };
 

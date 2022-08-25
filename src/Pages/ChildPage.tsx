@@ -186,6 +186,7 @@ const ChildPage = () => {
             await withdrawMoneyByChild(input);
             //@ts-ignore
             setInput('');
+            window.location.reload();
         }
         catch (error: any) {
             setError((error.reason.split(":"))[1])
@@ -198,63 +199,63 @@ const ChildPage = () => {
     const clearError = () => {
         //@ts-ignore
         setError('');
-     }
+    }
 
     return (
 
-            <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
-                <div>
+        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
+            <div>
 
-                    <Navbar />
+                <Navbar />
 
-                </div>
-                {
+            </div>
+            {
                 error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
             }
-                <div style={contentStyle}>
-                    <Content>
-                        <div style={colStyle} >
-                            <Row gutter={[16, 8]}>
-                                <Col span={12}>
-                                    <div>
-                                        <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                            Welcome User!
-                                        </Title>
-                                    </div>
-                                    <div style={cardStyle}>
-                                        <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
-                                            <p style={lineStyle}>
-                                                <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10, 18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
+            <div style={contentStyle}>
+                <Content>
+                    <div style={colStyle} >
+                        <Row gutter={[16, 8]}>
+                            <Col span={12}>
+                                <div>
+                                    <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
+                                        Welcome User!
+                                    </Title>
+                                </div>
+                                <div style={cardStyle}>
+                                    <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
+                                        <p style={lineStyle}>
+                                            <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10, 18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
 
-                                            </p>
-                                            <p style={textStyle}>
-                                                <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{date}</text>
-                                            </p>
-                                            <br />
-                                            {/* {child?.releaseTime && child?.releaseTime > new Date() && <>
+                                        </p>
+                                        <p style={textStyle}>
+                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{date}</text>
+                                        </p>
+                                        <br />
+                                        {/* {child?.releaseTime && child?.releaseTime > new Date() && <>
                                             <Countdown /*title="Day Level"  value={child?.releaseTime.getTime()} format="DD Gün HH:mm:ss kaldı" valueStyle={{ color: "white", width: "100%", textAlign: "center", }} />
                                         </>} */}
 
-                                            <br />
-                                            <Input style={inputStyle} onChange={(event: any) => setInput(event.target.value)} />
-                                            <br />
-                                            <Button style={buttonStyle} onClick={setClick} >Withdraw Money</Button>
-                                            <br />
-                                            <Button style={buttonStyle2} onClick={onWithdrawAll} >Withdraw All The Money</Button>
+                                        <br />
+                                        <Input style={inputStyle} onChange={(event: any) => setInput(event.target.value)} />
+                                        <br />
+                                        <Button style={buttonStyle} onClick={setClick} >Withdraw Money</Button>
+                                        <br />
+                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >Withdraw All The Money</Button>
 
-                                        </Card>
+                                    </Card>
 
-                                    </div>
-                                </Col>
-                                <Col span={12} >
-                                    <img src={picture} style={imageStyle} />
-                                </Col>
-                            </Row>
-                        </div>
+                                </div>
+                            </Col>
+                            <Col span={12} >
+                                <img src={picture} style={imageStyle} />
+                            </Col>
+                        </Row>
+                    </div>
 
-                    </Content>
-                </div>
-            </Layout>
+                </Content>
+            </div>
+        </Layout>
 
     );
 }
