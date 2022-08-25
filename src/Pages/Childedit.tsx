@@ -68,7 +68,7 @@ const imageStyle = {
 
 function Childedit() {
 
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   // React.useEffect(() => {
   //   if (
@@ -97,6 +97,8 @@ function Childedit() {
     const releaseTimeInSeconds = Math.floor(new Date().getTime() / 1000);
 
     await addChild(name, releaseTimeInSeconds, address);
+
+    navigate("/parent");
   }
 
 
@@ -133,7 +135,7 @@ function Childedit() {
                     <Input style={inputStyle} placeholder="Surname"/>
                   </div> */}
                   <div >
-                    <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children}type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
+                    <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
                   </div>
                   {/* <div >
                     <Input style={inputStyle} placeholder="Date of birth"/>
@@ -143,7 +145,7 @@ function Childedit() {
                   </div>
                   <div>
                     <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={addChildHandler}>
-                     {ML('kaydet')}
+                      {ML('kaydet')}
                     </Button>
                   </div>
                 </Col>
