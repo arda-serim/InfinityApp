@@ -1,4 +1,4 @@
-import Navbar from '../Components/Navbar';
+import Navbar from '../Components/NavbarChildPage';
 import React from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
 import { Col, Row, Slider, Spin } from 'antd';
@@ -25,7 +25,7 @@ const inputStyle = {
   height: '40px',
   background: 'rgba(0,0,0,0)',
   color: 'white',
-  marginLeft: '350px',
+  marginLeft: '230px',
   marginTop: '10%'
 };
 
@@ -50,13 +50,13 @@ const buttonStyle = {
   borderRadius: '15px',
   width: '150px',
   height: '40px',
-  marginLeft: '450px',
+  marginLeft: '330px',
   marginTop: '10%'
 };
 
 const fotoStyle = {
   marginLeft: '200px',
-  marginTop: '100px'
+  marginTop: '50px'
 };
 
 const imageStyle = {
@@ -136,24 +136,18 @@ function Childedit() {
               <div>
                 <Col span={12}>
                   <div style={fotoStyle}>
-                    <img src={edit} alt="edit" style={{ width: '600px', height: '500px' }} />
+                    <img src={edit} alt="edit" style={{ width: '530px', height: '400px' }} />
                   </div>
                 </Col>
               </div>
               <div>
                 <Col span={12}>
-                  <div style={{ marginTop: '25%' }} >
+                  <div style={{ marginTop: '60%' }} >
                     <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
                   </div>
-                  {/* <div >
-                    <Input style={inputStyle} placeholder="Surname"/>
-                  </div> */}
                   <div >
                     <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
                   </div>
-                  {/* <div >
-                    <Input style={inputStyle} placeholder="Date of birth"/>
-                  </div> */}
                   <div >
                     <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
                   </div>

@@ -133,28 +133,28 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const columns: ColumnsType<DataType> =
       [
          {
-            title: 'Name',
+            title: ML('ad'),
             dataIndex: 'name',
             key: 'name',
             align: 'center',
             width: '10%',
          },
          {
-            title: 'Current Money(ETH)',
+            title: ML('para'),
             dataIndex: 'amountOfMoney',
             key: 'amountOfMoney',
             align: 'center',
             width: '10%',
          },
          {
-            title: 'Given Amount(ETH)',
+            title: ML('gönderilen'),
             dataIndex: 'givenAmount',
             key: 'givenAmount',
             align: 'center',
             width: '10%',
          },
          {
-            title: 'Recieval Date',
+            title: ML('erisimTarihi'),
             dataIndex: 'releaseTime',
             key: 'releaseTime',
             render: (text, record) => (
@@ -171,7 +171,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             width: '32.5%',
          },
          {
-            title: 'Given Amount (ETH)',
+            title: ML('tutar'),
             dataIndex: 'given_amount',
             key: 'given_amount',
             render: (text, record) => (

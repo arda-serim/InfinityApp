@@ -78,9 +78,9 @@ const inputStyle = {
     width: "250px",
     height: '40px',
     marginLeft: "105px",
-    border: "#1D1B65",
     borderRadius: "30px",
-    background: "linear-gradient(#FFFFFF, #1D1B65)",
+    background: "#FFFFFF)",
+    border: '1px solid #40D8D8',
 } as React.CSSProperties;
 
 const buttonStyle = {

@@ -40,15 +40,13 @@ export const langs = {
         cocukekle: 'Çocuk ekle',
         cocuksil: 'Çocuk sil',
         send: 'Gönder',
-        money: 'Hesabındaki para',
-        given: 'Verilen tutar',
-        ethprice : 'Fiyatı',
         yourWallet: 'Senin cüzdanın',
         withdraweth : 'Ethereumu geri çek',
         sendeth: 'Ethereum gönder',
-        logout : 'Çıkış yap',
-        withdrawback : 'Geri çek'
-
+        withdrawback : 'Geri çek',
+        para: 'Mevcut Para(ETH)',
+        gönderilen: 'Gönderilen Miktar(ETH)',
+        tutar: 'Gönderilecek / Çekilecek Tutar'
     },
 
     en: {
@@ -73,6 +71,7 @@ export const langs = {
         fourth: 'You can manage your children’s accounts as you wish and invest as much as you want.',
         fifth: 'When the date you set comes, your child will have access to their wallet.',
         loginwm: 'Login with Metamask',
+        dildesgis: 'Change language',
         clickhere: 'Click here.',
         //childedit
         erisimTarihi: 'Date of Access',
@@ -90,15 +89,13 @@ export const langs = {
         cocuksil: 'Delete child',
         send: 'Send',
         money: 'Current amonunt of money',
-        given: 'Given amount',
-        dildesgis: 'Change language',
-        ethprice : 'Price',
         yourWallet: 'Your wallet',
         withdraweth : 'Withdraw Ethereum',
         sendeth: 'Send ethereum',
-        logout : 'Log Out',
-        withdrawback : 'Withdraw Back'
-       
+        withdrawback : 'Withdraw Back',
+        para: 'Current Money(ETH)',
+        gönderilen: 'Gönderilen Miktar(ETH)',
+        tutar: 'Amount To Be Sent / Withdrawn'
     }
 }
 
