@@ -239,7 +239,6 @@ const Signin = () => {
         </div>
       </Layout>
     </>
-
   );
 }
 

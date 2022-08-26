@@ -34,6 +34,8 @@ export const langs = {
         user: 'Hoşgeldiniz',
         geriCek: 'Parayı geri çek',
         tumParayıCek: 'Tüm parayı çek',
+        miktar: 'Çekilecek miktarı giriniz.',
+        tarih:'Paranın çekilebileceği tarih;',
         //parentpage
         cocukekle: 'Çocuk ekle',
         cocuksil: 'Çocuk sil',
@@ -81,6 +83,8 @@ export const langs = {
         user: 'Welcome',
         geriCek: 'Withdraw money',
         tumParayıCek: 'Withdraw all money',
+        miktar:'Enter the amount of to withdraw',
+        tarih: 'The date the money can be withdrawn',
         //parentpage
         cocukekle: 'Add child',
         cocuksil: 'Delete child',

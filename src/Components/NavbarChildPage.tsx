@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Descriptions, PageHeader, Row, Statistic, Tag } from 'antd';
+import { Button, Descriptions, PageHeader, Result, Row, Statistic, Tag } from 'antd';
 import logo from '../images/logo_infinity.png';
 import { Layout } from "antd";
 import { Avatar } from 'antd';
@@ -7,6 +7,8 @@ import { Typography } from "antd";
 import metamask from '../images/MetaMask.png';
 import { Language, ML } from "../App";
 import { DownloadOutlined, LogoutOutlined } from "@ant-design/icons";
+import connectToMetamask from "../contract";
+import { getChild, getRole } from "../contract/functions";
 
 
 const { Title } = Typography;
@@ -82,22 +84,28 @@ function onLogOut() {
 
 
 const Navbar = () => {
-   // let name;
-   // let surname;
-   // let user;
-   // if (localStorage.getItem("user")) {
-   //    user = localStorage.getItem("user");
-   //    if (user)
-   //       user = JSON.parse(user);
-   // }
-   // else if (sessionStorage.getItem("user")) {
-   //    user = sessionStorage.getItem("user");
-   //    if (user)
-   //       user = JSON.parse(user);
+   const [child, setChild] = useState({name: '' });
+   
+   async function Role(){
+      const role = await getRole();
+      localStorage.setItem('role', role);
+      if (role === 'child') {
+         let result = result1
+      }
 
-   // }
-
-   // name = user.name;
+   }
+   async function getThisChild() {
+      const { signerAddress } = await connectToMetamask();
+      const tempChild = await getChild(signerAddress);
+      setChild(tempChild);
+   }
+   getThisChild();
+   let fullName = child.name
+   let arrName = fullName.split(" ");
+   let iniName = fullName.charAt(0);
+   let iniLname = arrName[arrName.length - 1].charAt(0);
+   let initials = iniName + iniLname;
+   const result1 = initials.toUpperCase();
 
 
    return (
@@ -108,7 +116,7 @@ const Navbar = () => {
             <div style={languageStyle}>
                <Language />
             </div>
-            <Avatar style={avatarStyle} >PM</Avatar>
+            <Avatar style={avatarStyle} >{result1}</Avatar>
             <Button onClick={onLogOut} type="link" icon={<LogoutOutlined />} size={"large"} style={{ color: 'white' }} />
          </div>
       </Header >

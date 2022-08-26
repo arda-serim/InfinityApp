@@ -68,11 +68,14 @@ tr.ant-table-expanded-row>td {
    background: rgba(0, 0, 0, 0.2);
 }
 
-.ant-typography a,
-a.ant-typography {
+.ant-typography a{
    color: #FFFFFF;
    outline: none;
    cursor: pointer;
    transition: color .3s;
    text-decoration: none;
+}
+
+input{
+   text-align:center;
 }
