@@ -75,9 +75,7 @@ const EthereumPrice = (props: any) => {
 
    React.useEffect(() => {
       async function getBalance() {
-         setIsLoading(true)
          const balance = await showBalanceofParent();
-         setIsLoading(false)
          setBalance(Number(balance));
       }
 

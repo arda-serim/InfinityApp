@@ -171,9 +171,7 @@ const ChildPage = () => {
 
 
         async function getThisChild() {
-            setIsLoading(true);
             const tempChild = await getChild();
-            setIsLoading(false);
             setChild(tempChild);
         }
         getThisChild();

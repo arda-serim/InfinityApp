@@ -119,12 +119,13 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const onClickDate = async (date: any, address: any) => {
       try {
          console.log(date, '  date  ', address);
-
+         setIsLoading(true);
          await changeReleaseTime(address, date);
+         setIsLoading(false);
       }
       catch (error: any) {
          setError((error.reason.split(":"))[1])
-         setIsModalVisible(true);
+         setIsLoading(false);
       }
    }
 
