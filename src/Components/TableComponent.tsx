@@ -205,13 +205,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          </div>
          <Table style={table}
             bordered={true}
-            pagination={
-               {
-                  hideOnSinglePage: true,
-                  pageSize: 3,
-                  position: ['bottomCenter'],
-                  responsive: true,
-               }}
+            pagination={false}
             columns={columns} dataSource={data} />
       </div>
    );
