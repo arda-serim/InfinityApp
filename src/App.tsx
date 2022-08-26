@@ -5,6 +5,7 @@ import ParentPage from "./Pages/ParentPage";
 import Signin from "./Pages/Signin";
 import Childedit from "./Pages/Childedit";
 import ChildPage from "./Pages/ChildPage";
+import AdminPage from "./Pages/AdminPage";
 import './App.css';
 import './declaration.d.ts';
 import i18n from 'i18next';
@@ -88,6 +89,7 @@ function App() {
       <Route path="/childedit" element={<Childedit />} />
       <Route path="/childpage" element={<ChildPage />} />
       <Route path="/signin" element={<Signin />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
 
   );
