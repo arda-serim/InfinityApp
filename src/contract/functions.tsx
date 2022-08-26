@@ -102,3 +102,11 @@ export const getChild = async () => {
 
    return child;
 }
+
+export const changeReleaseTime = async (address: any, releaseTime: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.changeReleaseTime(address, releaseTime);
+
+   await tx.wait();
+}
