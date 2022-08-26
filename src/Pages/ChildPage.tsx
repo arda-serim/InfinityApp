@@ -61,7 +61,7 @@ const textStyle = {
     flexDirection: "row",
     justifyContent: "center",
     color: 'black',
-    fontSize: '13px',
+    fontSize: '15px',
     whiteSpace: "pre-wrap",
     width: "200px",
     marginLeft: "130px",
@@ -239,8 +239,9 @@ const ChildPage = () => {
                                             <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10, 18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
 
                                         </p>
+                                        <h1 style={{textAlign:'center', color:'white'}}> {ML('tarih')}</h1>
                                         <p style={textStyle}>
-                                            <text style={{ color: '#FFFFFF', opacity: "0.18" }}>{date}</text>
+                                            <text style={{ color: '#EFAA45'}}>{date}</text>
                                         </p>
                                         <br />
                                         {/* {child?.releaseTime && child?.releaseTime > new Date() && <>
@@ -248,7 +249,7 @@ const ChildPage = () => {
                                         </>} */}
 
                                         <br />
-                                        <Input style={inputStyle} onChange={(event: any) => setInput(event.target.value)} />
+                                        <Input style={inputStyle} placeholder={ML('miktar').props.children} onChange={(event: any) => setInput(event.target.value)} />
                                         <br />
                                         <Button style={buttonStyle} onClick={setClick} >{ML('geriCek')}</Button>
                                         <br />

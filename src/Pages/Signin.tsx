@@ -187,7 +187,7 @@ const Signin = () => {
                   <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
                 </div>
                 <div style={whitePlaceStyle}>
-                  <Input style={inputStyle} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
+                  <Input style={inputStyle} placeholder={ML('ad').props.children} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
                 </div>
                 <br>
                 </br>
@@ -195,7 +195,7 @@ const Signin = () => {
                   <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
                 </div>
                 <div style={whitePlaceStyle}>
-                  <Input style={inputStyle} type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
+                  <Input style={inputStyle}  type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
                 </div>
                 <br>
                 </br>

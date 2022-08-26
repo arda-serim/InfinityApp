@@ -66,3 +66,7 @@
    transition: color .3s;
    text-decoration: none;
 }
+
+input{
+   text-align:center;
+}
