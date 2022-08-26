@@ -95,10 +95,10 @@ export const getRole = async () => {
 
 }
 
-export const getChild = async (address: any) => {
+export const getChild = async () => {
    const { signerAddress, contract } = await connectToMetamask();
 
-   const child = await contract.childs(address);
+   const child = await contract.childs(signerAddress);
 
    return child;
 }

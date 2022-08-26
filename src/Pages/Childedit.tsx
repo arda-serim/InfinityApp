@@ -1,7 +1,7 @@
 import Navbar from '../Components/Navbar';
 import React from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider } from 'antd';
+import { Col, Row, Slider, Spin } from 'antd';
 import { useState } from 'react';
 import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
 import logo from '../images/logo_infinity.png';
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import edit from '../images/editfoto.png';
 import { addChild, withdrawMoneyByChild } from '../contract/functions';
 import { ML } from '../App';
+import ModalComponent from '../Components/ModalComponent';
 
 
 
@@ -88,6 +89,9 @@ function Childedit() {
 
   const [amountInputToWithdrawFromChild, setAmountInputToWithdrawFromChild] = useState();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
   const addChildHandler = async () => {
 
     // @ts-ignore
@@ -96,22 +100,32 @@ function Childedit() {
     // @ts-ignore
     const releaseTimeInSeconds = Math.floor(new Date().getTime() / 1000);
 
-    await addChild(name, releaseTimeInSeconds, address);
+    try {
+      setIsLoading(true);
+      await addChild(name, releaseTimeInSeconds, address);
+      setIsLoading(false);
+      navigate("/parent");
+    } catch (error: any) {
+      setError((error.reason.split(":"))[1])
+      setIsLoading(false);
+    }
 
-    navigate("/parent");
   }
 
-
-  const withdrawFromChildHandler = async () => {
-    await withdrawMoneyByChild(amountInputToWithdrawFromChild);
+  const clearError = () => {
+    //@ts-ignore
+    setError();
   }
 
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
 
-      {/* <input style={{ width: '30%' }} onChange={(e: any) => setAmountInputToWithdrawFromChild(e.target.value)} />
-      <button style={{ marginLeft: '5%' }} onClick={onClickSendAll()} onClick={withdrawFromChildHandler}>Withdraw(Child)</button> */}
-
+      {
+        isLoading && <ModalComponent title="CHILD IS ADDING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+      }
+      {
+        error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
+      }
       <div>
         <Navbar />
       </div>

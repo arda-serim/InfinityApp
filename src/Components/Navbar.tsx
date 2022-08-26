@@ -5,6 +5,7 @@ import { Layout } from "antd";
 import { Typography } from "antd";
 import metamask from '../images/MetaMask.png';
 import { Language } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 const { Header } = Layout;
@@ -39,21 +40,27 @@ const languageStyle = {
    //background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',
    //background: 'linear-gradient(to bottom right, #336600 0%, #009999 100%)',
    background: "linear-gradient(#EF886C, #EFAA45)",
-   borderRadius : '20px',
-   textAlign :"center",
-   justifyContent: 'center', 
-   alignItems:"center",
-   lineHeight:"40px",
+   borderRadius: '20px',
+   textAlign: "center",
+   justifyContent: 'center',
+   alignItems: "center",
+   lineHeight: "40px",
 } as React.CSSProperties;
 
 
 const Navbar = () => {
+   const navigate = useNavigate();
    return (
       <Header style={headerStyle}>
-         <img src={logo} alt="logo" style={logoStyle} />
-         <h1 style={titleStyle}>INTERITANCE</h1>
+         <span onClick={() => navigate('/parent')} style={{
+            display: 'flex',
+            flexDirection: 'row',
+         }} >
+            <img src={logo} alt="logo" style={logoStyle} />
+            <h1 style={titleStyle} >INTERITANCE</h1>
+         </span>
          <div style={languageStyle}>
-            <Language/>
+            <Language />
          </div>
       </Header >
    );

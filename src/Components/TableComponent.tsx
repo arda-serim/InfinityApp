@@ -59,7 +59,6 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let navigate = useNavigate();
    const [error, setError] = useState();
-   const [isModalVisible, setIsModalVisible] = useState(false);
    const [date, setDate] = useState('');
 
    function onAddChild() {
@@ -99,18 +98,21 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
       }
       catch (error: any) {
          setError((error.reason.split(":"))[1])
+         setIsLoading(false);
       }
 
    }
 
    const withdrawBackHandler = async (address: any) => {
       try {
+         setIsLoading(true);
          await withdrawMoneyByParentFromChild(amountWithdraw, address);
+         setIsLoading(false);
          window.location.reload();
       }
       catch (error: any) {
          setError((error.reason.split(":"))[1])
-         setIsModalVisible(true);
+         setIsLoading(false);
       }
    }
 
@@ -192,7 +194,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            isLoading && <ModalComponent title="SENDING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+            isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
          }
          {
             error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
