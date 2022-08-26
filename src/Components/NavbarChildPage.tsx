@@ -86,15 +86,6 @@ function onLogOut() {
 const Navbar = () => {
    const [child, setChild] = useState({name: '' });
    let result;
-   
-   async function Role(){
-      const role = await getRole();
-      localStorage.setItem('role', role);
-      if (role === 'child') {
-         result = result1
-      }
-
-   }
    async function getThisChild() {
       const tempChild = await getChild();
       setChild(tempChild);
@@ -107,6 +98,15 @@ const Navbar = () => {
    let initials = iniName + iniLname;
    const result1 = initials.toUpperCase();
 
+   async function Role(){
+      const role = await getRole();
+      localStorage.setItem('role', role);
+      if (role === 'child') {
+         result = result1
+      }
+
+   }
+
 
    return (
       <Header style={headerStyle}>
@@ -116,7 +116,7 @@ const Navbar = () => {
             <div style={languageStyle}>
                <Language />
             </div>
-            <Avatar style={avatarStyle} >{result}</Avatar>
+            <Avatar style={avatarStyle} >{result1}</Avatar>
             <Button onClick={onLogOut} type="link" icon={<LogoutOutlined />} size={"large"} style={{ color: 'white' }} />
          </div>
       </Header >

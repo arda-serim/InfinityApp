@@ -205,8 +205,8 @@ const HomePage = () => {
                               <h1 style={{ color: '#fff', fontSize: 32, fontStyle: 'italic' }}>{ML('need')}</h1>
                               <div style={insideCard}>
                                  <p > <img style={iconStyle} src={icon} />
-                                    {ML('first')} <a href='https://metamask.io/'>metamask</a> wallet.<br></br>
-                                    <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' > {ML('click here')}</a></text>
+                                    {ML('first')} <a href='https://metamask.io/'>metamask</a> {ML('first__')}.<br></br>
+                                    <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' > {ML('clickhere')}</a></text>
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
                                     {ML('second')} <a href='https://ethereum.org/en/'>ethereum</a> {ML('second_')}
