@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button, DatePicker, Input, Modal, Space, Table } from 'antd';
+import { Button, DatePicker, Input, Modal, Space, Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
-import { sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
+import { changeReleaseTime, sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
 import { ML } from '../App';
 import ModalComponent from './ModalComponent';
 
@@ -39,14 +39,27 @@ const table = {
 } as React.CSSProperties;
 
 
+const signInButtonStyle = {
+   height: '32px',
+   background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
+   color: '#fff',
+   border: 'none',
+   marginLeft: '-20%',
+};
 
+const buttonsStyle = {
+   display: 'flex',
+   flexDirection: 'row',
+   justifyContent: 'space-evenly',
+   alignItems: 'center',
+} as React.CSSProperties;
 
 
 const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let navigate = useNavigate();
    const [error, setError] = useState();
-   const [isModalVisible, setIsModalVisible] = useState(false);
+   const [date, setDate] = useState('');
 
    function onAddChild() {
       navigate("/childedit");
@@ -55,7 +68,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const [amount, setAmount] = useState();
    const [amountWithdraw, setAmountWithdraw] = useState();
    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
+   const [isLoading, setIsLoading] = useState(false);
 
 
    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -77,21 +90,40 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    }
 
    const sendToChild = async (address: any) => {
-      try{await sendMoneyToChild(amount, address);
-      window.location.reload();}
-      catch(error:any) {
+      try {
+         setIsLoading(true);
+         await sendMoneyToChild(amount, address);
+         setIsLoading(false);
+         window.location.reload();
+      }
+      catch (error: any) {
          setError((error.reason.split(":"))[1])
+         setIsLoading(false);
       }
 
    }
 
    const withdrawBackHandler = async (address: any) => {
       try {
+         setIsLoading(true);
          await withdrawMoneyByParentFromChild(amountWithdraw, address);
+         setIsLoading(false);
          window.location.reload();
       }
       catch (error: any) {
-         setError(error.message)
+         setError((error.reason.split(":"))[1])
+         setIsLoading(false);
+      }
+   }
+
+   const onClickDate = async (date: any, address: any) => {
+      try {
+         console.log(date, '  date  ', address);
+
+         await changeReleaseTime(address, date);
+      }
+      catch (error: any) {
+         setError((error.reason.split(":"))[1])
          setIsModalVisible(true);
       }
    }
@@ -124,13 +156,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             title: 'Recieval Date',
             dataIndex: 'releaseTime',
             key: 'releaseTime',
-            // render: (text) => (
-            //    <Space size="middle">
-            //       <DatePicker format={'DD/MM/YYYY'} defaultValue={moment(text, 'DD/MM/YYYY')} />
-            //       <Button type="primary" /*onClick={onClickDate()}*/>Submit</Button>
-            //    </Space>
+            render: (text, record) => (
+               <Space size="middle">
+                  <DatePicker format={'DD/MM/YYYY'} defaultValue={moment(text, 'DD/MM/YYYY')} onChange={(date: any) => {
+                     const d = new Date(date).toLocaleDateString();
+                     setDate(d);
+                  }} />
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={() => onClickDate(date, record.key)} >Save</Button>
+               </Space>
 
-            // ),
+            ),
             align: 'center',
             width: '32.5%',
          },
@@ -139,27 +174,17 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             dataIndex: 'given_amount',
             key: 'given_amount',
             render: (text, record) => (
-               <Space size="middle">
-                  <Input.Group compact>
-                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInput} />
-                     <Button type="primary" onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
-                     <Input style={{ width: '30%' }} defaultValue={0} onChange={amountInputToWithdraw} />
-                     <Button style={{ marginLeft: '5%' }} type="primary" onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
-                  </Input.Group>
-               </Space>
+               <Space size="middle" style={buttonsStyle}>
+                  <Input style={{ width: '60%', textAlign: 'center' }} defaultValue={0} onChange={amountInput} />
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
+                  <Input style={{ width: '60%', textAlign: 'center' }} defaultValue={0} onChange={amountInputToWithdraw} />
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
+               </Space >
             ),
             align: 'center',
             width: '37.5%',
          },
       ]
-
-   let addButton;
-   if (!hasSelected) {
-      addButton = <Button onClick={onAddChild} type="primary">{ML('cocukekle')}</Button>;
-   }
-   else {
-      addButton = <Button type="primary" danger>{ML('cocuksil')}</Button>;
-   }
 
    const clearError = () => {
       //@ts-ignore
@@ -169,17 +194,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{color: 'red'}} onClear={clearError} />
+            isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+         }
+         {
+            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
          }
          <div style={buttonStyle}>
-            {addButton}
+            <Button onClick={onAddChild} style={signInButtonStyle} shape='round' type="primary">{ML('cocukekle')}</Button>
          </div>
          <Table style={table}
             bordered={true}
-            rowSelection={{
-
-               ...rowSelection,
-            }}
             pagination={
                {
                   hideOnSinglePage: true,

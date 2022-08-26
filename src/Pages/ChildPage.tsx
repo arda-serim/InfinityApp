@@ -2,7 +2,7 @@ import Navbar from '../Components/NavbarChildPage';
 import Sayac from '../Components/Sayac';
 import React, { useEffect } from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider, Typography, Card, Statistic } from 'antd';
+import { Col, Row, Slider, Typography, Card, Statistic, Spin } from 'antd';
 import { useState } from 'react';
 import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
 import logo from '../images/logo_infinity.png';
@@ -14,9 +14,9 @@ import TRY from '../images/pngwing.com.png';
 import type { countdownValueType } from 'antd/es/statistic/utils';
 import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../contract/functions';
 import connectToMetamask from '../contract';
+import { ML } from '../App';
 import ModalComponent from '../Components/ModalComponent';
 const { Countdown } = Statistic;
-
 
 
 const colStyle = {
@@ -139,32 +139,42 @@ export interface child {
     address: string;
 
 }
+
+const pageStyle = {
+    background: 'linear-gradient(to bottom, #0A368B,#3B82A0)',
+    // full page
+    minHeight: '100vh',
+    minWidth: '100vw',
+
+};
 const { Title } = Typography;
 
 
 const ChildPage = () => {
     const [input, setInput] = useState();
-    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '' });
+    const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '', name: '' });
     const [error, setError] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+
     let navigate = useNavigate();
     useEffect(() => {
 
         if (localStorage.getItem("role") === "parent") {
             navigate("/parent");
         }
+
+
+
         if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
             navigate("/");
         }
 
 
         async function getThisChild() {
-            const { signerAddress } = await connectToMetamask();
-
-            const tempChild = await getChild(signerAddress);
-            console.log(Number(tempChild.amountOfMoney));
+            setIsLoading(true);
+            const tempChild = await getChild();
+            setIsLoading(false);
             setChild(tempChild);
-            console.log(tempChild);
-            console.log(child.releaseTime)
         }
         getThisChild();
 
@@ -172,24 +182,27 @@ const ChildPage = () => {
 
     const onWithdrawAll = async () => {
         try {
+            setIsLoading(true);
             await withdrawAllMoneyByChild();
-
+            setIsLoading(false);
             window.location.reload();
         }
         catch (error: any) {
             setError((error.reason.split(":"))[1])
+            setIsLoading(false);
         }
     };
 
     const setClick = async () => {
         try {
+            setIsLoading(true);
             await withdrawMoneyByChild(input);
-            //@ts-ignore
-            setInput('');
+            setIsLoading(false);
             window.location.reload();
         }
         catch (error: any) {
             setError((error.reason.split(":"))[1])
+            setIsLoading(false);
         }
     }
 
@@ -203,12 +216,13 @@ const ChildPage = () => {
 
     return (
 
-        <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
+        <Layout style={pageStyle}>
             <div>
-
                 <Navbar />
-
             </div>
+            {
+                isLoading && <ModalComponent title="WITHDRAWAL PROCESS" modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+            }
             {
                 error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
             }
@@ -219,7 +233,7 @@ const ChildPage = () => {
                             <Col span={12}>
                                 <div>
                                     <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
-                                        Welcome User!
+                                        {ML('user')} {' '} {String(child.name)}!
                                     </Title>
                                 </div>
                                 <div style={cardStyle}>
@@ -239,9 +253,9 @@ const ChildPage = () => {
                                         <br />
                                         <Input style={inputStyle} onChange={(event: any) => setInput(event.target.value)} />
                                         <br />
-                                        <Button style={buttonStyle} onClick={setClick} >Withdraw Money</Button>
+                                        <Button style={buttonStyle} onClick={setClick} >{ML('geriCek')}</Button>
                                         <br />
-                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >Withdraw All The Money</Button>
+                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >{ML('tumParayıCek')}</Button>
 
                                     </Card>
 

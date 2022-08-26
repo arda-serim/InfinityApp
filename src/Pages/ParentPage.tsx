@@ -43,9 +43,10 @@ const ParentPage = () => {
       if (localStorage.getItem("role") === "child") {
          navigate("/childpage");
       }
-      if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
-         navigate("/");
-      }
+
+       if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
+           navigate("/");
+        }
 
       const getChildHandler = async () => {
 

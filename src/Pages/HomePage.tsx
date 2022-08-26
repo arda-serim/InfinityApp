@@ -161,16 +161,18 @@ const HomePage = () => {
          const { signerAddress } = await connectToMetamask();
 
 
-         if (role === 'parent') {
-            navigate('/parent');
-         }
-         else if (role === 'child') {
-            navigate('/childpage');
-         }
-         else {
-            navigate('/signin');
-         }
+               //GERİ ALACANN
 
+                if (role === 'parent') {
+                  navigate('/parent');
+                }  
+                else if (role === 'child') {
+                navigate('/childpage');
+                }
+                else {
+                  navigate('/signin');
+                }
+              
 
       }
       else {
