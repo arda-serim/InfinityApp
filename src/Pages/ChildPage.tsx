@@ -2,7 +2,7 @@ import Navbar from '../Components/NavbarChildPage';
 import Sayac from '../Components/Sayac';
 import React, { useEffect } from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider, Typography, Card, Statistic } from 'antd';
+import { Col, Row, Slider, Typography, Card, Statistic, Spin } from 'antd';
 import { useState } from 'react';
 import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
 import logo from '../images/logo_infinity.png';
@@ -154,6 +154,8 @@ const ChildPage = () => {
     const [input, setInput] = useState();
     const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '', name: '' });
     const [error, setError] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+
     let navigate = useNavigate();
     useEffect(() => {
 
@@ -169,13 +171,8 @@ const ChildPage = () => {
 
 
         async function getThisChild() {
-            const { signerAddress } = await connectToMetamask();
-
-            const tempChild = await getChild(signerAddress);
-            console.log(Number(tempChild.amountOfMoney));
+            const tempChild = await getChild();
             setChild(tempChild);
-            console.log(tempChild);
-            console.log(child.releaseTime)
         }
         getThisChild();
 
@@ -183,24 +180,27 @@ const ChildPage = () => {
 
     const onWithdrawAll = async () => {
         try {
+            setIsLoading(true);
             await withdrawAllMoneyByChild();
-
+            setIsLoading(false);
             window.location.reload();
         }
         catch (error: any) {
             setError((error.reason.split(":"))[1])
+            setIsLoading(false);
         }
     };
 
     const setClick = async () => {
         try {
+            setIsLoading(true);
             await withdrawMoneyByChild(input);
-            //@ts-ignore
-            setInput('');
+            setIsLoading(false);
             window.location.reload();
         }
         catch (error: any) {
             setError((error.reason.split(":"))[1])
+            setIsLoading(false);
         }
     }
 
@@ -216,10 +216,11 @@ const ChildPage = () => {
 
         <Layout style={pageStyle}>
             <div>
-
                 <Navbar />
-
             </div>
+            {
+                isLoading && <ModalComponent title="WITHDRAWAL PROCESS" modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+            }
             {
                 error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
             }

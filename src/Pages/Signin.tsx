@@ -18,9 +18,10 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import { addParent } from '../contract/functions';
 import LangContext, { langs } from './LangugeContext';
-import { Typography, Layout, Row, Col, Input, Checkbox, Button } from 'antd';
+import { Typography, Layout, Row, Col, Input, Checkbox, Button, Spin } from 'antd';
 import { ML } from '../App';
 import Navbar from '../Components/Navbar';
+import ModalComponent from '../Components/ModalComponent';
 
 declare var window: any;
 
@@ -103,6 +104,10 @@ const Signin = () => {
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
 
+  const [error, setError] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const switchLang = () => {
     setSelectedLanguage(selectedLanguage === "tr" ? "en" : "tr");
     lang === langs.tr ? setLang(langs.en) : setLang(langs.tr)
@@ -131,13 +136,20 @@ const Signin = () => {
 
 
     if (name === "" || surname === "") {
-      alert("Please fill all the fields")
+      setError("Please fill all the fields")
     }
     else {
-      await addParent(name, surname);
+      try {
+        await addParent(name, surname);
+        navigate('/parent');
 
+      } catch (error: any) {
+        setError((error.reason.split(":"))[1])
+        setIsLoading(false)
+      }
 
-      navigate('/parent');
+      localStorage.setItem('role', "parent");
+
     }
   };
 
@@ -150,70 +162,83 @@ const Signin = () => {
     setSurname(e.target.value)
   };
 
+  const clearError = () => {
+    //@ts-ignore
+    setError('');
+ }
+
   return (
 
-    <Layout style={{
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(' + bg + ')',
-    }}>
-      <Header style={navbarStyle}>
-        <Navbar />
-      </Header >
-      <div style={contentStyle}>
-        <Content>
-          <div style={colStyle}>
-            <Row gutter={[16, 8]}>
-              <Col span={12}>
-                <img src={signinpng} style={imageStyle} />
-              </Col>
-              <Col span={12}>
-                <br>
-                </br>
-                <div style={whitePlaceStyle}>
-                  <Title style={{
-                    color: '#0A103A', marginTop: '25'
-                  }}>{ML('giris')}</Title>
-                </div>
-                <div style={whitePlaceStyle}>
-                  <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
-                </div>
-                <br>
-                </br>
-                <br>
-                </br>
-                <div style={whitePlaceStyle}>
-                  <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
-                </div>
-                <div style={whitePlaceStyle}>
-                  <Input style={inputStyle} placeholder={ML('ad').props.children} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
-                </div>
-                <br>
-                </br>
-                <div style={whitePlaceStyle}>
-                  <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
-                </div>
-                <div style={whitePlaceStyle}>
-                  <Input style={inputStyle}  type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
-                </div>
-                <br>
-                </br>
-                <div style={whitePlaceStyle}>
-                  <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
-                </div>
-                <br>
-                </br>
-                <div style={whitePlaceStyle}>
-                  <Button onClick={OnSignIn} size="large" style={signInButtonStyle} shape='round'>
-                    {ML('kayıtol')}</Button>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </Content>
-      </div>
-    </Layout>
+    <>
+      {
+        isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+      }
+      {
+        error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+      }
+      <Layout style={{
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: 'url(' + bg + ')',
+      }}>
+        <Header style={navbarStyle}>
+          <Navbar />
+        </Header >
+        <div style={contentStyle}>
+          <Content>
+            <div style={colStyle}>
+              <Row gutter={[16, 8]}>
+                <Col span={12}>
+                  <img src={signinpng} style={imageStyle} />
+                </Col>
+                <Col span={12}>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Title style={{
+                      color: '#0A103A', marginTop: '25'
+                    }}>{ML('giris')}</Title>
+                  </div>
+                  <div style={whitePlaceStyle}>
+                    <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
+                  </div>
+                  <br>
+                  </br>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
+                  </div>
+                  <div style={whitePlaceStyle}>
+                    <Input style={inputStyle} type='text' name={ML('ad').props.children} value={name} onChange={handleNameChange} />
+                  </div>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
+                  </div>
+                  <div style={whitePlaceStyle}>
+                    <Input style={inputStyle} type='text' name={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
+                  </div>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
+                  </div>
+                  <br>
+                  </br>
+                  <div style={whitePlaceStyle}>
+                    <Button onClick={OnSignIn} size="large" style={signInButtonStyle} shape='round'>
+                      {ML('kayıtol')}</Button>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </Content>
+        </div>
+      </Layout>
+    </>
   );
 }
 

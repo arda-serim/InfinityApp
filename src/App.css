@@ -24,11 +24,20 @@
 
 .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table,
 .ant-table.ant-table-bordered>.ant-table-container>.ant-table-header>table {
-   border-color: yellow;
+   border-color: linear-gradient(to bottom, #0A368B, #3B82A0);
 }
 
 .ant-table-tbody>tr>td {
    border-color: yellow;
+}
+
+tr.ant-table-expanded-row:hover>td,
+tr.ant-table-expanded-row>td {
+   background: rgba(0, 0, 0, 0.5);
+}
+
+.ant-table-row-expand-icon {
+   background: rgba(0, 0, 0, 0);
 }
 
 
@@ -59,7 +68,7 @@
    background: rgba(0, 0, 0, 0.2);
 }
 
-.ant-typography a, a.ant-typography {
+.ant-typography a{
    color: #FFFFFF;
    outline: none;
    cursor: pointer;

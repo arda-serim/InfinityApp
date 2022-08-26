@@ -95,10 +95,34 @@ export const getRole = async () => {
 
 }
 
-export const getChild = async (address: any) => {
+export const getChild = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const child = await contract.childs(signerAddress);
+
+   return child;
+}
+
+export const getChildWithAddress = async (address: any) => {
    const { signerAddress, contract } = await connectToMetamask();
 
    const child = await contract.childs(address);
 
    return child;
+}
+
+export const changeReleaseTime = async (address: any, releaseTime: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.changeReleaseTime(address, releaseTime);
+
+   await tx.wait();
+}
+
+export const getAllParents = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const response = await contract.getParents();
+
+   return response;
 }

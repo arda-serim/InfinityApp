@@ -3,9 +3,11 @@ import Card from "antd/es/card";
 import icon from '../images/ethereum.png';
 import { Button, Modal, Spin } from "antd";
 import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from "../contract/functions";
+import connectToMetamask from '../contract';
 import { ML } from "../App";
 import { useHref } from "react-router-dom";
 import ModalComponent from "./ModalComponent";
+
 
 
 
@@ -39,15 +41,37 @@ const buttons = {
 } as React.CSSProperties;
 
 
+const signInButtonStyle = {
+   height: '32px',
+   background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
+   color: '#fff',
+   border: 'none',
+   width: '165px',
+   marginTop: '1%'
+
+};
+
+const inputStyle = {
+   borderRadius: '30px',
+   border: 'none',
+   height: '28px',
+   textAlign: 'center'
+} as React.CSSProperties;
+
 
 const EthereumPrice = (props: any) => {
    const [amountOfEthToDeposit, setAmountOfEthToDeposit] = useState('');
    const [amountOfEthToWithdraw, setAmountOfEthToWithdraw] = useState();
    const [balance, setBalance] = useState(0);
+   const [name, setName] = useState('');
+   const [ethValue, setEthValue] = useState('');
 
    const [error, setError] = useState();
 
-   const [loading, setLoading] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
+
+   const ethPrice = require('eth-price');
+
 
    React.useEffect(() => {
       async function getBalance() {
@@ -55,27 +79,59 @@ const EthereumPrice = (props: any) => {
          setBalance(Number(balance));
       }
 
+      async function getEthValue() {
+         const ethValue = await ethPrice('usd');
+         const eth = parseFloat(ethValue[0].substring(5))
+         setEthValue(eth.toString());
+      }
+
+
+
+
+      async function getName() {
+         const { contract, signerAddress } = await connectToMetamask();
+
+         const tempParent = await contract.parents(signerAddress);
+
+         const name = String(tempParent.name);
+         const surname = String(tempParent.surname);
+         setName(name + ' ' + surname);
+      }
+
+
+      getEthValue();
+      getName();
+
       getBalance();
-   }, []);
+   }, [ethPrice('usd')]);
 
 
 
 
    const sendMoneyHandler = async () => {
-      setLoading(true);
-      await sendMoneyToContract(amountOfEthToDeposit);
-      setLoading(false);
-      window.location.reload();
+      try {
+         setIsLoading(true);
+         await sendMoneyToContract(amountOfEthToDeposit);
+         setIsLoading(false);
+         window.location.reload();
+
+      }
+      catch (error) {
+         setIsLoading(false);
+      }
    }
 
 
    const withdrawHandler = async () => {
       try {
+         setIsLoading(true)
          await withdrawMoneyByParent(amountOfEthToWithdraw);
+         setIsLoading(false)
          window.location.reload();
       }
       catch (error: any) {
          setError((error.reason.split(":"))[1])
+         setIsLoading(false)
       }
 
    }
@@ -101,13 +157,13 @@ const EthereumPrice = (props: any) => {
    return (
       <>
          {
-            loading && <ModalComponent title="Loadıng" modalVisibility={true} message={ <Spin /> }  />
+            isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
          }
          {
             error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
          }
          <Card style={cardStyle} >
-            <h1 style={{ color: '#fff' }}>{ML('user')} Username</h1>
+            <h1 style={{ color: '#fff' }}>{ML('user')} {' '} {name}</h1>
             <br />
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>Ethereum{ML('ethprice')}</text>
@@ -115,7 +171,7 @@ const EthereumPrice = (props: any) => {
             <br />
             <p style={lineStyle}>
                <img src={icon} style={{ width: '25px', height: '40px' }}></img>
-               <text style={{ color: '#fff' }}>{'\t=\t'}$1,000</text>
+               <text style={{ color: '#fff' }}>{'\t=\t'}${ethValue}</text>
             </p>
             <br />
             <br />
@@ -124,19 +180,19 @@ const EthereumPrice = (props: any) => {
             </p>
             <br />
             <p style={lineStyle}>
-               <text style={{ color: '#fff' }}>{balance / (Math.pow(10, 18))} ETH = $1,000</text>
+               <text style={{ color: '#fff' }}>{balance / (Math.pow(10, 18))} ETH = ${parseFloat(ethValue) * balance / (Math.pow(10, 18))}</text>
             </p>
             <br />
             <div style={buttons}>
                <div>
-                  <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)}></input>
-                  <Button type="primary" style={{ width: '165px' }} onClick={sendMoneyHandler}>
+                  <input onChange={(e: any) => setAmountOfEthToDeposit(e.target.value)} style={inputStyle}></input>
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={sendMoneyHandler}>
                      <text style={{ color: '#fff' }}>{ML('sendeth')} </text>
                   </Button>
                </div>
                <div>
-                  <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)}></input>
-                  <Button type="primary" style={{ width: '165px' }} onClick={withdrawHandler}>
+                  <input onChange={(e: any) => setAmountOfEthToWithdraw(e.target.value)} style={inputStyle}></input>
+                  <Button type="primary" style={signInButtonStyle} shape='round' onClick={withdrawHandler}>
                      <text style={{ color: '#fff' }} >{ML('withdraweth')}</text>
                   </Button>
                </div>
@@ -149,3 +205,4 @@ const EthereumPrice = (props: any) => {
 }
 
 export default EthereumPrice;
+
