@@ -85,18 +85,18 @@ function onLogOut() {
 
 const Navbar = () => {
    const [child, setChild] = useState({name: '' });
+   let result;
    
    async function Role(){
       const role = await getRole();
       localStorage.setItem('role', role);
       if (role === 'child') {
-         let result = result1
+         result = result1
       }
 
    }
    async function getThisChild() {
-      const { signerAddress } = await connectToMetamask();
-      const tempChild = await getChild(signerAddress);
+      const tempChild = await getChild();
       setChild(tempChild);
    }
    getThisChild();
@@ -116,7 +116,7 @@ const Navbar = () => {
             <div style={languageStyle}>
                <Language />
             </div>
-            <Avatar style={avatarStyle} >{result1}</Avatar>
+            <Avatar style={avatarStyle} >{result}</Avatar>
             <Button onClick={onLogOut} type="link" icon={<LogoutOutlined />} size={"large"} style={{ color: 'white' }} />
          </div>
       </Header >

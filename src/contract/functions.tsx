@@ -103,6 +103,15 @@ export const getChild = async () => {
    return child;
 }
 
+
+export const getParent = async () => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const parent = await contract.parents(signerAddress);
+
+   return parent;
+}
+
 export const getChildWithAddress = async (address: any) => {
    const { signerAddress, contract } = await connectToMetamask();
 
