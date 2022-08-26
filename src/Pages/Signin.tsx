@@ -136,6 +136,7 @@ const Signin = () => {
     else {
       await addParent(name, surname);
 
+      localStorage.setItem('role', "parent");
 
       navigate('/parent');
     }
