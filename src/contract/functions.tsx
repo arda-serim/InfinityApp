@@ -30,9 +30,8 @@ export const getChilds = async () => {
 export const sendMoneyToContract = async (amount: any) => {
    const { signerAddress, contract } = await connectToMetamask();
 
-   await contract.sendMoney({ value: ethers.utils.parseEther(amount) });
-   // reload page
-   window.location.reload();
+   const tx = await contract.sendMoney({ value: ethers.utils.parseEther(amount) });
+   await tx.wait();
 }
 
 export const showBalanceofParent = async () => {

@@ -29,6 +29,7 @@ export const langs = {
         erisimTarihi: 'Erişim Tarihi',
         walletAdres: 'Çocuğun cüzdan adresi',
         kaydet: 'Kaydet',
+        degistir: 'Değiştir',
         childeditbutton: 'Geri çek(çocuk)',
         //childpage
         user: 'Hoşgeldiniz',
@@ -46,7 +47,10 @@ export const langs = {
         withdrawback : 'Geri çek',
         para: 'Mevcut Para(ETH)',
         gönderilen: 'Gönderilen Miktar(ETH)',
-        tutar: 'Gönderilecek / Çekilecek Tutar'
+        tutar: 'Gönderilecek / Çekilecek Tutar',
+        adres: 'Cüzdan Adresi',
+        //ethprice
+        ethprice: 'Ethereum Fiyatı'
     },
 
     en: {
@@ -77,6 +81,7 @@ export const langs = {
         erisimTarihi: 'Date of Access',
         walletAdres: 'Wallet address of the child',
         kaydet: 'Save',
+        degistir: 'Change',
         childeditbutton: 'Withdraw(Child)',
         //childpage
         user: 'Welcome',
@@ -95,7 +100,10 @@ export const langs = {
         withdrawback : 'Withdraw Back',
         para: 'Current Money(ETH)',
         gönderilen: 'Total Given(ETH)',
-        tutar: 'Amount To Be Sent / Withdrawn'
+        tutar: 'Amount To Be Sent / Withdrawn',
+        adres: 'Wallet Address',
+        ethprice: 'Ethereum Price'
+
     }
 }
 

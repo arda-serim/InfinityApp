@@ -18,7 +18,6 @@ const cardStyle = {
    alignItems: "center",
    background: "rgba(0, 0, 0, 0)",
    border: "black",
-   boxShadow: "rgba(0, 0, 0, 0.3) 0px 1px 4px",
    textAlign: "center",
 } as React.CSSProperties;
 
@@ -184,10 +183,10 @@ const EthereumPrice = (props: any) => {
          <Card style={cardStyle} >
             <h1 style={{ color: '#fff' }}>{ML('user')} {' '} {name}</h1>
             <br />
-            <p style={lineStyle}>
-               <text style={{ color: '#fff' }}>Ethereum{ML('ethprice')}</text>
-            </p>
             <br />
+            <p style={lineStyle}>
+               <text style={{ color: '#fff' }}>{ML('ethprice')}</text>
+            </p>
             <p style={lineStyle}>
                <img src={icon} style={{ width: '25px', height: '40px' }}></img>
                <text style={{ color: '#fff' }}>{'\t=\t'}${ethValue}</text>
@@ -197,7 +196,6 @@ const EthereumPrice = (props: any) => {
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>{ML('yourWallet')}</text>
             </p>
-            <br />
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>{balance / (Math.pow(10, 18))} ETH = ${parseFloat(ethValue) * balance / (Math.pow(10, 18))}</text>
             </p>
