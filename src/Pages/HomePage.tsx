@@ -242,13 +242,35 @@ const HomePage = () => {
                      
                   </Col>
                   <Col span={12} >
-                     <p style={{ color : 'white' , marginLeft : '30%' , fontSize : '20px' , marginTop : '20%'}}>
-                        Why Ethereum ?
+                     <p style={{ color : 'white' , marginLeft : '20%' , fontSize : '20px' , marginTop : '10%'}}>
+                        Why InTeritance ?
                      </p>
                      <p style={{marginTop : '5%' , color : 'white' , marginRight : '20%' , fontSize : '20px'}} >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga </p>
+                        <p>
+                        Teknoloji çağına ayak uyduran, yeni nesil bir yatırım uygulaması
+                        </p>
+                        <p>
+                        Birden fazla işlem aynı sayfa üzerinde hızlı bir şekilde gerçekleştirilebilir.
+                        </p>
+                        <p>
+                        Kullanıcı dostu uygulama tasarımı
+                        </p>
+                        <p>
+                        Son derece güvenli
+                        </p>
+                        <p>
+                        Ebeveynler hem kendilerinin hem çocuklarının kripto varlıklarını yönetebilir.
+                        </p>
+                        <p>
+                        Çocukların hesaplarına erişim tarihleri gelene kadar tüm yetki ebeveynlerinde olur. 
+                        </p>
+                        </p>
+                    
+                    
+                    
+                     
+                    
+                   
                   </Col>
                   
               
@@ -263,9 +285,14 @@ const HomePage = () => {
                       Our vision and mission
                   </p>
                <p style={{marginTop : '5%' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}} >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                   numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga </p>
+               Vizyon:
+               Ebeveynlerin çocuklarının geleceği için daha güvenilir, yeni çağa uygun ve sürdürülebilir bir sistemde kripto varlıklarını miras bırakabilecekleri uygulamalar arasında akla ilk gelen olmak.
+              </p>
+              <br/>
+              <p style={{marginTop : '' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}}>
+              Misyon:
+               Yarınlarımızı emanet edeceğimiz çocuklarımız için onların yaşamlarını kolaylaştırmak, yeni çağda yeni teknolojilerle birlikte onlara daha çağa uygun bir gelecek yaratmak amacıyla ailelerinin güvenilir bir şekilde yatırım yapabilmelerini sağlamak.
+              </p >
                </Col>
                <Col span={12} >
                   <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1 , marginLeft : '20%' , marginTop: '20%' }}>
