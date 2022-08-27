@@ -175,10 +175,10 @@ const EthereumPrice = (props: any) => {
    return (
       <>
          {
-            isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
          }
          {
-            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+            error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
          }
          <Card style={cardStyle} >
             <h1 style={{ color: '#fff' }}>{ML('user')} {' '} {name}</h1>

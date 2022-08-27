@@ -248,7 +248,7 @@ const ChildPage = () => {
                 <Navbar />
             </div>
             {
-                isLoading && <ModalComponent title="WITHDRAWAL PROCESS" modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+                isLoading && <ModalComponent title={ML('withdrawalProcess')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
             }
             {
                 error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />

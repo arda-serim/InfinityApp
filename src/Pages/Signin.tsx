@@ -181,10 +181,10 @@ const Signin = () => {
 
     <>
       {
-        isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+        isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
       }
       {
-        error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+        error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
       }
       <Layout style={{
         backgroundPosition: 'center',

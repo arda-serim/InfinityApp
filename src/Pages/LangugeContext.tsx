@@ -53,7 +53,13 @@ export const langs = {
         ethprice: 'Ethereum Fiyatı',
         block: 'Blok gezgininde görüntüle',
         error : 'Lütfen Metamask uzantısını kurunuz.',
-        error2 : 'Tüm alanları doldurunuz.'
+        error2 : 'Tüm alanları doldurunuz.',
+        loading:'YÜKLENIYOR...',
+        errorOccured: 'HATA OLUŞTU!',
+        childAdding: 'ÇOCUK EKLENİYOR...',
+        withdrawalProcess: 'PARA ÇEKME İŞLEMİ...'
+
+
     },
 
     en: {
@@ -108,8 +114,11 @@ export const langs = {
         ethprice: 'Ethereum Price',
         block: 'View in block explorer',
         error : 'Please install Metamask extensions',
-        error2 : 'Please fill all the fields'
-
+        error2 : 'Please fill all the fields',
+        loading:'LOADING...',
+        errorOccured: 'ERROR OCCURED!',
+        childAdding: 'CHILD IS ADDING...',
+        withdrawalProcess: 'WITHDRAWAL PROCESS...'
     }
 }
 

@@ -244,10 +244,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            isLoading && <ModalComponent title="LOADING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
          }
          {
-            error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
+            error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
          }
          <div style={buttonStyle}>
             <Button onClick={onAddChild} style={signInButtonStyle} shape='round' type="primary">{ML('cocukekle')}</Button>

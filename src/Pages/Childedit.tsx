@@ -131,10 +131,10 @@ function Childedit() {
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
 
       {
-        isLoading && <ModalComponent title="CHILD IS ADDING..." modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+        isLoading && <ModalComponent title={ML('childAdding')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
       }
       {
-        error && <ModalComponent title="ERROR OCCURED" modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
+        error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
       }
       <div>
         <Navbar />
