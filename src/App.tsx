@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import ParentPage from "./Pages/ParentPage";
@@ -81,18 +81,46 @@ export function Language() {
 }
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/parent" element={<ParentPage />} />
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/childedit" element={<Childedit />} />
-      <Route path="/childpage" element={<ChildPage />} />
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/admin" element={<AdminPage />} />
-    </Routes>
 
-  );
-}
+    const  [key , setKey] = useState(localStorage.getItem('role'));
+    useEffect(()=> setKey(localStorage.getItem('role')) , [localStorage.getItem('role')]) ;
+     if(key=== 'parent') {
+        return(
+          
+            <Routes>
+               <Route path="/parent" element={<ParentPage />}/>
+               <Route path="/childedit" element={<Childedit />} />
+            </Routes>
+
+        ) 
+    }
+
+    else if(key === 'child'){
+      return(
+        <Route path="/childpage" element={<ChildPage />} />
+      )
+    }
+
+    else if (key === 'none'){
+      return(
+        <Routes>
+           <Route path="/" element={<HomePage />} />
+           <Route path="/signin" element={<Signin />} />
+        </Routes>
+       
+      )
+    }
+
+    else {
+      return(
+        <Route path="/admin" element={<AdminPage />} />
+      )
+    }
+  
+  
+  
+  }
+ 
+
 
 export default App;

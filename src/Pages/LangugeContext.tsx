@@ -51,7 +51,9 @@ export const langs = {
         adres: 'Cüzdan Adresi',
         //ethprice
         ethprice: 'Ethereum Fiyatı',
-        block: 'Blok gezgininde görüntüle'
+        block: 'Blok gezgininde görüntüle',
+        error : 'Lütfen Metamask uzantısını kurunuz.',
+        error2 : 'Tüm alanları doldurunuz.'
     },
 
     en: {
@@ -104,7 +106,9 @@ export const langs = {
         tutar: 'Amount To Be Sent / Withdrawn',
         adres: 'Wallet Address',
         ethprice: 'Ethereum Price',
-        block: 'View in block explorer'
+        block: 'View in block explorer',
+        error : 'Please install Metamask extensions',
+        error2 : 'Please fill all the fields'
 
     }
 }

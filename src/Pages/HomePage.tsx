@@ -174,7 +174,7 @@ const HomePage = () => {
 
       }
       else {
-         alert('Please install MetaMask Extension');
+         alert(ML('error'));
       }
 
    }
