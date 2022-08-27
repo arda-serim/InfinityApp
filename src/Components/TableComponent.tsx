@@ -173,7 +173,13 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             dataIndex: 'key',
             key: 'key',
             render: (dataIndex) => (
-               <a href={'https://rinkeby.etherscan.io/address/' + dataIndex} target="_blank" >{dataIndex}</a>
+               <>
+                  <a href={'https://rinkeby.etherscan.io/address/' + dataIndex} target="_blank" style={{ color: 'white', textDecoration: 'underline' }}>{dataIndex}</a>
+                  <Button href={'https://rinkeby.etherscan.io/address/' + dataIndex} target="_blank" shape='round' type='primary' style={{ textAlign: 'center', background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff' }}
+                  >
+                     {ML('block')}
+                  </Button>
+               </>
             ),
             align: 'center',
             width: '10%',
@@ -197,13 +203,12 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             dataIndex: 'releaseTime',
             key: 'releaseTime',
             render: (text, record) => (
-               <Space size="middle" style={{display: 'flex', flexDirection: 'column'}}>
-                  <DatePicker format={'DD/MM/YYYY'} style={{borderRadius:'32px'}} defaultValue={moment(text, 'DD/MM/YYYY')} onChange={(date: any) => {
+               <Space size="middle" style={{ display: 'flex', flexDirection: 'column' }}>
+                  <DatePicker format={'DD/MM/YYYY'} style={{ borderRadius: '32px' }} defaultValue={moment(text, 'DD/MM/YYYY')} onChange={(date: any) => {
                      const d = new Date(date).toLocaleDateString();
                      setDate(d);
                   }} />
-                 <Button type="primary" style={{textAlign: 'center',background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff'}} shape='round' onClick={() => onClickDate(date, record.key)} >{ML('degistir')}</Button>
-
+                  <Button type="primary" style={{ textAlign: 'center', background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff' }} shape='round' onClick={() => onClickDate(date, record.key)} >{ML('degistir')}</Button>
                </Space>
 
             ),
@@ -216,13 +221,13 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             key: 'given_amount',
             render: (text, record) => (
                <Space size="middle" style={buttonsStyle}>
-                  <div style={{display: 'flex', flexDirection: 'column',}}>
-                  <Input style={{ width: '100%', textAlign: 'center', borderRadius: '30px' }} defaultValue={0} onChange={amountInput} />
-                  <Button type="primary" style={{textAlign: 'center',background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff'}} shape='round' onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
+                  <div style={{ display: 'flex', flexDirection: 'column', }}>
+                     <Input style={{ width: '100%', textAlign: 'center', borderRadius: '30px' }} defaultValue={0} onChange={amountInput} />
+                     <Button type="primary" style={{ textAlign: 'center', background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff' }} shape='round' onClick={() => sendToChild(record.key)}>{ML('send')}</Button>
                   </div>
-                  <div style={{display: 'flex', flexDirection: 'column',}}>
-                  <Input style={{ width: '100%', textAlign: 'center', borderRadius: '30px' }} defaultValue={0} onChange={amountInputToWithdraw} />
-                  <Button type="primary" style={{textAlign: 'center',background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff'}} shape='round' onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
+                  <div style={{ display: 'flex', flexDirection: 'column', }}>
+                     <Input style={{ width: '100%', textAlign: 'center', borderRadius: '30px' }} defaultValue={0} onChange={amountInputToWithdraw} />
+                     <Button type="primary" style={{ textAlign: 'center', background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff' }} shape='round' onClick={() => withdrawBackHandler(record.key)}>{ML('withdrawback')}</Button>
                   </div>
                </Space >
             ),

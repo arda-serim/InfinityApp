@@ -50,7 +50,8 @@ export const langs = {
         tutar: 'Gönderilecek / Çekilecek Tutar',
         adres: 'Cüzdan Adresi',
         //ethprice
-        ethprice: 'Ethereum Fiyatı'
+        ethprice: 'Ethereum Fiyatı',
+        block: 'Blok gezgininde görüntüle'
     },
 
     en: {
@@ -102,7 +103,8 @@ export const langs = {
         gönderilen: 'Total Given(ETH)',
         tutar: 'Amount To Be Sent / Withdrawn',
         adres: 'Wallet Address',
-        ethprice: 'Ethereum Price'
+        ethprice: 'Ethereum Price',
+        block: 'View in block explorer'
 
     }
 }
