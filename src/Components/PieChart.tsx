@@ -61,12 +61,12 @@ const PieChartComponent = ({ data }: { data: Array<DataType> }) => {
       },
       legend: {
          visible: true,
-         offsetX: 25,
+         offsetX:-10,
          label: {
             style: {
                fill: 'white',
-               color: '#fff',
-            },
+                color: '#fff',
+         },
 
          },
       },
