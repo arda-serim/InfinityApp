@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Descriptions, PageHeader, Result, Row, Statistic, Tag } from 'antd';
 import logo from '../images/logo_infinity.png';
 import { Layout } from "antd";
@@ -8,7 +8,7 @@ import metamask from '../images/MetaMask.png';
 import { Language, ML } from "../App";
 import { DownloadOutlined, LogoutOutlined } from "@ant-design/icons";
 import connectToMetamask from "../contract";
-import { getChild, getRole } from "../contract/functions";
+import { getChild, getParent, getRole } from "../contract/functions";
 
 
 const { Title } = Typography;
@@ -84,28 +84,39 @@ function onLogOut() {
 
 
 const Navbar = () => {
-   const [child, setChild] = useState({name: '' });
-   let result;
-   async function getThisChild() {
-      const tempChild = await getChild();
-      setChild(tempChild);
-   }
-   getThisChild();
-   let fullName = child.name
-   let arrName = fullName.split(" ");
-   let iniName = fullName.charAt(0);
-   let iniLname = arrName[arrName.length - 1].charAt(0);
-   let initials = iniName + iniLname;
-   const result1 = initials.toUpperCase();
+   const [result, setResult] = useState();
 
-   async function Role(){
-      const role = await getRole();
-      localStorage.setItem('role', role);
-      if (role === 'child') {
-         result = result1
+   useEffect(() => {
+      async function getThisUser() {
+         const role = await getRole();
+         localStorage.setItem('role', role);
+
+         async function getThisChild() {
+            const tempChild = await getChild();
+            return tempChild;
+         }
+
+         async function getThisParent(){
+            const parent = await getParent();
+            return parent;
+         }
+         if (role === 'child') {
+            const tempChild = await getThisChild();
+            let arrName = tempChild.name.split(" ");
+            let iniName = tempChild.name.charAt(0);
+            let iniLname = arrName[arrName.length - 1].charAt(0);
+            let initials = iniName + iniLname;
+            setResult(initials.toUpperCase());
+         } else if (role === 'parent') {
+            const parent = await getThisParent();
+            let iniName = parent.name.charAt(0);
+            let iniLname = parent.surname.charAt(0);
+            let initials = iniName + iniLname;
+            setResult(initials.toUpperCase())
+         }
       }
-
-   }
+      getThisUser();
+   }, [])
 
 
    return (
@@ -116,7 +127,7 @@ const Navbar = () => {
             <div style={languageStyle}>
                <Language />
             </div>
-            <Avatar style={avatarStyle} >{result1}</Avatar>
+            <Avatar style={avatarStyle} >{result}</Avatar>
             <Button onClick={onLogOut} type="link" icon={<LogoutOutlined />} size={"large"} style={{ color: 'white' }} />
          </div>
       </Header >

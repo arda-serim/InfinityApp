@@ -142,9 +142,9 @@ const Signin = () => {
         setIsLoading(true);
         await addParent(name, surname);
         setIsLoading(false);
+        localStorage.setItem('role', "parent");
         navigate('/parent');
-
-      } 
+      }
       catch (error: any) {
         const activeLanguage = localStorage.getItem("i18nextLng");
         const errorMessage = (error.reason.split(":"))[1]
@@ -152,14 +152,13 @@ const Signin = () => {
         const messageTR = errorMessage.split("TR")[1]
 
         if (activeLanguage === 'en') {
-           setError(messageEN)
+          setError(messageEN)
         } else {
-           setError(messageTR)
+          setError(messageTR)
         }
         setIsLoading(false);
-     }
+      }
 
-      localStorage.setItem('role', "parent");
 
     }
   };
@@ -176,7 +175,7 @@ const Signin = () => {
   const clearError = () => {
     //@ts-ignore
     setError('');
- }
+  }
 
   return (
 

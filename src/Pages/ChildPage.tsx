@@ -155,6 +155,7 @@ const ChildPage = () => {
     const [child, setChild] = useState({ amountOfMoney: '', releaseTime: '', name: '' });
     const [error, setError] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [display, setDisplay] = useState(false);
 
     let navigate = useNavigate();
     useEffect(() => {
@@ -163,18 +164,28 @@ const ChildPage = () => {
             navigate("/parent");
         }
 
-
-
         if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
             navigate("/");
         }
-
 
         async function getThisChild() {
             const tempChild = await getChild();
             setChild(tempChild);
         }
         getThisChild();
+
+        //@ts-ignore
+        const releaseTime = (child.releaseTime * 1000)
+
+        const currentDate = Date.now()
+
+        const currentTime = Math.floor(new Date(currentDate).getTime() / 1000);
+
+        if(releaseTime >currentTime) {
+            setDisplay(true);
+        } else {
+            setDisplay(false);
+        }
 
     }, [])
 
@@ -256,9 +267,8 @@ const ChildPage = () => {
                                     <Card style={{ background: "#4268B1  50.02%", border: "#4268B1", borderRadius: "30px", height: "450px" }}>
                                         <p style={lineStyle}>
                                             <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10, 18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
-
                                         </p>
-                                        <h1 style={{textAlign:'center', color:'white'}}> {ML('tarih')}</h1>
+                                        <h1 style={{textAlign:'center', color:'white', fontSize: '15px', opacity: '0.7', marginTop:'30px', marginBottom:'15px'}}> {ML('tarih')}</h1>
                                         <p style={textStyle}>
                                             <text style={{ color: '#EFAA45'}}>{date}</text>
                                         </p>
@@ -270,9 +280,9 @@ const ChildPage = () => {
                                         <br />
                                         <Input style={inputStyle} placeholder={ML('miktar').props.children} onChange={(event: any) => setInput(event.target.value)} />
                                         <br />
-                                        <Button style={buttonStyle} onClick={setClick} >{ML('geriCek')}</Button>
+                                        <Button style={buttonStyle} onClick={setClick} disabled={display} >{ML('geriCek')}</Button>
                                         <br />
-                                        <Button style={buttonStyle2} onClick={onWithdrawAll} >{ML('tumParayıCek')}</Button>
+                                        <Button style={buttonStyle2} onClick={onWithdrawAll} disabled={display} >{ML('tumParayıCek')}</Button>
 
                                     </Card>
 

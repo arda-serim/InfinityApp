@@ -1,5 +1,5 @@
 
-export const CONTRACT_ADDRESS = "0x3350f390A2BA9dB8D43FB30277b1cDa09999AcDe";
+export const CONTRACT_ADDRESS = "0x86bE945BDFE47DB250C8DC571CCfdBD937Ce95c5";
 export const PATENT_ABI = [
    {
      inputs: [],

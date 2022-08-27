@@ -98,7 +98,7 @@ function Childedit() {
     const date = new Date(releaseTime);
 
     // @ts-ignore
-    const releaseTimeInSeconds = Math.floor(new Date().getTime() / 1000);
+    const releaseTimeInSeconds = Math.floor(date.getTime() / 1000);
 
     try {
       setIsLoading(true);
