@@ -45,13 +45,12 @@ const logoStyle = {
 };
 
 const buttonStyle = {
-  background: 'linear-gradient(#327FA3,#1D1B65)',
+  background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
   border: 'none',
   borderRadius: '15px',
   width: '150px',
   height: '40px',
-  marginLeft: '330px',
-  marginTop: '10%'
+  margin: '10px'
 };
 
 const fotoStyle = {
@@ -122,6 +121,9 @@ function Childedit() {
 
   }
 
+  const cancelAddingChildHandler = () => {
+    navigate('/parent');
+  }
   const clearError = () => {
     //@ts-ignore
     setError();
@@ -161,7 +163,10 @@ function Childedit() {
                   <div >
                     <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
                   </div>
-                  <div>
+                  <div style={{display: 'flex', justifyContent: 'space-between', marginLeft: '300px', marginTop:"7%"}}>
+                    <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
+                      {ML('vazgec')}
+                    </Button>
                     <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={addChildHandler}>
                       {ML('kaydet')}
                     </Button>

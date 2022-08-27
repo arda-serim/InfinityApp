@@ -57,8 +57,8 @@ export const langs = {
         loading:'YÜKLENIYOR...',
         errorOccured: 'HATA OLUŞTU!',
         childAdding: 'ÇOCUK EKLENİYOR...',
-        withdrawalProcess: 'PARA ÇEKME İŞLEMİ...'
-
+        withdrawalProcess: 'PARA ÇEKME İŞLEMİ...',
+        vazgec: 'Vazgeç',
 
     },
 
@@ -118,7 +118,9 @@ export const langs = {
         loading:'LOADING...',
         errorOccured: 'ERROR OCCURED!',
         childAdding: 'CHILD IS ADDING...',
-        withdrawalProcess: 'WITHDRAWAL PROCESS...'
+        withdrawalProcess: 'WITHDRAWAL PROCESS...',
+        vazgec: 'Cancel',
+
     }
 }
 
