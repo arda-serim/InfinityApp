@@ -94,7 +94,7 @@ export const langs = {
         sendeth: 'Send ethereum',
         withdrawback : 'Withdraw Back',
         para: 'Current Money(ETH)',
-        gönderilen: 'Gönderilen Miktar(ETH)',
+        gönderilen: 'Total Given(ETH)',
         tutar: 'Amount To Be Sent / Withdrawn'
     }
 }

@@ -105,10 +105,20 @@ function Childedit() {
       await addChild(name, releaseTimeInSeconds, address);
       setIsLoading(false);
       navigate("/parent");
-    } catch (error: any) {
-      setError((error.reason.split(":"))[1])
+    } 
+    catch (error: any) {
+      const activeLanguage = localStorage.getItem("i18nextLng");
+      const errorMessage = (error.reason.split(":"))[1]
+      const messageEN = errorMessage.split("TR")[0]
+      const messageTR = errorMessage.split("TR")[1]
+
+      if (activeLanguage === 'en') {
+         setError(messageEN)
+      } else {
+         setError(messageTR)
+      }
       setIsLoading(false);
-    }
+   }
 
   }
 

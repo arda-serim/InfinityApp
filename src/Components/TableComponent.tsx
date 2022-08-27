@@ -97,7 +97,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          window.location.reload();
       }
       catch (error: any) {
-         setError((error.reason.split(":"))[1])
+         const activeLanguage = localStorage.getItem("i18nextLng");
+         const errorMessage = (error.reason.split(":"))[1]
+         const messageEN = errorMessage.split("TR")[0]
+         const messageTR = errorMessage.split("TR")[1]
+
+         if (activeLanguage === 'en') {
+            setError(messageEN)
+         } else {
+            setError(messageTR)
+         }
          setIsLoading(false);
       }
 
@@ -111,7 +120,16 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          window.location.reload();
       }
       catch (error: any) {
-         setError((error.reason.split(":"))[1])
+         const activeLanguage = localStorage.getItem("i18nextLng");
+         const errorMessage = (error.reason.split(":"))[1]
+         const messageEN = errorMessage.split("TR")[0]
+         const messageTR = errorMessage.split("TR")[1]
+
+         if (activeLanguage === 'en') {
+            setError(messageEN)
+         } else {
+            setError(messageTR)
+         }
          setIsLoading(false);
       }
    }
@@ -124,7 +142,18 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          setIsLoading(false);
       }
       catch (error: any) {
-         setError((error.reason.split(":"))[1])
+         const activeLanguage = localStorage.getItem("i18nextLng");
+         const errorMessage = (error.reason.split(":"))[1]
+         const messageEN = errorMessage.split("TR")[0]
+         const messageTR = errorMessage.split("TR")[1]
+         console.log("en: ", messageEN);
+         console.log("TR: ", messageTR);
+
+         if (activeLanguage === 'en') {
+            setError(messageEN)
+         } else {
+            setError(messageTR)
+         }
          setIsLoading(false);
       }
    }

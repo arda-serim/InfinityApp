@@ -139,13 +139,25 @@ const Signin = () => {
     }
     else {
       try {
+        setIsLoading(true);
         await addParent(name, surname);
+        setIsLoading(false);
         navigate('/parent');
 
-      } catch (error: any) {
-        setError((error.reason.split(":"))[1])
-        setIsLoading(false)
-      }
+      } 
+      catch (error: any) {
+        const activeLanguage = localStorage.getItem("i18nextLng");
+        const errorMessage = (error.reason.split(":"))[1]
+        const messageEN = errorMessage.split("TR")[0]
+        const messageTR = errorMessage.split("TR")[1]
+
+        if (activeLanguage === 'en') {
+           setError(messageEN)
+        } else {
+           setError(messageTR)
+        }
+        setIsLoading(false);
+     }
 
       localStorage.setItem('role', "parent");
 
