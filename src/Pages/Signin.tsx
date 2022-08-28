@@ -107,10 +107,10 @@ const Signin = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const switchLang = () => {
-    setSelectedLanguage(selectedLanguage === "tr" ? "en" : "tr");
-    lang === langs.tr ? setLang(langs.en) : setLang(langs.tr)
-  }
+  // const switchLang = () => {
+  //   setSelectedLanguage(selectedLanguage === "tr" ? "en" : "tr");
+  //   lang === langs.tr ? setLang(langs.en) : setLang(langs.tr)
+  // }
 
   const onChange = (e: CheckboxChangeEvent) => {
     rememberMe = !rememberMe;

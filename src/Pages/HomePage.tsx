@@ -243,26 +243,26 @@ const HomePage = () => {
                   </Col>
                   <Col span={12} >
                      <p style={{ color : 'white' , marginLeft : '20%' , fontSize : '20px' , marginTop : '10%'}}>
-                        Why InTeritance ?
+                       {ML('why')}
                      </p>
                      <p style={{marginTop : '5%' , color : 'white' , marginRight : '20%' , fontSize : '20px'}} >
                         <p>
-                        Teknoloji çağına ayak uyduran, yeni nesil bir yatırım uygulaması
+                       {ML('p1')}
                         </p>
                         <p>
-                        Birden fazla işlem aynı sayfa üzerinde hızlı bir şekilde gerçekleştirilebilir.
+                        {ML('p2')}
                         </p>
                         <p>
-                        Kullanıcı dostu uygulama tasarımı
+                        {ML('p3')}
                         </p>
                         <p>
-                        Son derece güvenli
+                        {ML('p4')}
                         </p>
                         <p>
-                        Ebeveynler hem kendilerinin hem çocuklarının kripto varlıklarını yönetebilir.
+                        {ML('p5')}
                         </p>
                         <p>
-                        Çocukların hesaplarına erişim tarihleri gelene kadar tüm yetki ebeveynlerinde olur. 
+                        {ML('p6')}
                         </p>
                         </p>
                     
@@ -282,16 +282,14 @@ const HomePage = () => {
                <Col span={12} >
 
                   <p style={{marginTop : '25%' , color : 'white' , marginLeft : '40%' , fontSize : '20px'}}>
-                      Our vision and mission
+                     {ML('vizyonvemisyon')}
                   </p>
                <p style={{marginTop : '5%' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}} >
-               Vizyon:
-               Ebeveynlerin çocuklarının geleceği için daha güvenilir, yeni çağa uygun ve sürdürülebilir bir sistemde kripto varlıklarını miras bırakabilecekleri uygulamalar arasında akla ilk gelen olmak.
+              {ML('vizyon')}
               </p>
               <br/>
               <p style={{marginTop : '' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}}>
-              Misyon:
-               Yarınlarımızı emanet edeceğimiz çocuklarımız için onların yaşamlarını kolaylaştırmak, yeni çağda yeni teknolojilerle birlikte onlara daha çağa uygun bir gelecek yaratmak amacıyla ailelerinin güvenilir bir şekilde yatırım yapabilmelerini sağlamak.
+            {ML('misyon')}
               </p >
                </Col>
                <Col span={12} >
