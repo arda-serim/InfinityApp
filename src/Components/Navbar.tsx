@@ -75,10 +75,10 @@ const Navbar = () => {
             <h1 style={titleStyle} >INTERITANCE</h1>
          </span>
           <div style={{marginLeft : '80%' , marginTop : '5px'}}>
-        
+{/*         
          <Button style={button} onClick={() => navigate('/aboutus')  }  type="text" >
              About Us
-         </Button>
+         </Button> */}
          </div>
  
          <div style={languageStyle}>
