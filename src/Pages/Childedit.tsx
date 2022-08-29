@@ -53,6 +53,15 @@ const buttonStyle = {
   margin: '10px'
 };
 
+const buttonStyleTwo = {
+  background: 'linear-gradient(180deg, red 67%, #FDB137 100%)',
+  border: 'none',
+  borderRadius: '15px',
+  width: '150px',
+  height: '40px',
+  margin: '10px'
+};
+
 const fotoStyle = {
   marginLeft: '200px',
   marginTop: '50px'
@@ -129,6 +138,7 @@ function Childedit() {
     setError();
   }
 
+
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
 
@@ -158,13 +168,13 @@ function Childedit() {
                     <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
                   </div>
                   <div >
-                    <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
+                  <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
                   </div>
                   <div >
                     <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
                   </div>
                   <div style={{display: 'flex', justifyContent: 'space-between', marginLeft: '300px', marginTop:"7%"}}>
-                    <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
+                    <Button style={buttonStyleTwo} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
                       {ML('vazgec')}
                     </Button>
                     <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={addChildHandler}>
