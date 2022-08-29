@@ -132,21 +132,20 @@ const HomePage = () => {
 
    let navigate = useNavigate();
 
-   // if there is session send to next page
-   // React.useEffect(() => {
+   React.useEffect(() => {
+      const role = localStorage.getItem('role');
+      if (role === 'parent') {
+         navigate('/parent');
+      }
+      else if (role === 'child') {
+         navigate('/childpage');
+      }
+      else if (role === 'admin') {
+         navigate('/admin');
+      }
 
-   //    let session;
-   //    if (localStorage.getItem('user')) {
-   //       session = localStorage.getItem('user')
-   //    }
-   //    else if (sessionStorage.getItem('user')) {
-   //       session = sessionStorage.getItem('user')
-   //    }
-   //    if (session) {
-   //       let role = JSON.parse(session).role;
-   //       role === 'parent' ? navigate('/parent') : navigate('/ChildPage');
-   //    }
-   // }, []);
+   }, []);
+
 
 
    const [errorMessage, setErrorMessage] = useState('');
