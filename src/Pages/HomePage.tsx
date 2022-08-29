@@ -277,29 +277,7 @@ const HomePage = () => {
                </Row>
                </div>
 
-               <div style={contentStyle}>
-               <Row gutter={[24, 8]}>
-               <Col span={12} >
-
-                  <p style={{marginTop : '25%' , color : 'white' , marginLeft : '40%' , fontSize : '20px'}}>
-                     {ML('vizyonvemisyon')}
-                  </p>
-               <p style={{marginTop : '5%' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}} >
-              {ML('vizyon')}
-              </p>
-              <br/>
-              <p style={{marginTop : '' , color : 'white' , marginLeft : '20%' , fontSize : '20px'}}>
-            {ML('misyon')}
-              </p >
-               </Col>
-               <Col span={12} >
-                  <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1 , marginLeft : '20%' , marginTop: '20%' }}>
-                  <img src={test2} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%' , zIndex :2}}/>
-                  </div>
-                
-               </Col>
-               </Row>
-               </div>
+           
 
             </Content >
          </div >

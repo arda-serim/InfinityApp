@@ -49,9 +49,15 @@ const languageStyle = {
    textColor : 'white'
 } as React.CSSProperties;
 
+const button = {
+  color : 'white' ,
+
+};
 
 const Navbar = () => {
    const navigate = useNavigate();
+
+  
    return (
       <Header style={headerStyle}>
          <span onClick={() => navigate('/parent')} style={{
@@ -61,7 +67,15 @@ const Navbar = () => {
             <img src={logo} alt="logo" style={logoStyle} />
             <h1 style={titleStyle} >INTERITANCE</h1>
          </span>
+          <div style={{marginLeft : '80%' , marginTop : '5px'}}>
+        
+         <Button style={button} onClick={() => navigate('/aboutus')  }  type="text" >
+             About Us
+         </Button>
+         </div>
+ 
          <div style={languageStyle}>
+      
             <Language />
          </div>
       </Header >
