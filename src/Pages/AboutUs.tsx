@@ -191,7 +191,7 @@ const AboutUs = () => {
         <Card
          hoverable
          style={{ width: 200}}
-         cover={< a target="_blank" href='https://www.linkedin.com/in/nur-sude-var-6a9550196/' > <img style={{width : '200px' , height : '250.16px'} }    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" /></a>} >
+         cover={< a target="_blank" href='https://www.linkedin.com/in/nur-sude-var-6a9550196/' > <img style={{width : '200px' , height : '250.16px'} }    src="https://cdn.discordapp.com/attachments/776504233063088178/1013848991563268116/NursudeHazir.png" /></a>} >
          <Meta title="Nur Sude Var" description={ML('onyuz')}   />
        </Card>
      </Col>
