@@ -174,20 +174,24 @@ const ChildPage = () => {
         }
         getThisChild();
 
+
+
+    }, [])
+
+    useEffect(() => {
         //@ts-ignore
         const releaseTime = (child.releaseTime * 1000)
 
         const currentDate = Date.now()
+        
+        const currentTime = Math.floor(new Date(currentDate).getTime());
 
-        const currentTime = Math.floor(new Date(currentDate).getTime() / 1000);
-
-        if(releaseTime >currentTime) {
+        if (releaseTime > currentTime) {
             setDisplay(true);
         } else {
             setDisplay(false);
         }
-
-    }, [])
+    }, [child])
 
     const onWithdrawAll = async () => {
         try {
@@ -201,14 +205,14 @@ const ChildPage = () => {
             const errorMessage = (error.reason.split(":"))[1]
             const messageEN = errorMessage.split("TR")[0]
             const messageTR = errorMessage.split("TR")[1]
-   
+
             if (activeLanguage === 'en') {
-               setError(messageEN)
+                setError(messageEN)
             } else {
-               setError(messageTR)
+                setError(messageTR)
             }
             setIsLoading(false);
-         }
+        }
     };
 
     const setClick = async () => {
@@ -223,14 +227,14 @@ const ChildPage = () => {
             const errorMessage = (error.reason.split(":"))[1]
             const messageEN = errorMessage.split("TR")[0]
             const messageTR = errorMessage.split("TR")[1]
-   
+
             if (activeLanguage === 'en') {
-               setError(messageEN)
+                setError(messageEN)
             } else {
-               setError(messageTR)
+                setError(messageTR)
             }
             setIsLoading(false);
-         }
+        }
     }
 
     //@ts-ignore
@@ -248,7 +252,7 @@ const ChildPage = () => {
                 <Navbar />
             </div>
             {
-                isLoading && <ModalComponent title={ML('withdrawalProcess')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+                isLoading && <ModalComponent title={ML('withdrawalProcess')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
             }
             {
                 error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
@@ -268,9 +272,9 @@ const ChildPage = () => {
                                         <p style={lineStyle}>
                                             <text style={{ color: 'black' }}>{Number(child.amountOfMoney) / (Math.pow(10, 18))} ETH{/*<img src={TRY} style={tryStyle} />*/}</text>
                                         </p>
-                                        <h1 style={{textAlign:'center', color:'white', fontSize: '15px', opacity: '0.7', marginTop:'30px', marginBottom:'15px'}}> {ML('tarih')}</h1>
+                                        <h1 style={{ textAlign: 'center', color: 'white', fontSize: '15px', opacity: '0.7', marginTop: '30px', marginBottom: '15px' }}> {ML('tarih')}</h1>
                                         <p style={textStyle}>
-                                            <text style={{ color: '#EFAA45'}}>{date}</text>
+                                            <text style={{ color: '#EFAA45' }}>{date}</text>
                                         </p>
                                         <br />
                                         {/* {child?.releaseTime && child?.releaseTime > new Date() && <>

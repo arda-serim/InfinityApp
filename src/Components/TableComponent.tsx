@@ -252,7 +252,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} />
+            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true}/>
          }
          {
             error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
