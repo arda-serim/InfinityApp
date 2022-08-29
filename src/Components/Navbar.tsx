@@ -39,12 +39,14 @@ const languageStyle = {
    height: '40px',
    //background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',
    //background: 'linear-gradient(to bottom right, #336600 0%, #009999 100%)',
-   background: "linear-gradient(#EF886C, #EFAA45)",
+   //background: "linear-gradient(#EF886C, #EFAA45)",
+   background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
    borderRadius: '20px',
    textAlign: "center",
    justifyContent: 'center',
    alignItems: "center",
    lineHeight: "40px",
+   textColor : 'white'
 } as React.CSSProperties;
 
 
