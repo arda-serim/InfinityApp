@@ -26,8 +26,6 @@ const headerStyle = {
    flexDirection: 'row',
    height: '10%',
    background: 'rgba(0, 0, 0, 0)',
-   position: 'sticky',
-   top: '0',
 } as React.CSSProperties;
 
 const titleStyle = {
@@ -49,11 +47,11 @@ const languageStyle = {
    justifyContent: 'center',
    alignItems: "center",
    lineHeight: "40px",
-   textColor : 'white'
+   textColor: 'white'
 } as React.CSSProperties;
 
 const button = {
-  color : 'white' ,
+   color: 'white',
 
 };
 
@@ -64,7 +62,7 @@ const button = {
 const Navbar = () => {
    const navigate = useNavigate();
 
-  
+
    return (
       <Header style={headerStyle}>
          <span onClick={() => navigate('/parent')} style={{
@@ -74,15 +72,17 @@ const Navbar = () => {
             <img src={logo} alt="logo" style={logoStyle} />
             <h1 style={titleStyle} >INTERITANCE</h1>
          </span>
-          <div style={{marginLeft : '80%' , marginTop : '5px'}}>
-{/*         
-         <Button style={button} onClick={() => navigate('/aboutus')  }  type="text" >
-             About Us
-         </Button> */}
+
+         <div style={{ marginLeft: '80%', marginTop: '5px' }}>
+
+            <Button style={button} onClick={() => navigate('/aboutus')} type="text" >
+               About Us
+            </Button>
+
          </div>
- 
+
          <div style={languageStyle}>
-      
+
             <Language />
          </div>
       </Header >
