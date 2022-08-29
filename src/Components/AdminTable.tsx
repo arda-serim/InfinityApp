@@ -23,42 +23,59 @@ const mystyle = {
 interface DataType {
    key: React.Key;
    name: string;
-   platform: string;
-   version: string;
-   upgradeNum: number;
-   creator: string;
-   createdAt: string;
+   balance: string;
+   address: string;
+   childs: number;
+   numOfChildren: string;
 }
 
 interface ExpandedDataType {
    key: React.Key;
-   date: string;
    name: string;
-   upgradeNum: string;
+   amountOfMoney: string;
+   givenAmount: string;
+   releaseTime: string;
 }
 
 
 const AdminTable = (parentData: any) => {
 
-   const [data, setData] = useState([]);
+   const [data, setData] = useState();
+   //const [tempChildren, setTempChildren] = useState([]);
+   let tempChildren: any = [];
+   let children: any = [];
 
    React.useEffect(() => {
       const getChildDataHandler = async () => {
-         parentData.parentData.forEach(async (x: any) => {
-            const childAddresses = x.childs
-            childAddresses.forEach(async (element: any) => {
-               const child = await getChildWithAddress(element);
+         console.log('xxxxx', parentData.parentData.length);
+         for (let index = 0; index < parentData.parentData.length; index++) {
+            const childAddresses = parentData.parentData[index].childs
+            console.log('asfasfsas', childAddresses.length);
 
+            for (let i = 0; i < childAddresses.length; i++) {
+               const child = await getChildWithAddress(childAddresses[i]);
                const tempData = {
+                  key: child.walletaddress,
                   name: child.name,
                   amountOfMoney: (Number(child.amountOfMoney) / (Math.pow(10, 18))),
                   givenAmount: ((Number(child.amountOfMoney) + (Number(child.totalWithdrawnMoney))) / (Math.pow(10, 18))),
                   releaseTime: new Date(child.releaseTime * 1000).toLocaleDateString(),
                };
+
+
                // @ts-ignore
-               x.childs = tempData;
-            });
-         });
+               tempChildren.push(tempData);
+               console.log(index, tempChildren);
+
+            }
+            // @ts-ignore
+            children.push(tempChildren);
+            console.log(children)
+            // @ts-ignore
+            tempChildren = [];
+         }
+
+
 
       }
       getChildDataHandler();
@@ -97,7 +114,7 @@ const AdminTable = (parentData: any) => {
          },
       ];
 
-      return <Table columns={columns} dataSource={data} pagination={false} />;
+      return <Table columns={columns} dataSource={children} pagination={false} />;
    };
 
    const columns: TableColumnsType<DataType> = [
@@ -112,7 +129,7 @@ const AdminTable = (parentData: any) => {
       <div style={mystyle}>
          <Table
             columns={columns}
-            expandable={{ expandedRowRender, defaultExpandedRowKeys: ['0'] }}
+            expandable={{ expandedRowRender }}
             dataSource={parentData.parentData}
             style={table}
             pagination={false}
