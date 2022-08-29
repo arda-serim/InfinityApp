@@ -28,8 +28,6 @@ const headerStyle = {
    flexDirection: 'row',
    height: '10%',
    background: 'rgba(0, 0, 0, 0)',
-   position: 'sticky',
-   top: '0',
 } as React.CSSProperties;
 
 const titleStyle = {
@@ -96,7 +94,7 @@ const Navbar = () => {
             return tempChild;
          }
 
-         async function getThisParent(){
+         async function getThisParent() {
             const parent = await getParent();
             return parent;
          }
