@@ -49,7 +49,7 @@ const card = {
    color: '#fff',
    background: 'rgba(0, 0, 0, 0)',
    marginLeft: '-3%',
-   zIndex: 2
+   zIndex : 2
 
 } as React.CSSProperties;
 
@@ -68,12 +68,12 @@ const imageStyle = {
    height: '800px',
    borderRadius: '15px',
    float: 'right',
-   // marginLeft: '-15%',
-   // marginTop: '-13%',
-   marginRight: '0',
-   zIndex: '1',
-   position: 'absolute',
-   right: '0'
+  // marginLeft: '-15%',
+  // marginTop: '-13%',
+  marginRight : '0',
+   zIndex : '1',
+   position : 'absolute',
+   right :'0'
 } as React.CSSProperties;
 
 const imageStyle1 = {
@@ -83,9 +83,9 @@ const imageStyle1 = {
    float: 'right',
    marginLeft: '-15%',
    marginTop: '-13%',
-   zIndex: '-1',
-   opacity: '0.4',
-
+   zIndex :'-1',
+   opacity : '0.4',
+  
 } as React.CSSProperties;
 
 
@@ -93,11 +93,11 @@ const imageStyle1 = {
 const contentStyle = {
    width: '100%',
    height: '100%',
-
+   
 };
 
 const navbarStyle = {
-   zIndex: 2
+   zIndex : 2
 };
 
 const buttonBoxStyle = {
@@ -112,7 +112,7 @@ const signUpButtonStyle = {
    background: 'linear-gradient(180deg, #091058 , #305367)',
    color: '#fff',
    border: 'none',
-   zIndex: 2
+   zIndex : 2
 };
 
 const pageStyle = {
@@ -132,20 +132,21 @@ const HomePage = () => {
 
    let navigate = useNavigate();
 
-   React.useEffect(() => {
-      const role = localStorage.getItem('role');
-      if (role === 'parent') {
-         navigate('/parent');
-      }
-      else if (role === 'child') {
-         navigate('/childpage');
-      }
-      else if (role === 'admin') {
-         navigate('/admin');
-      }
+   // if there is session send to next page
+   // React.useEffect(() => {
 
-   }, []);
-
+   //    let session;
+   //    if (localStorage.getItem('user')) {
+   //       session = localStorage.getItem('user')
+   //    }
+   //    else if (sessionStorage.getItem('user')) {
+   //       session = sessionStorage.getItem('user')
+   //    }
+   //    if (session) {
+   //       let role = JSON.parse(session).role;
+   //       role === 'parent' ? navigate('/parent') : navigate('/ChildPage');
+   //    }
+   // }, []);
 
 
    const [errorMessage, setErrorMessage] = useState('');
@@ -160,19 +161,16 @@ const HomePage = () => {
          const { signerAddress } = await connectToMetamask();
 
 
-         if (role === 'parent') {
-            navigate('/parent');
-         }
-         else if (role === 'child') {
-            navigate('/childpage');
-         }
-         else if (role === 'admin') {
-            navigate('/admin');
-         }
-         else {
-            navigate('/signin');
-         }
-
+                 if (role === 'parent') {
+                   navigate('/parent');
+                 }  
+                 else if (role === 'child') {
+                 navigate('/childpage');
+                 }
+                 else {
+                   navigate('/signin');
+                 }
+              
 
       }
       else {
@@ -227,85 +225,63 @@ const HomePage = () => {
                         </div>
                      </Col>
 
-                     <Col span={12} >
+                     <Col span={12} > 
                         <img src={test4} style={imageStyle1} />
                         <img src={test3} style={imageStyle} />
                      </Col>
                   </Row>
                </div>
                <div style={contentStyle}>
-                  <Row gutter={[24, 8]}>
-
-                     <Col span={12}  >
-
-                        <div style={{ width: '400px', height: '400px', borderRadius: '200px', background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)', zIndex: 1, marginLeft: '20%', marginTop: '10%' }}>
-                           <img src={test1} style={{ width: '300px', height: '300px', marginLeft: '10%', marginTop: '10%', zIndex: 2 }} />
-                        </div>
-
-                     </Col>
-                     <Col span={12} >
-                        <p style={{ color: 'white', marginLeft: '20%', fontSize: '20px', marginTop: '10%' }}>
-                           {ML('why')}
+               <Row gutter={[24, 8]}>
+                 
+                  <Col span={12}  >
+                     
+                     <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1  , marginLeft : '20%' , marginTop: '10%'}}>
+                     <img src={test1} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%', zIndex :2}}/>
+                     </div>
+                     
+                  </Col>
+                  <Col span={12} >
+                     <p style={{ color : 'white' , marginLeft : '20%' , fontSize : '20px' , marginTop : '10%'}}>
+                       {ML('why')}
+                     </p>
+                     <p style={{marginTop : '5%' , color : 'white' , marginRight : '20%' , fontSize : '20px'}} >
+                        <p>
+                       {ML('p1')}
                         </p>
-                        <p style={{ marginTop: '5%', color: 'white', marginRight: '20%', fontSize: '20px' }} >
-                           <p>
-                              {ML('p1')}
-                           </p>
-                           <p>
-                              {ML('p2')}
-                           </p>
-                           <p>
-                              {ML('p3')}
-                           </p>
-                           <p>
-                              {ML('p4')}
-                           </p>
-                           <p>
-                              {ML('p5')}
-                           </p>
-                           <p>
-                              {ML('p6')}
-                           </p>
+                        <p>
+                        {ML('p2')}
                         </p>
-
-
-
-
-
-
-                     </Col>
-
-
-                  </Row>
+                        <p>
+                        {ML('p3')}
+                        </p>
+                        <p>
+                        {ML('p4')}
+                        </p>
+                        <p>
+                        {ML('p5')}
+                        </p>
+                        <p>
+                        {ML('p6')}
+                        </p>
+                        </p>
+                    
+                    
+                    
+                     
+                    
+                   
+                  </Col>
+                  
+              
+               </Row>
                </div>
 
-               <div style={contentStyle}>
-                  <Row gutter={[24, 8]}>
-                     <Col span={12} >
-
-                        <p style={{ marginTop: '25%', color: 'white', marginLeft: '40%', fontSize: '20px' }}>
-                           {ML('vizyonvemisyon')}
-                        </p>
-                        <p style={{ marginTop: '5%', color: 'white', marginLeft: '20%', fontSize: '20px' }} >
-                           {ML('vizyon')}
-                        </p>
-                        <br />
-                        <p style={{ marginTop: '', color: 'white', marginLeft: '20%', fontSize: '20px' }}>
-                           {ML('misyon')}
-                        </p >
-                     </Col>
-                     <Col span={12} >
-                        <div style={{ width: '400px', height: '400px', borderRadius: '200px', background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)', zIndex: 1, marginLeft: '20%', marginTop: '20%' }}>
-                           <img src={test2} style={{ width: '300px', height: '300px', marginLeft: '10%', marginTop: '10%', zIndex: 2 }} />
-                        </div>
-
-                     </Col>
-                  </Row>
-               </div>
+           
 
             </Content >
          </div >
-
+         
 
       </Layout >
    );

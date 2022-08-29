@@ -23,6 +23,8 @@ const headerStyle = {
    flexDirection: 'row',
    height: '10%',
    background: 'rgba(0, 0, 0, 0)',
+   position: 'sticky',
+   top: '0',
 } as React.CSSProperties;
 
 const titleStyle = {
@@ -37,17 +39,25 @@ const languageStyle = {
    height: '40px',
    //background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',
    //background: 'linear-gradient(to bottom right, #336600 0%, #009999 100%)',
-   background: "linear-gradient(#EF886C, #EFAA45)",
+   //background: "linear-gradient(#EF886C, #EFAA45)",
+   background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
    borderRadius: '20px',
    textAlign: "center",
    justifyContent: 'center',
    alignItems: "center",
    lineHeight: "40px",
+   textColor : 'white'
 } as React.CSSProperties;
 
+const button = {
+  color : 'white' ,
+
+};
 
 const Navbar = () => {
    const navigate = useNavigate();
+
+  
    return (
       <Header style={headerStyle}>
          <span onClick={() => navigate('/parent')} style={{
@@ -57,7 +67,15 @@ const Navbar = () => {
             <img src={logo} alt="logo" style={logoStyle} />
             <h1 style={titleStyle} >INTERITANCE</h1>
          </span>
+          <div style={{marginLeft : '80%' , marginTop : '5px'}}>
+        
+         <Button style={button} onClick={() => navigate('/aboutus')  }  type="text" >
+             About Us
+         </Button>
+         </div>
+ 
          <div style={languageStyle}>
+      
             <Language />
          </div>
       </Header >

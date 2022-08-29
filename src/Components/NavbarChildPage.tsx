@@ -28,6 +28,8 @@ const headerStyle = {
    flexDirection: 'row',
    height: '10%',
    background: 'rgba(0, 0, 0, 0)',
+   position: 'sticky',
+   top: '0',
 } as React.CSSProperties;
 
 const titleStyle = {
@@ -64,7 +66,8 @@ const languageStyle = {
    alignSelf: 'center',
    width: '40px',
    height: '40px',
-   background: "linear-gradient(#EF886C, #EFAA45)",
+  // background: "linear-gradient(#EF886C, #EFAA45)",
+  background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
    borderRadius: '20px',
    textAlign: "center",
    justifyContent: 'center',
@@ -94,7 +97,7 @@ const Navbar = () => {
             return tempChild;
          }
 
-         async function getThisParent() {
+         async function getThisParent(){
             const parent = await getParent();
             return parent;
          }

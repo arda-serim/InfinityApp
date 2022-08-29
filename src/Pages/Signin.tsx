@@ -211,7 +211,7 @@ const Signin = () => {
                     }}>{ML('giris')}</Title>
                   </div>
                   <div style={whitePlaceStyle}>
-                    <Title level={5} style={{ color: '#0A103A', marginRight: '25px' }}>{ML('hosgeldin')}</Title>
+                    <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
                   </div>
                   <br>
                   </br>
@@ -233,6 +233,9 @@ const Signin = () => {
                   </div>
                   <br>
                   </br>
+                  <div style={whitePlaceStyle}>
+                    <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
+                  </div>
                   <br>
                   </br>
                   <div style={whitePlaceStyle}>

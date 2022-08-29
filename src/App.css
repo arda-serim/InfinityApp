@@ -69,7 +69,7 @@ tr.ant-table-expanded-row>td {
 }
 
 .ant-typography a {
-   color: #FFFFFF;
+   color: white;
    outline: none;
    cursor: pointer;
    transition: color .3s;
@@ -78,4 +78,16 @@ tr.ant-table-expanded-row>td {
 
 input {
    text-align: center;
+}
+
+a.ant-typography:hover {
+   color: white;
+}
+
+.ant-typography a, a.ant-typography {
+   color: white;
+   outline: none;
+   cursor: pointer;
+   transition: color .3s;
+   text-decoration: none;
 }
