@@ -15,6 +15,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { langs } from "./Pages/LangugeContext";
 import { Dropdown, Typography, Space, Menu } from "antd";
 import menu from "antd/lib/menu";
+import AdminPage from "./Pages/AdminPage";
 
 
 
@@ -87,6 +88,7 @@ function App() {
       <Route path="/signin" element={<Signin />} />
       <Route path="/childedit" element={<Childedit />} />
       <Route path="/childpage" element={<ChildPage />} />
+      <Route path='/admin' element={<AdminPage />} />
     </Routes>
 
   );

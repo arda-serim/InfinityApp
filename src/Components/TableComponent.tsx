@@ -59,7 +59,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
 
    let navigate = useNavigate();
    const [error, setError] = useState();
-   const [date, setDate] = useState('');
+   const [date, setDate] = useState();
 
    function onAddChild() {
       navigate("/childedit");
@@ -134,26 +134,34 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
       }
    }
 
-   const onClickDate = async (date: any, address: any) => {
+   const onClickDate = async (address: any) => {
       try {
-         console.log(date, '  date  ', address);
+         // @ts-ignore
+         const tempDate = new Date(date);
+
+         console.log(tempDate);
+         // @ts-ignore
+         const releaseTimeInSeconds = Math.floor(tempDate.getTime() / 1000);
+
+         console.log(releaseTimeInSeconds, '  date  ', address);
          setIsLoading(true);
-         await changeReleaseTime(address, date);
+         await changeReleaseTime(address, releaseTimeInSeconds);
          setIsLoading(false);
       }
       catch (error: any) {
-         const activeLanguage = localStorage.getItem("i18nextLng");
-         const errorMessage = (error.reason.split(":"))[1]
-         const messageEN = errorMessage.split("TR")[0]
-         const messageTR = errorMessage.split("TR")[1]
-         console.log("en: ", messageEN);
-         console.log("TR: ", messageTR);
+         console.log('heree');
+         // const activeLanguage = localStorage.getItem("i18nextLng");
+         // const errorMessage = (error.reason.split(":"))[1]
+         // const messageEN = errorMessage.split("TR")[0]
+         // const messageTR = errorMessage.split("TR")[1]
+         // console.log("en: ", messageEN);
+         // console.log("TR: ", messageTR);
 
-         if (activeLanguage === 'en') {
-            setError(messageEN)
-         } else {
-            setError(messageTR)
-         }
+         // if (activeLanguage === 'en') {
+         //    setError(messageEN)
+         // } else {
+         //    setError(messageTR)
+         // }
          setIsLoading(false);
       }
    }
@@ -205,10 +213,10 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             render: (text, record) => (
                <Space size="middle" style={{ display: 'flex', flexDirection: 'column' }}>
                   <DatePicker format={'DD/MM/YYYY'} style={{ borderRadius: '32px' }} defaultValue={moment(text, 'DD/MM/YYYY')} onChange={(date: any) => {
-                     const d = new Date(date).toLocaleDateString();
-                     setDate(d);
+                     // const d = new Date(date);
+                     setDate(date);
                   }} />
-                  <Button type="primary" style={{ textAlign: 'center', background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff' }} shape='round' onClick={() => onClickDate(date, record.key)} >{ML('degistir')}</Button>
+                  <Button type="primary" style={{ textAlign: 'center', background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)', color: '#fff' }} shape='round' onClick={() => onClickDate(record.key)} >{ML('degistir')}</Button>
                </Space>
 
             ),
