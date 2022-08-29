@@ -40,17 +40,14 @@ interface ExpandedDataType {
 
 const AdminTable = (parentData: any) => {
 
-   const [data, setData] = useState();
    //const [tempChildren, setTempChildren] = useState([]);
    let tempChildren: any = [];
    let children: any = [];
 
    React.useEffect(() => {
       const getChildDataHandler = async () => {
-         console.log('xxxxx', parentData.parentData.length);
          for (let index = 0; index < parentData.parentData.length; index++) {
             const childAddresses = parentData.parentData[index].childs
-            console.log('asfasfsas', childAddresses.length);
 
             for (let i = 0; i < childAddresses.length; i++) {
                const child = await getChildWithAddress(childAddresses[i]);
@@ -65,12 +62,10 @@ const AdminTable = (parentData: any) => {
 
                // @ts-ignore
                tempChildren.push(tempData);
-               console.log(index, tempChildren);
 
             }
             // @ts-ignore
             children.push(tempChildren);
-            console.log(children)
             // @ts-ignore
             tempChildren = [];
          }
@@ -82,7 +77,8 @@ const AdminTable = (parentData: any) => {
    }, [parentData]);
 
 
-   const expandedRowRender = () => {
+
+   const expandedRowRender = (row: any, rowIndex: any) => {
       const columns: TableColumnsType<ExpandedDataType> = [
          {
             title: 'Name',
@@ -113,8 +109,8 @@ const AdminTable = (parentData: any) => {
             width: '32.5%',
          },
       ];
-
-      return <Table columns={columns} dataSource={children} pagination={false} />;
+      // @ts-ignore
+      return <Table columns={columns} dataSource={children[rowIndex]} pagination={false} />;
    };
 
    const columns: TableColumnsType<DataType> = [
