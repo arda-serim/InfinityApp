@@ -59,10 +59,11 @@ export const langs = {
         block: 'Blok gezgininde görüntüle',
         error : 'Lütfen Metamask uzantısını kurunuz.',
         error2 : 'Tüm alanları doldurunuz.',
-        loading:'YÜKLENIYOR...',
+        loading:'YÜKLENİYOR...',
         errorOccured: 'HATA OLUŞTU!',
-        childAdding: 'ÇOCUK EKLENİYOR...',
-        withdrawalProcess: 'PARA ÇEKME İŞLEMİ...',
+        childAdding: 'Çocuk Ekleniyor...',
+        addingParent: 'Ebeveyn ekleniyor...',
+        withdrawalProcess: 'Para çekme işlemi gerçekleşiyor...',
         vazgec: 'Vazgeç',
         vizyon: 'Ebeveynlerin çocuklarının geleceği için daha güvenilir, yeni çağa uygun ve sürdürülebilir bir sistemde kripto varlıklarını miras bırakabilecekleri uygulamalar arasında akla ilk gelen olmak.',
         misyon : 'Yarınlarımızı emanet edeceğimiz çocuklarımız için onların yaşamlarını kolaylaştırmak, yeni çağda yeni teknolojilerle birlikte onlara daha çağa uygun bir gelecek yaratmak amacıyla ailelerinin güvenilir bir şekilde yatırım yapabilmelerini sağlamak.',
@@ -87,7 +88,8 @@ export const langs = {
         account2: 'Metamask Cüzdanım',
         toaccount1: 'Interitance Hesabıma Aktar',
         toaccount2: 'Metamask Cüzdanıma Aktar',
-
+        transfer: 'Transfer gerçekleşiyor...',
+        changeDate: 'Tarih güncelleniyor...'
 
     },
 
@@ -151,8 +153,9 @@ export const langs = {
         error2 : 'Please fill all the fields',
         loading:'LOADING...',
         errorOccured: 'ERROR OCCURED!',
-        childAdding: 'CHILD IS ADDING...',
-        withdrawalProcess: 'WITHDRAWAL PROCESS...',
+        childAdding: 'Child is adding...',
+        addingParent: 'Parent is adding...',
+        withdrawalProcess: 'Withdrawal is in progress...',
         vazgec: 'Cancel',
         ourvision: 'Our Vision',
         ourmission : 'Our Mission',
@@ -177,7 +180,8 @@ export const langs = {
         account2: 'Metamask Wallet',
         toaccount1: 'Trasanfer to my Interitance Account',
         toaccount2: 'Transfer to my Metamask Wallet',
-
+        transfer: 'Transfer in progress...',
+        changeDate: 'Updating date... '
     }
 }
 

@@ -6,6 +6,7 @@ import moment from 'moment';
 import { changeReleaseTime, sendMoneyToChild, sendMoneyToChildFromWallet, withdrawMoneyByParentFromChild, withdrawMoneyByParentToWallet } from '../contract/functions';
 import { ML } from '../App';
 import ModalComponent from './ModalComponent';
+import CustomModal from './CustomModal.js';
 
 interface DataType {
    key: string;
@@ -70,6 +71,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const [amountWithdraw, setAmountWithdraw] = useState();
    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
    const [isLoading, setIsLoading] = useState(false);
+   const [isLoading2, setIsLoading2] = useState(false);
    const [showToChildModal, setShowToChildModal] = useState(false);
    const [showWithdrawModal, setShowWithdrawModal] = useState(false);
 
@@ -202,9 +204,9 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          const releaseTimeInSeconds = Math.floor(tempDate.getTime() / 1000);
 
          console.log(releaseTimeInSeconds, '  date  ', address);
-         setIsLoading(true);
+         setIsLoading2(true);
          await changeReleaseTime(address, releaseTimeInSeconds);
-         setIsLoading(false);
+         setIsLoading2(false);
       }
       catch (error: any) {
          console.log('heree');
@@ -220,7 +222,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          // } else {
          //    setError(messageTR)
          // }
-         setIsLoading(false);
+         setIsLoading2(false);
       }
    }
 
@@ -331,7 +333,24 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
             </>} style={{ textAlign: 'center' }} onClear={clearModalTwo} />
          }
          {
-            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+            isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+               <div>
+                  <span style={{ margin: '16px' }}>
+                     {ML('transfer')}
+                  </span>
+   
+               </div>
+            </CustomModal>
+         }
+                  {
+            isLoading2 && <CustomModal show header={ML('loading')} footer={<Spin />}>
+               <div>
+                  <span style={{ margin: '16px' }}>
+                     {ML('changeDate')}
+                  </span>
+   
+               </div>
+            </CustomModal>
          }
          {
             error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
