@@ -59,8 +59,8 @@ export const langs = {
         childAdding: 'ÇOCUK EKLENİYOR...',
         withdrawalProcess: 'PARA ÇEKME İŞLEMİ...',
         vazgec: 'Vazgeç',
-        vizyon: 'Vizyon: Ebeveynlerin çocuklarının geleceği için daha güvenilir, yeni çağa uygun ve sürdürülebilir bir sistemde kripto varlıklarını miras bırakabilecekleri uygulamalar arasında akla ilk gelen olmak.',
-        misyon : 'Misyon: Yarınlarımızı emanet edeceğimiz çocuklarımız için onların yaşamlarını kolaylaştırmak, yeni çağda yeni teknolojilerle birlikte onlara daha çağa uygun bir gelecek yaratmak amacıyla ailelerinin güvenilir bir şekilde yatırım yapabilmelerini sağlamak.',
+        vizyon: 'Ebeveynlerin çocuklarının geleceği için daha güvenilir, yeni çağa uygun ve sürdürülebilir bir sistemde kripto varlıklarını miras bırakabilecekleri uygulamalar arasında akla ilk gelen olmak.',
+        misyon : 'Yarınlarımızı emanet edeceğimiz çocuklarımız için onların yaşamlarını kolaylaştırmak, yeni çağda yeni teknolojilerle birlikte onlara daha çağa uygun bir gelecek yaratmak amacıyla ailelerinin güvenilir bir şekilde yatırım yapabilmelerini sağlamak.',
         vizyonvemisyon : 'Vizyonumuz ve Misyonumuz',
         why : 'Neden InTeritance ?',
         p1 :' Teknoloji çağına ayak uyduran, yeni nesil bir yatırım uygulaması',
@@ -68,7 +68,15 @@ export const langs = {
         p3 : 'Kullanıcı dostu uygulama tasarımı',
         p4 : ' Son derece güvenli',
         p5 : ' Ebeveynler hem kendilerinin hem çocuklarının kripto varlıklarını yönetebilir.',
-        p6 : ' Çocukların hesaplarına erişim tarihleri gelene kadar tüm yetki ebeveynlerinde olur.'
+        p6 : ' Çocukların hesaplarına erişim tarihleri gelene kadar tüm yetki ebeveynlerinde olur.',
+        ourvision: 'Vizyonumuz',
+        ourmission : 'Misyonumuz',
+        team : 'Ekibimiz',
+        bcteam : 'Blockchain ekip üyesi',
+        onyuz : 'Ön yüz ekip üyesi',
+        analist : 'İş analisti',
+        po : 'Ürün sahibi',
+        agile : 'Agile koç'
 
 
     },
@@ -131,8 +139,10 @@ export const langs = {
         childAdding: 'CHILD IS ADDING...',
         withdrawalProcess: 'WITHDRAWAL PROCESS...',
         vazgec: 'Cancel',
-        vizyon: 'Vision: To be the first to come to mind among the applications where parents can hand their crypto assets down in a more reliable, avant-garde and sustainable system for the future of their children.',
-        misyon : 'Mission:To ease the lives of children to whom we will entrust our future and to provide that families can invest to create a future in tune with the times for their children in a more reliable way with new technologies in the new era.',
+        ourvision: 'Our Vision',
+        ourmission : 'Our Mission',
+        vizyon: 'To be the first to come to mind among the applications where parents can hand their crypto assets down in a more reliable, avant-garde and sustainable system for the future of their children.',
+        misyon : 'To ease the lives of children to whom we will entrust our future and to provide that families can invest to create a future in tune with the times for their children in a more reliable way with new technologies in the new era.',
         vizyonvemisyon : 'Our Vision and Our Mission',
         why : 'Why InTeritance ?',
         p1 :' A new generation investment application that keeps up with the era of technology',
@@ -140,7 +150,13 @@ export const langs = {
         p3 : 'User-friendly application design',
         p4 : 'Extremely safe',
         p5 : 'Parents can manage both their and their children’s crypto assets.',
-        p6 : 'Parents have all authorization until the date of children’s access to their accounts comes.'
+        p6 : 'Parents have all authorization until the date of children’s access to their accounts comes.',
+        team : 'Our Team',
+        bcteam : 'Blockchain team member',
+        onyuz : 'Frontend team member',
+        analist : 'Business analyst',
+        po : 'Product owner',
+        agile : 'Agile coach'
 
 
     }
