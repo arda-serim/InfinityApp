@@ -9,7 +9,7 @@ import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useNavigate } from 'react-router-dom';
 // import vector from '../images/Vector.png';
 import edit from '../images/editfoto.png';
-import { addChild, withdrawMoneyByChild } from '../contract/functions';
+import { addChild, getRole, withdrawMoneyByChild } from '../contract/functions';
 import { ML } from '../App';
 import CustomModal from '../Components/CustomModal';
 
@@ -79,11 +79,20 @@ function Childedit() {
 
 
   React.useEffect(() => {
-    if (
-      localStorage.getItem('role') !== 'parent'
-    ) {
-      navigate("/");
-    }
+
+
+    const roleFunc = async() => {
+      const role = await getRole();
+      if (role === 'admin') {
+         navigate('/admin');
+      } else if (role === 'child') {
+         navigate('/childpage');
+      } else if (role === 'none' || role === null || role === undefined) {
+         navigate('/');
+      }
+   }
+
+   roleFunc();
   }, []);
 
   const [form] = Form.useForm();
@@ -171,7 +180,7 @@ function Childedit() {
         {/* sayfayı ikiye bölüyorum */}
         <Col span={12} >
           {/* Burada içerisine attığım resmin justify ile sağa sona gelmesini align ile dikeyde ortalamaya height 100% ile de bir yukarıdaki row'da verdim parentin tamamını kapsamasını sağlıyorum. */}
-          <Row justify='end' align='middle' style={{ height: "100%" }}>
+          <Row justify='end' align='middle' style={{ height: "90%" }}>
             <img src={edit} alt="edit" style={{ width: '530px', height: '400px' }} />
           </Row>
         </Col>
@@ -191,9 +200,9 @@ function Childedit() {
               <Form.Item
                 label={<span style={{ color: "white" }}>{ML('ad').props.children}</span>}
                 name="name"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, message: ML('input1') }]}
               >
-                <Input />
+                <Input style={{ borderRadius:'25px'}} />
               </Form.Item>
 
               <Form.Item
@@ -201,7 +210,7 @@ function Childedit() {
                 name="releaseTime"
                 rules={[{ required: true, message: ML('input2') }]}
               >
-                <DatePicker style={{ width: "100%" }} />
+                <DatePicker style={{ borderRadius:'25px', width: '100%'}}/>
               </Form.Item>
 
               <Form.Item
@@ -212,7 +221,7 @@ function Childedit() {
                   { min: 42, message: ML('input4') }
                 ]}
               >
-                <Input />
+                <Input style={{ borderRadius:'25px'}} />
               </Form.Item>
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                 <Button style={buttonStyle1} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>

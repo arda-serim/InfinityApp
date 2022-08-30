@@ -16,7 +16,7 @@ import userEvent from '@testing-library/user-event';
 
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
-import { addParent } from '../contract/functions';
+import { addParent, getRole } from '../contract/functions';
 import LangContext, { langs } from './LangugeContext';
 import { Typography, Layout, Row, Col, Input, Checkbox, Button, Spin, Form } from 'antd';
 import { ML } from '../App';
@@ -126,7 +126,18 @@ const Signin = () => {
     // }
     // );
 
+    const roleFunc = async() => {
+      const role = await getRole();
+      if (role === 'admin') {
+         navigate('/admin');
+      } else if (role === 'parent') {
+         navigate('/parent');
+      } else if(role !== 'none') {
+         navigate('/');
+      }
+   }
 
+   roleFunc();
 
   }
     , []);

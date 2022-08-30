@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import ParentPage from "./Pages/ParentPage";
@@ -17,6 +17,7 @@ import { langs } from "./Pages/LangugeContext";
 import { Dropdown, Typography, Space, Menu } from "antd";
 import menu from "antd/lib/menu";
 import AdminPage from "./Pages/AdminPage";
+import { ethers } from "ethers";
 
 
 
@@ -82,6 +83,23 @@ export function Language() {
 }
 
 function App() {
+
+  useEffect(() => {
+    const reload = async () => {
+      //@ts-ignore
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      let accounts = await provider.send("eth_requestAccounts", []);
+      let account = accounts[0];
+
+      const signer = provider.getSigner(); // üst stırda geşen provider'dan hesabı çekiuyor
+      const signerAddress = await signer.getAddress();
+
+      provider.on('accountsChanged', (accounts: any) => { account = accounts[0]; window.location.reload(); });
+
+    };
+    reload();
+  }, [])
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -91,7 +109,7 @@ function App() {
       <Route path="/childpage" element={<ChildPage />} />
       <Route path='/admin' element={<AdminPage />} />
       <Route path='/aboutus' element={<AboutUs />} />
-      
+
     </Routes>
 
   );

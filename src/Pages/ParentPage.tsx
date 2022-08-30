@@ -7,10 +7,8 @@ import logo from "../images/logo_infinity.png";
 import EthereumPrice from "../Components/EthereumPrice";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { getChilds, showBalanceofParent } from "../contract/functions";
-
-
-
+import { getChilds, getRole, showBalanceofParent } from "../contract/functions";
+import test4 from '../images/Vector.png'
 
 const pageStyle = {
    background: 'linear-gradient(to bottom, #0A368B,#3B82A0)',
@@ -36,17 +34,19 @@ const ParentPage = () => {
    const [role, setRole] = useState("");
 
    React.useEffect(() => {
-      let tempRole = localStorage.getItem("role");
-      if (tempRole) {
-         setRole(tempRole);
-      }
-      if (localStorage.getItem("role") === "child") {
-         navigate("/childpage");
-      }
 
-       if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
-           navigate("/");
-        }
+        const roleFunc = async() => {
+         const role = await getRole();
+         if (role === 'admin') {
+            navigate('/admin');
+         } else if (role === 'child') {
+            navigate('/childpage');
+         } else if (role === 'none' || role === null || role === undefined) {
+            navigate('/');
+         }
+      }
+   
+      roleFunc();
 
       const getChildHandler = async () => {
 
@@ -84,10 +84,22 @@ const ParentPage = () => {
 
    }, [])
 
-
+   const imageStyle = {
+      width: '2000px',
+      height: '800px',
+      borderRadius: '15px',
+     // marginLeft: '-15%',
+     // marginTop: '-13%',
+      zIndex : '0',
+      position : 'absolute',
+      right :'0',
+      opacity:'0.5'
+   } as React.CSSProperties;
    return (
       <body style={pageStyle}>
          <Navbar />
+         <img src={test4} style={imageStyle}></img>
+
          {<Content>
             <div style={topSideStyle}>
                <PieChartComponent data={data} />

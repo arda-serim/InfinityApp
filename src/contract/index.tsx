@@ -12,7 +12,7 @@ async function connectToMetamask() {
    const signer = provider.getSigner(); // üst stırda geşen provider'dan hesabı çekiuyor
    const signerAddress = await signer.getAddress();
 
-   provider.on('accountsChanged', (accounts: any) => { account = accounts[0]; console.log("sdasd: ", signerAddress); });
+   provider.on('accountsChanged', (accounts: any) => { account = accounts[0]; window.location.reload(); });
 
    console.log("signer: ", signerAddress);
 

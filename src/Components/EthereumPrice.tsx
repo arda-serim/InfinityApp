@@ -193,13 +193,16 @@ const EthereumPrice = (props: any) => {
          }
          <Card style={cardStyle} >
             <h1 style={{ color: '#fff' }}>{ML('user')} {' '} {name}</h1>
+            <br />
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>{ML('ethprice')}</text>
             </p>
             <p style={lineStyle}>
-               <img src={icon} style={{ width: '25px', height: '40px' }}></img>
+               <img src={icon} style={{ width: '20px', height: '30px' }}></img>
                <text style={{ color: '#fff' }}>{'\t=\t'}${ethValue}</text>
             </p>
+            <br />
+
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>{ML('yourWallet')}</text>
             </p>

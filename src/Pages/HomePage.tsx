@@ -12,8 +12,8 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import connectToMetamask from '../contract';
 import { getRole } from '../contract/functions';
-import { ML } from '../App';
 import test1 from '../images/smart-contracts.png';
+import { ML } from '../App';
 import test2 from '../images/target.png';
 import { Footer } from 'antd/lib/layout/layout';
 import test3 from '../images/homepage2.png';
@@ -49,7 +49,7 @@ const card = {
    color: '#fff',
    background: 'rgba(0, 0, 0, 0)',
    marginLeft: '-3%',
-   zIndex : 2
+   zIndex: 2
 
 } as React.CSSProperties;
 
@@ -68,12 +68,12 @@ const imageStyle = {
    height: '800px',
    borderRadius: '15px',
    float: 'right',
-  // marginLeft: '-15%',
-  // marginTop: '-13%',
-  marginRight : '0',
-   zIndex : '1',
-   position : 'absolute',
-   right :'0'
+   // marginLeft: '-15%',
+   // marginTop: '-13%',
+   marginRight: '0',
+   zIndex: '1',
+   position: 'absolute',
+   right: '0'
 } as React.CSSProperties;
 
 const imageStyle1 = {
@@ -83,9 +83,9 @@ const imageStyle1 = {
    float: 'right',
    marginLeft: '-15%',
    marginTop: '-13%',
-   zIndex :'-1',
-   opacity : '0.4',
-  
+   zIndex: '-1',
+   opacity: '0.4',
+
 } as React.CSSProperties;
 
 
@@ -93,11 +93,10 @@ const imageStyle1 = {
 const contentStyle = {
    width: '100%',
    height: '100%',
-   
 };
 
 const navbarStyle = {
-   zIndex : 2
+   zIndex: 2
 };
 
 const buttonBoxStyle = {
@@ -112,7 +111,7 @@ const signUpButtonStyle = {
    background: 'linear-gradient(180deg, #091058 , #305367)',
    color: '#fff',
    border: 'none',
-   zIndex : 2
+   zIndex: 2
 };
 
 const pageStyle = {
@@ -161,18 +160,18 @@ const HomePage = () => {
          const { signerAddress } = await connectToMetamask();
 
 
-                 if (role === 'parent') {
-                   navigate('/parent');
-                 }  
-                 else if (role === 'child') {
-                 navigate('/childpage');
-                 } else if(role === 'admin') {
-                  navigate('/admin')
-                 }
-                 else {
-                   navigate('/signin');
-                 }
-              
+         if (role === 'parent') {
+            navigate('/parent');
+         }
+         else if (role === 'child') {
+            navigate('/childpage');
+         } else if (role === 'admin') {
+            navigate('/admin')
+         }
+         else {
+            navigate('/signin');
+         }
+
 
       }
       else {
@@ -207,11 +206,11 @@ const HomePage = () => {
                               <h1 style={{ color: '#fff', fontSize: 32, fontStyle: 'italic' }}>{ML('need')}</h1>
                               <div style={insideCard}>
                                  <p > <img style={iconStyle} src={icon} />
-                                    {ML('first')} <a href='https://metamask.io/'>metamask</a> {ML('first__')}.<br></br>
-                                    <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' > {ML('clickhere')}</a></text>
+                                    {ML('first')} <a href='https://metamask.io/' target="_blank">metamask</a> {ML('first__')}.<br></br>
+                                    <text style={{ fontSize: 12, marginLeft: 20 }}>  {ML('first_')} < a href='https://metamask.io/download/' target="_blank"> {ML('clickhere')}</a></text>
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
-                                    {ML('second')} <a href='https://ethereum.org/en/'>ethereum</a> {ML('second_')}
+                                    {ML('second')} <a href='https://ethereum.org/en/' target="_blank">ethereum</a> {ML('second_')}
                                  </p>
                                  <p  > <img style={iconStyle} src={icon} />
                                     {ML('third')}
@@ -227,7 +226,7 @@ const HomePage = () => {
                         </div>
                      </Col>
 
-                     <Col span={12} > 
+                     <Col span={12} >
                         <img src={test4} style={imageStyle1} />
                         <img src={test3} style={imageStyle} />
                      </Col>
@@ -279,11 +278,11 @@ const HomePage = () => {
                </Row>
                </div>
 
-           
+
 
             </Content >
          </div >
-         
+
 
       </Layout >
    );

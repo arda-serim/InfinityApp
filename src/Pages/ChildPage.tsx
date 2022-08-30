@@ -12,7 +12,7 @@ import picture from '../images/newPicture.png';
 import edit from '../images/editfoto.png';
 import TRY from '../images/pngwing.com.png';
 import type { countdownValueType } from 'antd/es/statistic/utils';
-import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../contract/functions';
+import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild, getRole } from '../contract/functions';
 import connectToMetamask from '../contract';
 import { ML } from '../App';
 import CustomModal from '../Components/CustomModal';
@@ -160,13 +160,19 @@ const ChildPage = () => {
     let navigate = useNavigate();
     useEffect(() => {
 
-        if (localStorage.getItem("role") === "parent") {
-            navigate("/parent");
-        }
+        const roleFunc = async() => {
+            const role = await getRole();
+            if (role === 'admin') {
+               navigate('/admin');
+            } else if (role === 'parent') {
+               navigate('/parent');
+            } else if(role !== 'child') {
+               navigate('/');
+            }
+         }
+      
+         roleFunc();
 
-        if (localStorage.getItem("role") === undefined || localStorage.getItem("role") === null || localStorage.getItem("role") === 'none') {
-            navigate("/");
-        }
 
         async function getThisChild() {
             const tempChild = await getChild();
