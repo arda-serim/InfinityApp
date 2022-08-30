@@ -103,7 +103,7 @@ function Childedit() {
   }
   const onFinish = () => {
     console.log('deneme1')
-    // addChildHandler()
+     addChildHandler()
   };
 
   const addChildHandler = async () => {
@@ -145,7 +145,16 @@ function Childedit() {
       <div>
         <Navbar />
       </div>
-      <Form form={form} onFinish={onFinish}>
+      <Form 
+      form={form} 
+      onFinish={onFinish}
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      >
       <div style={contentStyle}>
         <Content>
           <div>
@@ -160,18 +169,26 @@ function Childedit() {
               <div>
                 <Col span={12}>
                   <div style={{ marginTop: '60%' }} >
-                    <Form.Item rules = {[{required:true, message:'Please input your name!'}]}>
+                    <Form.Item
+                    name="Name"
+                    rules = {[{required:true, message:ML('input1')}]}
+                    >
                       <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)}/>
                     </Form.Item>
                   </div>
                   <div >
-                    <Form.Item>
+                    <Form.Item name="date-picker" rules = {[{required: true, message: ML('input2') }]}>
                       <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
                   </Form.Item>
-                    <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
                   </div>
                   <div >
-                  <Form.Item>
+                  <Form.Item
+                  name = "wallet adress"
+                  rules = {[
+                    {required: true, message:ML('input3')},
+                    {min: 42, message:ML('input4')}
+                  ]}
+                  >
                     <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
                   </Form.Item>
                   </div>

@@ -6,6 +6,7 @@ import { Typography } from "antd";
 import metamask from '../images/MetaMask.png';
 import { Language } from "../App";
 import { useNavigate } from "react-router-dom";
+import { ML } from '../App';
 
 const { Title } = Typography;
 const { Header } = Layout;
@@ -76,7 +77,7 @@ const Navbar = () => {
          <div style={{ marginLeft: '80%', marginTop: '5px' }}>
 
             <Button style={button} onClick={() => navigate('/aboutus')} type="text" >
-               About Us
+               {ML('hakkımızda')}
             </Button>
 
          </div>
