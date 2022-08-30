@@ -9,6 +9,8 @@ export const langs = {
         hosgeldin: 'Sayfamıza Hoşgeldiniz',
         kayıtol: 'Kayıt ol',
         checkbox: 'Beni hatırla',
+        input5:'Lütfen adınızı giriniz!',
+        input6:'Lütfen soyadınızı giriniz!',
         //homepage
         homePageGiris: "InTeritance'a ",
         homePageGiris1: "Hoş geldiniz  ",
@@ -94,6 +96,8 @@ export const langs = {
         hosgeldin: 'Welcome to our page',
         kayıtol: 'Sign Up',
         checkbox: 'Keep me logged in',
+        input5:'Please input your name!',
+        input6:'Please input your surname!',
         //homepage
         homePageGiris: ' InTeritance ',
         homePageGiris1: 'Welcome  ',
