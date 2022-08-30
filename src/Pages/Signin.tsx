@@ -134,10 +134,6 @@ const Signin = () => {
 
 
 
-    if (name === "" || surname === "") {
-      setError("Please fill all the fields")
-    }
-    else {
       try {
         setIsLoading(true);
         await addParent(name, surname);
@@ -158,9 +154,6 @@ const Signin = () => {
         }
         setIsLoading(false);
       }
-
-
-    }
   };
 
 
