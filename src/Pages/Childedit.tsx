@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import edit from '../images/editfoto.png';
 import { addChild, withdrawMoneyByChild } from '../contract/functions';
 import { ML } from '../App';
-import ModalComponent from '../Components/ModalComponent';
 import CustomModal from '../Components/CustomModal';
 
 
@@ -33,8 +32,7 @@ const inputStyle = {
 const contentStyle = {
   witdh: '100%',
   height: '100%',
-  padding: 24,
-  minHeight: 850
+  minHeight: '700px'
 };
 
 const logoStyle = {
@@ -47,6 +45,14 @@ const logoStyle = {
 
 const buttonStyle = {
   background: 'linear-gradient(180deg, #FF980E 41.67%, #FDB137 100%)',
+  border: 'none',
+  borderRadius: '15px',
+  width: '150px',
+  height: '40px',
+  margin: '10px'
+};
+const buttonStyle1 = {
+  background: 'linear-gradient(180deg, red 41.67%, #FDB137 100%)',
   border: 'none',
   borderRadius: '15px',
   width: '150px',
@@ -71,16 +77,17 @@ function Childedit() {
 
   let navigate = useNavigate();
 
-  // React.useEffect(() => {
-  //   if (
-  //     localStorage.getItem('user') === 'child2'
-  //   ) {
-  //     navigate("/");
-  //   }
-  // }, []);
+
+  React.useEffect(() => {
+    if (
+      localStorage.getItem('role') !== 'parent'
+    ) {
+      navigate("/");
+    }
+  }, []);
 
   const [form] = Form.useForm();
-  
+
   const [size, setSize] = useState<SizeType>('large');
 
   //@ts-ignore
@@ -103,7 +110,7 @@ function Childedit() {
     setError();
   }
   const onFinish = () => {
-     addChildHandler()
+    addChildHandler()
   };
 
   const addChildHandler = async () => {
@@ -118,7 +125,7 @@ function Childedit() {
       await addChild(name, releaseTimeInSeconds, address);
       setIsLoading(false);
       navigate("/parent");
-    } 
+    }
     catch (error: any) {
       const activeLanguage = localStorage.getItem("i18nextLng");
       const errorMessage = (error.reason.split(":"))[1]
@@ -126,96 +133,99 @@ function Childedit() {
       const messageTR = errorMessage.split("TR")[1]
 
       if (activeLanguage === 'en') {
-         setError(messageEN)
+        setError(messageEN)
       } else {
-         setError(messageTR)
+        setError(messageTR)
       }
       setIsLoading(false);
-   }
+    }
   }
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
-         {
-            isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
-               <div>
-                  <span style={{ margin: '16px' }}>
-                     {ML('childAdding')}
-                  </span>
-   
-               </div>
-            </CustomModal>
-         }
-
       {
-        error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
+        isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+          <div>
+            <span style={{ margin: '16px' }}>
+              {ML('childAdding')}
+            </span>
+
+          </div>
+        </CustomModal>
+      }
+      {
+        error && <CustomModal show header={ML('errorOccured')} btnShow={true} onClear={clearError}>
+          <span style={{ margin: '16px' }}>
+            {error}
+          </span>
+        </CustomModal>
       }
       <div>
         <Navbar />
       </div>
-      <Form 
-      form={form} 
-      onFinish={onFinish}
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 16,
-      }}
+      <Form
+        form={form}
+        onFinish={onFinish}
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
       >
-      <div style={contentStyle}>
-        <Content>
-          <div>
-            <Row gutter={[16, 8]}>
-              <div>
-                <Col span={12}>
-                  <div style={fotoStyle}>
-                    <img src={edit} alt="edit" style={{ width: '530px', height: '400px' }} />
-                  </div>
-                </Col>
-              </div>
-              <div>
-                <Col span={12}>
-                  <div style={{ marginTop: '30%' }} >
-                    <Form.Item
-                    name="Name"
-                    rules = {[{required:true, message:ML('input1')}]}
-                    >
-                      <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)}/>
-                    </Form.Item>
-                  </div>
-                  <div >
-                    <Form.Item name="date-picker" rules = {[{required: true, message: ML('input2') }]}>
-                      <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
-                  </Form.Item>
-                  </div>
-                  <div >
-                  <Form.Item
-                  name = "wallet adress"
-                  rules = {[
-                    {required: true, message:ML('input3')},
-                    {min: 42, message:ML('input4')}
-                  ]}
-                  >
-                    <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
-                  </Form.Item>
-                  </div>
-                  <div style={{display: 'flex', justifyContent: 'space-between', marginLeft: '300px', marginTop:"7%"}}>
-                    <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
-                      {ML('vazgec')}
-                    </Button>
-                    <Form.Item>
-                    <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
-                      {ML('kaydet')}
-                    </Button>
-                    </Form.Item>
-                  </div>
-                  
-                </Col>
-              </div>
-            </Row>
-          </div>
-        </Content>
-      </div>
+        <div style={contentStyle}>
+          <Content>
+            <div>
+              <Row gutter={[16, 8]}>
+                <div>
+                  <Col span={12}>
+                    <div style={fotoStyle}>
+                      <img src={edit} alt="edit" style={{ width: '530px', height: '400px' }} />
+                    </div>
+                  </Col>
+                </div>
+                <div>
+                  <Col span={12}>
+                    <div style={{ marginTop: '30%' }} >
+                      <Form.Item
+                        name="Name"
+                        rules={[{ required: true, message: ML('input1') }]}
+                      >
+                        <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
+                      </Form.Item>
+                    </div>
+                    <div >
+                      <Form.Item name="date-picker" rules={[{ required: true, message: ML('input2') }]}>
+                        <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
+                      </Form.Item>
+                    </div>
+                    <div >
+                      <Form.Item
+                        name="wallet adress"
+                        rules={[
+                          { required: true, message: ML('input3') },
+                          { min: 42, message: ML('input4') }
+                        ]}
+                      >
+                        <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
+                      </Form.Item>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '270px', marginTop: "7%" }}>
+                      <Button style={buttonStyle1} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
+                        {ML('vazgec')}
+                      </Button>
+                      <Form.Item>
+                        <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
+                          {ML('kaydet')}
+                        </Button>
+                      </Form.Item>
+                    </div>
+
+                  </Col>
+                </div>
+              </Row>
+            </div>
+          </Content>
+        </div>
       </Form>
     </Layout>
   );

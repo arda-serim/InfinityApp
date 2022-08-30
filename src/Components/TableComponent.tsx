@@ -5,7 +5,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { changeReleaseTime, sendMoneyToChild, sendMoneyToChildFromWallet, withdrawMoneyByParentFromChild, withdrawMoneyByParentToWallet } from '../contract/functions';
 import { ML } from '../App';
-import ModalComponent from './ModalComponent';
 import CustomModal from './CustomModal.js';
 
 interface DataType {
@@ -18,10 +17,10 @@ interface DataType {
 
 const mystyle = {
 
-   marginTop: '1%',
    marginLeft: '10%',
    marginRight: '10%',
    padding: '10px',
+   paddingBottom: '25px',
    background: 'rgba(255, 255, 255, 0)',
 
 };
@@ -175,6 +174,9 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          window.location.reload();
       }
       catch (error: any) {
+
+         console.log("err: ", error)
+
          const activeLanguage = localStorage.getItem("i18nextLng");
          const errorMessage = (error.reason.split(":"))[1]
          const messageEN = errorMessage.split("TR")[0]
@@ -185,6 +187,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          } else {
             setError(messageTR)
          }
+
          setIsLoading(false);
       }
    }
@@ -321,16 +324,17 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={mystyle}>
          {
-            showWithdrawModal && <ModalComponent title={ML('select')} modalVisibility={true} message={<>
-               <Button onClick={toInteritanceAccount}>{ML('toaccount1')}</Button>
-               <Button onClick={toMetamaskWallet} style={{ marginLeft: '10px' }} >{ML('toaccount2')}</Button>
-            </>} style={{ textAlign: 'center' }} onClear={clearModal} />
+            showWithdrawModal && <CustomModal show header={ML('select')} style={{ textAlign: 'center' }} onClear={clearModal} btnShow={true}>
+               <Button onClick={toInteritanceAccount} style={{ borderRadius: '25px', color: 'white', background: '#13438F' }}>{ML('toaccount1')}</Button>
+               <Button onClick={toMetamaskWallet} style={{ marginTop: '5px', borderRadius: '25px', color: 'white', background: '#FE980E' }} >{ML('toaccount2')} </Button>
+            </CustomModal>
          }
          {
-            showToChildModal && <ModalComponent title={ML('select')} modalVisibility={true} message={<>
-               <Button onClick={interitanceAccount}>{ML('account1')}</Button>
-               <Button onClick={metamaskWallet} style={{ marginLeft: '10px' }} >{ML('account2')}</Button>
-            </>} style={{ textAlign: 'center' }} onClear={clearModalTwo} />
+            showToChildModal && <CustomModal show header={ML('select')} style={{ textAlign: 'center' }} onClear={clearModalTwo} btnShow={true}>
+               <Button onClick={interitanceAccount} style={{ borderRadius: '25px', color: 'white', background: '#13438F' }}>{ML('account1')}</Button>
+               <Button onClick={metamaskWallet} style={{ marginTop: '5px', marginLeft:'5px', borderRadius: '25px', color: 'white', background: '#FE980E' }} >{ML('account2')} </Button>
+            </CustomModal>
+
          }
          {
             isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
@@ -338,22 +342,26 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
                   <span style={{ margin: '16px' }}>
                      {ML('transfer')}
                   </span>
-   
+
                </div>
             </CustomModal>
          }
-                  {
+         {
             isLoading2 && <CustomModal show header={ML('loading')} footer={<Spin />}>
                <div>
                   <span style={{ margin: '16px' }}>
                      {ML('changeDate')}
                   </span>
-   
+
                </div>
             </CustomModal>
          }
          {
-            error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
+            error && <CustomModal show header={ML('errorOccured')} btnShow={true} onClear={clearError}>
+               <span style={{ margin: '16px' }}>
+                  {error}
+               </span>
+            </CustomModal>
          }
          <div style={buttonStyle}>
             <Button onClick={onAddChild} style={signInButtonStyle} shape='round' type="primary">{ML('cocukekle')}</Button>

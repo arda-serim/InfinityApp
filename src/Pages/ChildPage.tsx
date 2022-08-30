@@ -15,7 +15,6 @@ import type { countdownValueType } from 'antd/es/statistic/utils';
 import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../contract/functions';
 import connectToMetamask from '../contract';
 import { ML } from '../App';
-import ModalComponent from '../Components/ModalComponent';
 import CustomModal from '../Components/CustomModal';
 const { Countdown } = Statistic;
 
@@ -264,7 +263,11 @@ const ChildPage = () => {
                 </CustomModal>
             }
             {
-                error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+                error && <CustomModal show header={ML('errorOccured')} btnShow={true} onClear={clearError}>
+                    <span style={{ margin: '16px' }}>
+                        {error}
+                    </span>
+                </CustomModal>
             }
             <div style={contentStyle}>
                 <Content>

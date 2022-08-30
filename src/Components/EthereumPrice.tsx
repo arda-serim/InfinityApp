@@ -6,7 +6,6 @@ import { sendMoneyToContract, showBalanceofParent, withdrawMoneyByParent } from 
 import connectToMetamask from '../contract';
 import { ML } from "../App";
 import { useHref } from "react-router-dom";
-import ModalComponent from "./ModalComponent";
 import CustomModal from "./CustomModal";
 
 
@@ -186,12 +185,14 @@ const EthereumPrice = (props: any) => {
          </CustomModal> 
          }
          {
-            error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
+            error && <CustomModal show header={ML('errorOccured')} btnShow={true} onClear={clearError}>
+            <span style={{ margin: '16px' }}>
+               {error}
+            </span>
+      </CustomModal> 
          }
          <Card style={cardStyle} >
             <h1 style={{ color: '#fff' }}>{ML('user')} {' '} {name}</h1>
-            <br />
-            <br />
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>{ML('ethprice')}</text>
             </p>
@@ -199,8 +200,6 @@ const EthereumPrice = (props: any) => {
                <img src={icon} style={{ width: '25px', height: '40px' }}></img>
                <text style={{ color: '#fff' }}>{'\t=\t'}${ethValue}</text>
             </p>
-            <br />
-            <br />
             <p style={lineStyle}>
                <text style={{ color: '#fff' }}>{ML('yourWallet')}</text>
             </p>

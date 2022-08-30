@@ -21,7 +21,6 @@ import LangContext, { langs } from './LangugeContext';
 import { Typography, Layout, Row, Col, Input, Checkbox, Button, Spin, Form } from 'antd';
 import { ML } from '../App';
 import Navbar from '../Components/Navbar';
-import ModalComponent from '../Components/ModalComponent';
 import CustomModal from '../Components/CustomModal';
 
 declare var window: any;
@@ -175,109 +174,104 @@ const Signin = () => {
   const onFinish = () => {
     console.log("deneme")
     OnSignIn()
- };
+  };
 
   return (
-  <body className="signin">
-    <>
+    <body className="signin">
+      <>
 
-      {
-        isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
-          <div>
-            <span style={{ margin: '16px' }}>
-              {ML('addingParent')}
-            </span>
+        {
+          isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+            <div>
+              <span style={{ margin: '16px' }}>
+                {ML('addingParent')}
+              </span>
 
-          </div>
-        </CustomModal>
-      }
-      {
-        error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
-      }
-      <Layout style={{
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: 'url(' + bg + ')',
-      }}>
-        <Header style={navbarStyle}>
-          <Navbar />
-        </Header >
-        <div style={contentStyle}>
-          <Content>
-            <div style={colStyle}>
-              <Row gutter={[16, 8]}>
-                <Col span={12}>
-                  <img src={signinpng} style={imageStyle} />
-                </Col>
-                <Col span={12}>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title style={{
-                      color: '#0A103A', marginTop: '25'
-                    }}>{ML('giris')}</Title>
-                  </div>
-                  <div style={whitePlaceStyle}>
-                    <Title level={5} style={{ color: '#0A103A', marginRight: '160px' }}>{ML('hosgeldin')}</Title>
-                  </div>
-                  <br>
-                  </br>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
-                  </div>
-                  <Form 
-                    form={form} 
-                    onFinish={onFinish}
-                    labelCol={{
-                      span: 8,
-                    }}
-                    wrapperCol={{
-                      span: 16,
-                    }}
-                    >
-                  <div style={whitePlaceStyle}>
-                  <Form.Item
-                    name="Name"
-                    rules = {[{required:true, message:ML('input5'), whitespace: true}]}
-                    >
-                    <Input style={inputStyle} type='text' placeholder={ML('ad').props.children} value={name} onChange={handleNameChange} />
-                  </Form.Item>
-                  </div>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
-                  </div>
-                  <div style={whitePlaceStyle}>
-                  <Form.Item
-                    name="surname"
-                    rules = {[{required:true, message:ML('input6'), whitespace: true}]}
-                  > 
-                    <Input style={inputStyle} type='text' placeholder={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
-                  </Form.Item>
-                  </div>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Checkbox onChange={onChange} style={{ marginRight: '170px' }} >{ML('checkbox')}</Checkbox>
-                  </div>
-                  <br>
-                  </br>
-                  <div style={whitePlaceStyle}>
-                    <Button size="large" style={signInButtonStyle} shape='round' type="primary" htmlType="submit">
-                      {ML('kayıtol')}</Button>
-                  </div>
-                  </Form>
-                </Col>
-              </Row>
             </div>
-          </Content>
-        </div>
-      </Layout>
-    </>
+          </CustomModal>
+        }
+        {
+          error && <CustomModal show header={ML('errorOccured')} btnShow={true} onClear={clearError}>
+            <span style={{ margin: '16px' }}>
+              {error}
+            </span>
+          </CustomModal>
+        }
+        <Layout style={{
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: 'url(' + bg + ')',
+        }}>
+          <Navbar />
+          <div style={contentStyle}>
+            <Content>
+              <div style={colStyle}>
+                <Row gutter={[16, 8]}>
+                  <Col span={12}>
+                    <img src={signinpng} style={imageStyle} />
+                  </Col>
+                  <Col span={12}>
+                    <br>
+                    </br>
+                    <div style={whitePlaceStyle}>
+                      <Title style={{
+                        color: '#0A103A', marginTop: '25'
+                      }}>{ML('giris')}</Title>
+                    </div>
+                    <br>
+                    </br>
+                    <div style={whitePlaceStyle}>
+                      <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
+                    </div>
+                    <Form
+                      form={form}
+                      onFinish={onFinish}
+                      labelCol={{
+                        span: 8,
+                      }}
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                    >
+                      <div style={whitePlaceStyle}>
+                        <Form.Item
+                          name="Name"
+                          rules={[{ required: true, message: ML('input5'), whitespace: true }]}
+                        >
+                          <Input style={inputStyle} type='text' placeholder={ML('ad').props.children} value={name} onChange={handleNameChange} />
+                        </Form.Item>
+                      </div>
+                      <br>
+                      </br>
+                      <div style={whitePlaceStyle}>
+                        <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
+                      </div>
+                      <div style={whitePlaceStyle}>
+                        <Form.Item
+                          name="surname"
+                          rules={[{ required: true, message: ML('input6'), whitespace: true }]}
+                        >
+                          <Input style={inputStyle} type='text' placeholder={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
+                        </Form.Item>
+                      </div>
+                      <br>
+                      </br>
+
+                      <br>
+                      </br>
+                      <div style={whitePlaceStyle}>
+                        <Button size="large" style={signInButtonStyle} shape='round' type="primary" htmlType="submit">
+                          {ML('kayıtol')}</Button>
+                      </div>
+                    </Form>
+                  </Col>
+                </Row>
+              </div>
+            </Content>
+          </div>
+        </Layout>
+      </>
     </body>
   );
 }

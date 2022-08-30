@@ -64,7 +64,7 @@ export const langs = {
         loading:'YÜKLENİYOR...',
         errorOccured: 'HATA OLUŞTU!',
         childAdding: 'Çocuk Ekleniyor...',
-        addingParent: 'Ebeveyn ekleniyor...',
+        addingParent: 'Kayıt işlemi yapılıyor...',
         withdrawalProcess: 'Para çekme işlemi gerçekleşiyor...',
         vazgec: 'Vazgeç',
         vizyon: 'Ebeveynlerin çocuklarının geleceği için daha güvenilir, yeni çağa uygun ve sürdürülebilir bir sistemde kripto varlıklarını miras bırakabilecekleri uygulamalar arasında akla ilk gelen olmak.',
@@ -91,8 +91,8 @@ export const langs = {
         toaccount1: 'Interitance Hesabıma Aktar',
         toaccount2: 'Metamask Cüzdanıma Aktar',
         transfer: 'Transfer gerçekleşiyor...',
-        changeDate: 'Tarih güncelleniyor...'
-
+        changeDate: 'Tarih güncelleniyor...',
+        close: 'Kapat'
     },
 
     en: {
@@ -158,7 +158,7 @@ export const langs = {
         loading:'LOADING...',
         errorOccured: 'ERROR OCCURED!',
         childAdding: 'Child is adding...',
-        addingParent: 'Parent is adding...',
+        addingParent: 'Registration in progress...',
         withdrawalProcess: 'Withdrawal is in progress...',
         vazgec: 'Cancel',
         ourvision: 'Our Vision',
@@ -185,7 +185,8 @@ export const langs = {
         toaccount1: 'Trasanfer to my Interitance Account',
         toaccount2: 'Transfer to my Metamask Wallet',
         transfer: 'Transfer in progress...',
-        changeDate: 'Updating date... '
+        changeDate: 'Updating date... ',
+        close: 'Close',
     }
 }
 

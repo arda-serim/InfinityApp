@@ -1,5 +1,7 @@
+import { Button } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ML } from '../App';
 
 import Backdrop from './Backdrop';
 import './CustomModal.css';
@@ -21,6 +23,9 @@ const ModalOverlay = props => {
         <footer className={`modal__footer`}>
           {props.footer}
         </footer>
+       {props.btnShow === true &&  <>
+        <Button onClick={() => props.onClear()} style={{position:'absolute', bottom: '25px', right:'25px', borderRadius:'25px', color:'white', background: '#FE980E', textAlign:'center'}} >{ML('close')}</Button>
+          </>}
       </form>
     </div>
   );
