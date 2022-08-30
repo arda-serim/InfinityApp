@@ -1,7 +1,7 @@
 import Navbar from '../Components/NavbarChildPage';
 import React from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider, Spin } from 'antd';
+import { Col, Row, Slider, Spin, Form, Select } from 'antd';
 import { useState } from 'react';
 import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
 import logo from '../images/logo_infinity.png';
@@ -78,7 +78,8 @@ function Childedit() {
   //   }
   // }, []);
 
-
+  const [form] = Form.useForm();
+  
   const [size, setSize] = useState<SizeType>('large');
 
   //@ts-ignore
@@ -91,8 +92,21 @@ function Childedit() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  const addChildHandler = async () => {
 
+
+  const cancelAddingChildHandler = () => {
+    navigate('/parent');
+  }
+  const clearError = () => {
+    //@ts-ignore
+    setError();
+  }
+  const onFinish = () => {
+    console.log('deneme1')
+     addChildHandler()
+  };
+
+  const addChildHandler = async () => {
     // @ts-ignore
     const date = new Date(releaseTime);
 
@@ -118,17 +132,7 @@ function Childedit() {
       }
       setIsLoading(false);
    }
-
   }
-
-  const cancelAddingChildHandler = () => {
-    navigate('/parent');
-  }
-  const clearError = () => {
-    //@ts-ignore
-    setError();
-  }
-
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
 
@@ -141,6 +145,16 @@ function Childedit() {
       <div>
         <Navbar />
       </div>
+      <Form 
+      form={form} 
+      onFinish={onFinish}
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      >
       <div style={contentStyle}>
         <Content>
           <div>
@@ -155,28 +169,47 @@ function Childedit() {
               <div>
                 <Col span={12}>
                   <div style={{ marginTop: '60%' }} >
-                    <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
+                    <Form.Item
+                    name="Name"
+                    rules = {[{required:true, message:ML('input1')}]}
+                    >
+                      <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)}/>
+                    </Form.Item>
                   </div>
                   <div >
-                    <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
+                    <Form.Item name="date-picker" rules = {[{required: true, message: ML('input2') }]}>
+                      <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
+                  </Form.Item>
                   </div>
                   <div >
+                  <Form.Item
+                  name = "wallet adress"
+                  rules = {[
+                    {required: true, message:ML('input3')},
+                    {min: 42, message:ML('input4')}
+                  ]}
+                  >
                     <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
+                  </Form.Item>
                   </div>
                   <div style={{display: 'flex', justifyContent: 'space-between', marginLeft: '300px', marginTop:"7%"}}>
                     <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
                       {ML('vazgec')}
                     </Button>
-                    <Button style={buttonStyle} type="primary" shape="round" size={size} onClick={addChildHandler}>
+                    <Form.Item>
+                    <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
                       {ML('kaydet')}
                     </Button>
+                    </Form.Item>
                   </div>
+                  
                 </Col>
               </div>
             </Row>
           </div>
         </Content>
       </div>
+      </Form>
     </Layout>
   );
 }
