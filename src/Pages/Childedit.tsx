@@ -12,6 +12,7 @@ import edit from '../images/editfoto.png';
 import { addChild, withdrawMoneyByChild } from '../contract/functions';
 import { ML } from '../App';
 import ModalComponent from '../Components/ModalComponent';
+import CustomModal from '../Components/CustomModal';
 
 
 
@@ -134,10 +135,17 @@ function Childedit() {
   }
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
+         {
+            isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+               <div>
+                  <span style={{ margin: '16px' }}>
+                     {ML('childAdding')}
+                  </span>
+   
+               </div>
+            </CustomModal>
+         }
 
-      {
-        isLoading && <ModalComponent title={ML('childAdding')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true}/>
-      }
       {
         error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />
       }
@@ -167,7 +175,7 @@ function Childedit() {
               </div>
               <div>
                 <Col span={12}>
-                  <div style={{ marginTop: '60%' }} >
+                  <div style={{ marginTop: '30%' }} >
                     <Form.Item
                     name="Name"
                     rules = {[{required:true, message:ML('input1')}]}

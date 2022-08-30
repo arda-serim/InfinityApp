@@ -16,6 +16,7 @@ import { withdrawMoneyByChild, getChild, withdrawAllMoneyByChild } from '../cont
 import connectToMetamask from '../contract';
 import { ML } from '../App';
 import ModalComponent from '../Components/ModalComponent';
+import CustomModal from '../Components/CustomModal';
 const { Countdown } = Statistic;
 
 
@@ -183,7 +184,7 @@ const ChildPage = () => {
         const releaseTime = (child.releaseTime * 1000)
 
         const currentDate = Date.now()
-        
+
         const currentTime = Math.floor(new Date(currentDate).getTime());
 
         if (releaseTime > currentTime) {
@@ -251,8 +252,16 @@ const ChildPage = () => {
             <div>
                 <Navbar />
             </div>
+
             {
-                isLoading && <ModalComponent title={ML('withdrawalProcess')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+                isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+                    <div>
+                        <span style={{ margin: '16px' }}>
+                            {ML('withdrawalProcess')}
+                        </span>
+
+                    </div>
+                </CustomModal>
             }
             {
                 error && <ModalComponent modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />
@@ -263,7 +272,7 @@ const ChildPage = () => {
                         <Row gutter={[16, 8]}>
                             <Col span={12}>
                                 <div>
-                                    <Title level={2} style={{ marginLeft: "260px", width: "400px", marginTop: "50px", color: "white" }} >
+                                    <Title level={2} style={{ marginLeft: "230px", width: "400px", marginTop: "50px", color: "white" }} >
                                         {ML('user')} {' '} {String(child.name)}!
                                     </Title>
                                 </div>

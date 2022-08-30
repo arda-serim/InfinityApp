@@ -4,6 +4,7 @@ import AdminTable from '../Components/AdminTable';
 import { Content } from 'antd/lib/layout/layout';
 import { getAllParents } from '../contract/functions';
 import { useNavigate } from 'react-router-dom';
+import AdminNavbar from '../Components/AdminNavbar';
 
 
 
@@ -50,7 +51,7 @@ const AdminPage = () => {
 
    return (
       <body style={pageStyle} >
-         <Navbar />
+         <AdminNavbar />
          <Content>
             <AdminTable parentData={tableData} />
          </Content>

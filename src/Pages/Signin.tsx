@@ -22,6 +22,7 @@ import { Typography, Layout, Row, Col, Input, Checkbox, Button, Spin, Form } fro
 import { ML } from '../App';
 import Navbar from '../Components/Navbar';
 import ModalComponent from '../Components/ModalComponent';
+import CustomModal from '../Components/CustomModal';
 
 declare var window: any;
 
@@ -135,26 +136,26 @@ const Signin = () => {
 
 
 
-      try {
-        setIsLoading(true);
-        await addParent(name, surname);
-        setIsLoading(false);
-        localStorage.setItem('role', "parent");
-        navigate('/parent');
-      }
-      catch (error: any) {
-        const activeLanguage = localStorage.getItem("i18nextLng");
-        const errorMessage = (error.reason.split(":"))[1]
-        const messageEN = errorMessage.split("TR")[0]
-        const messageTR = errorMessage.split("TR")[1]
+    try {
+      setIsLoading(true);
+      await addParent(name, surname);
+      setIsLoading(false);
+      localStorage.setItem('role', "parent");
+      navigate('/parent');
+    }
+    catch (error: any) {
+      const activeLanguage = localStorage.getItem("i18nextLng");
+      const errorMessage = (error.reason.split(":"))[1]
+      const messageEN = errorMessage.split("TR")[0]
+      const messageTR = errorMessage.split("TR")[1]
 
-        if (activeLanguage === 'en') {
-          setError(messageEN)
-        } else {
-          setError(messageTR)
-        }
-        setIsLoading(false);
+      if (activeLanguage === 'en') {
+        setError(messageEN)
+      } else {
+        setError(messageTR)
       }
+      setIsLoading(false);
+    }
   };
 
 
@@ -179,8 +180,16 @@ const Signin = () => {
   return (
   <body className="signin">
     <>
+
       {
-        isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+        isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+          <div>
+            <span style={{ margin: '16px' }}>
+              {ML('addingParent')}
+            </span>
+
+          </div>
+        </CustomModal>
       }
       {
         error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />

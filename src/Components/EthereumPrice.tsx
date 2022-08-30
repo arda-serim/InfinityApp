@@ -7,6 +7,7 @@ import connectToMetamask from '../contract';
 import { ML } from "../App";
 import { useHref } from "react-router-dom";
 import ModalComponent from "./ModalComponent";
+import CustomModal from "./CustomModal";
 
 
 
@@ -175,7 +176,14 @@ const EthereumPrice = (props: any) => {
    return (
       <>
          {
-            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
+            isLoading && <CustomModal show header={ML('loading')} footer={<Spin />}>
+            <div>
+               <span style={{ margin: '16px' }}>
+                  {ML('transfer')}
+               </span>
+
+            </div>
+         </CustomModal> 
          }
          {
             error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} />

@@ -40,10 +40,17 @@ const pageStyle = {
 
  const pStyle1 = {
     marginTop : '5%' , 
-    color : 'white' ,  
+    color : '#FE980E' ,  
     fontSize : '20px' , 
     textAlign : 'center'
  }as React.CSSProperties;
+
+ const pStyle2 = {
+   marginTop : '5%' , 
+   color : 'white' ,  
+   fontSize : '20px' , 
+   textAlign : 'center'
+}as React.CSSProperties;
 
  const imgStyle ={
     width : '300px' , 
@@ -72,7 +79,7 @@ const AboutUs = () => {
             <div style={{marginRight : '25%'}}>
             <p style={pStyle1}> {ML('ourvision')} </p>
                   
-             <p style={pStyle1} > {ML('vizyon')}  </p>  
+             <p style={pStyle2} > {ML('vizyon')}  </p>  
             </div>
        
          <Col span={4}>
@@ -88,7 +95,7 @@ const AboutUs = () => {
             <p style={pStyle1}>
                  {ML('ourmission')}
                   </p>
-              <p style={pStyle1}>
+              <p style={pStyle2}>
             {ML('misyon')}
               </p >
             </div>
