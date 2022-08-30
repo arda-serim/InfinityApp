@@ -18,12 +18,13 @@ const cardStyle = {
    height: "400px",
    justifyContent: "center",
    alignItems: "center",
-   background: "rgba(0, 0, 0, 0)",
-   border: "none",
-   marginLeft: "20%",
+   background: "rgba(255, 255, 255)",
+   borderRadius: 20,
+   borderWidth: 0,
+   paddingLeft: 20,
    marginTop: "1%",
 
-};
+} as React.CSSProperties;
 
 const boxStyle = {
 };
@@ -61,12 +62,12 @@ const PieChartComponent = ({ data }: { data: Array<DataType> }) => {
       },
       legend: {
          visible: true,
-         offsetX:-10,
+         offsetX: -10,
          label: {
             style: {
-               fill: 'white',
-                color: '#fff',
-         },
+               fill: 'red',
+               color: '#fff',
+            },
 
          },
       },
@@ -75,7 +76,10 @@ const PieChartComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={boxStyle} >
          <Card style={cardStyle}>
-            <Pie {...config} />
+            <span style={{ position: "absolute", left: 0, top: 0, right: 0, textAlign: "center" }}>Toplam dağılım</span>
+            <div style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}>
+               <Pie {...config} />
+            </div>
          </Card>
       </div >
    );
