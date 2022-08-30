@@ -176,52 +176,54 @@ function Childedit() {
           </Row>
         </Col>
         <Col span={12}>
-          <Form
-            name="basic"
-            // solda label kısımlarına 24 te 8 ayırıyorum
-            labelCol={{ span: 8 }}
-            // sağda input kısımlarına 24 te 12 ayırıyorum kalan 4 lük kısım sola geçiyor
-            wrapperCol={{ span: 12 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <Form.Item
-              label={<span style={{ color: "white" }}>{ML('ad').props.children}</span>}
-              name="name"
-              rules={[{ required: true, message: 'Please input your username!' }]}
+          <Row justify='center' align='middle' style={{ height: "100%", width: "100%" }}>
+            <Form
+              name="basic"
+              // solda label kısımlarına 24 te 8 ayırıyorum
+              labelCol={{ span: 8 }}
+              // sağda input kısımlarına 24 te 12 ayırıyorum kalan 4 lük kısım sola geçiyor
+              wrapperCol={{ span: 12 }}
+              onFinish={onFinish}
+              style={{ width: "100%" }}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
             >
-              <Input />
-            </Form.Item>
+              <Form.Item
+                label={<span style={{ color: "white" }}>{ML('ad').props.children}</span>}
+                name="name"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
+                <Input />
+              </Form.Item>
 
-            <Form.Item
-              label={<span style={{ color: "white" }}>{ML('erisimTarihi').props.children}</span>}
-              name="releaseTime"
-              rules={[{ required: true, message: ML('input2') }]}
-            >
-              <DatePicker style={{ width: "100%" }} />
-            </Form.Item>
+              <Form.Item
+                label={<span style={{ color: "white" }}>{ML('erisimTarihi').props.children}</span>}
+                name="releaseTime"
+                rules={[{ required: true, message: ML('input2') }]}
+              >
+                <DatePicker style={{ width: "100%" }} />
+              </Form.Item>
 
-            <Form.Item
-              label={<span style={{ color: "white" }}>{ML('walletAdres').props.children}</span>}
-              name="walletAddress"
-              rules={[
-                { required: true, message: ML('input3') },
-                { min: 42, message: ML('input4') }
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button style={buttonStyle1} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
-                {ML('vazgec')}
-              </Button>
-              <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
-                {ML('kaydet')}
-              </Button>
-            </Form.Item>
-          </Form>
+              <Form.Item
+                label={<span style={{ color: "white" }}>{ML('walletAdres').props.children}</span>}
+                name="walletAddress"
+                rules={[
+                  { required: true, message: ML('input3') },
+                  { min: 42, message: ML('input4') }
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button style={buttonStyle1} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
+                  {ML('vazgec')}
+                </Button>
+                <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
+                  {ML('kaydet')}
+                </Button>
+              </Form.Item>
+            </Form>
+          </Row>
         </Col>
       </Row>
     </Layout>

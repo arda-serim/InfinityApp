@@ -94,6 +94,6 @@ a.ant-typography:hover {
 
 .ant-form-item-explain-error {
    color: #ff4d4f;
-   margin-left: 230px;
+   /* margin-left: 230px; */
    width: max-content;
 }
