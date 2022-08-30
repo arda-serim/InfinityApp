@@ -81,7 +81,12 @@ export const langs = {
         onyuz : 'Ön yüz ekip üyesi',
         analist : 'İş analisti',
         po : 'Ürün sahibi',
-        agile : 'Agile koç'
+        agile : 'Agile koç',
+        select: 'Lütfen kullanmak istediğiniz hesabı seçiniz',
+        account1: 'Interitance Hesabım',
+        account2: 'Metamask Cüzdanım',
+        toaccount1: 'Interitance Hesabıma Aktar',
+        toaccount2: 'Metamask Cüzdanıma Aktar',
 
 
     },
@@ -166,8 +171,12 @@ export const langs = {
         onyuz : 'Frontend team member',
         analist : 'Business analyst',
         po : 'Product owner',
-        agile : 'Agile coach'
-
+        agile : 'Agile coach',
+        select:'Please select the account you want to use',
+        account1: 'Interitance Account',
+        account2: 'Metamask Wallet',
+        toaccount1: 'Trasanfer to my Interitance Account',
+        toaccount2: 'Transfer to my Metamask Wallet',
 
     }
 }

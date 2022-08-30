@@ -59,10 +59,27 @@ export const sendMoneyToChild = async (amount: any, address: any) => {
 
 }
 
+export const sendMoneyToChildFromWallet = async (amount: any, address: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.sendMoneyToChildFromWallet(address, {value: ethers.utils.parseEther(amount)})
+
+   await tx.wait();
+
+}
+
 export const withdrawMoneyByParentFromChild = async (amount: any, address: any) => {
    const { signerAddress, contract } = await connectToMetamask();
 
    const tx = await contract.withdrawMoneyByParentFromChild(address, ethers.utils.parseEther(amount))
+
+   await tx.wait();
+}
+
+export const withdrawMoneyByParentToWallet = async (amount: any, address: any) => {
+   const { signerAddress, contract } = await connectToMetamask();
+
+   const tx = await contract.withdrawMoneyByParentToWallet(address, ethers.utils.parseEther(amount))
 
    await tx.wait();
 }

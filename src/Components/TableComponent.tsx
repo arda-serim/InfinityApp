@@ -3,7 +3,7 @@ import { Button, DatePicker, Input, Modal, Space, Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from 'moment';
-import { changeReleaseTime, sendMoneyToChild, withdrawMoneyByParentFromChild } from '../contract/functions';
+import { changeReleaseTime, sendMoneyToChild, sendMoneyToChildFromWallet, withdrawMoneyByParentFromChild, withdrawMoneyByParentToWallet } from '../contract/functions';
 import { ML } from '../App';
 import ModalComponent from './ModalComponent';
 
@@ -60,6 +60,7 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    let navigate = useNavigate();
    const [error, setError] = useState();
    const [date, setDate] = useState();
+   const [childAddress, setChildAddress] = useState();
 
    function onAddChild() {
       navigate("/childedit");
@@ -69,7 +70,8 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    const [amountWithdraw, setAmountWithdraw] = useState();
    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
    const [isLoading, setIsLoading] = useState(false);
-
+   const [showToChildModal, setShowToChildModal] = useState(false);
+   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
 
    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
       setSelectedRowKeys(newSelectedRowKeys);
@@ -90,9 +92,15 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
    }
 
    const sendToChild = async (address: any) => {
+      setChildAddress(address)
+      setShowToChildModal(true);
+   }
+
+   const interitanceAccount = async () => {
+      setShowToChildModal(false);
       try {
          setIsLoading(true);
-         await sendMoneyToChild(amount, address);
+         await sendMoneyToChild(amount, childAddress);
          setIsLoading(false);
          window.location.reload();
       }
@@ -109,29 +117,79 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
          }
          setIsLoading(false);
       }
+   }
 
+   const metamaskWallet = async () => {
+      setShowToChildModal(false);
+      try {
+         setIsLoading(true);
+         await sendMoneyToChildFromWallet(amount, childAddress);
+         setIsLoading(false);
+         window.location.reload();
+      }
+      catch (error: any) {
+         const activeLanguage = localStorage.getItem("i18nextLng");
+
+         console.log("error: ", error);
+
+         if (activeLanguage === 'en') {
+            setError(error)
+         } else {
+            setError(error)
+         }
+         setIsLoading(false);
+      }
+   }
+
+   const toInteritanceAccount = async () => {
+      setShowWithdrawModal(false);
+      try {
+         setIsLoading(true);
+         await withdrawMoneyByParentFromChild(amountWithdraw, childAddress);
+         setIsLoading(false);
+         window.location.reload();
+      }
+      catch (error: any) {
+         const activeLanguage = localStorage.getItem("i18nextLng");
+         const errorMessage = (error.reason.split(":"))[1]
+         const messageEN = errorMessage.split("TR")[0]
+         const messageTR = errorMessage.split("TR")[1]
+
+         if (activeLanguage === 'en') {
+            setError(messageEN)
+         } else {
+            setError(messageTR)
+         }
+         setIsLoading(false);
+      }
+   }
+
+   const toMetamaskWallet = async () => {
+      setShowWithdrawModal(false);
+      try {
+         setIsLoading(true);
+         await withdrawMoneyByParentToWallet(amountWithdraw, childAddress);
+         setIsLoading(false);
+         window.location.reload();
+      }
+      catch (error: any) {
+         const activeLanguage = localStorage.getItem("i18nextLng");
+         const errorMessage = (error.reason.split(":"))[1]
+         const messageEN = errorMessage.split("TR")[0]
+         const messageTR = errorMessage.split("TR")[1]
+
+         if (activeLanguage === 'en') {
+            setError(messageEN)
+         } else {
+            setError(messageTR)
+         }
+         setIsLoading(false);
+      }
    }
 
    const withdrawBackHandler = async (address: any) => {
-      try {
-         setIsLoading(true);
-         await withdrawMoneyByParentFromChild(amountWithdraw, address);
-         setIsLoading(false);
-         window.location.reload();
-      }
-      catch (error: any) {
-         const activeLanguage = localStorage.getItem("i18nextLng");
-         const errorMessage = (error.reason.split(":"))[1]
-         const messageEN = errorMessage.split("TR")[0]
-         const messageTR = errorMessage.split("TR")[1]
-
-         if (activeLanguage === 'en') {
-            setError(messageEN)
-         } else {
-            setError(messageTR)
-         }
-         setIsLoading(false);
-      }
+      setChildAddress(address)
+      setShowWithdrawModal(true);
    }
 
    const onClickDate = async (address: any) => {
@@ -249,10 +307,31 @@ const TableComponent = ({ data }: { data: Array<DataType> }) => {
       setError();
    }
 
+   const clearModal = () => {
+      //@ts-ignore
+      setShowWithdrawModal();
+   }
+
+   const clearModalTwo = () => {
+      //@ts-ignore
+      setShowToChildModal();
+   }
    return (
       <div style={mystyle}>
          {
-            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true}/>
+            showWithdrawModal && <ModalComponent title={ML('select')} modalVisibility={true} message={<>
+               <Button onClick={toInteritanceAccount}>{ML('toaccount1')}</Button>
+               <Button onClick={toMetamaskWallet} style={{ marginLeft: '10px' }} >{ML('toaccount2')}</Button>
+            </>} style={{ textAlign: 'center' }} onClear={clearModal} />
+         }
+         {
+            showToChildModal && <ModalComponent title={ML('select')} modalVisibility={true} message={<>
+               <Button onClick={interitanceAccount}>{ML('account1')}</Button>
+               <Button onClick={metamaskWallet} style={{ marginLeft: '10px' }} >{ML('account2')}</Button>
+            </>} style={{ textAlign: 'center' }} onClear={clearModalTwo} />
+         }
+         {
+            isLoading && <ModalComponent title={ML('loading')} modalVisibility={true} message={<Spin />} style={{ textAlign: 'center' }} loading={true} />
          }
          {
             error && <ModalComponent title={ML('errorOccured')} modalVisibility={true} message={error} style={{ color: 'red' }} onClear={clearError} buttons={true} />

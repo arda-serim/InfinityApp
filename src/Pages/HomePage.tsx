@@ -166,6 +166,8 @@ const HomePage = () => {
                  }  
                  else if (role === 'child') {
                  navigate('/childpage');
+                 } else if(role === 'admin') {
+                  navigate('/admin')
                  }
                  else {
                    navigate('/signin');
