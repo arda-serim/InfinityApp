@@ -18,7 +18,7 @@ import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import { addParent } from '../contract/functions';
 import LangContext, { langs } from './LangugeContext';
-import { Typography, Layout, Row, Col, Input, Checkbox, Button, Spin } from 'antd';
+import { Typography, Layout, Row, Col, Input, Checkbox, Button, Spin, Form } from 'antd';
 import { ML } from '../App';
 import Navbar from '../Components/Navbar';
 import ModalComponent from '../Components/ModalComponent';
@@ -95,6 +95,7 @@ const logoStyle = {
 const { Header, Content } = Layout;
 
 const Signin = () => {
+  const [form] = Form.useForm();
   let rememberMe = false;
   let navigate = useNavigate();
   let users = [{ name: "", surname: "", role: "", balance: "", address: "", children: [{ name: "", surname: "", role: "", balance: "", address: "", age: "", receivalDate: "" }] }];
@@ -171,8 +172,13 @@ const Signin = () => {
     setError('');
   }
 
-  return (
+  const onFinish = () => {
+    console.log("deneme")
+    OnSignIn()
+ };
 
+  return (
+  <body className="signin">
     <>
 
       {
@@ -222,8 +228,23 @@ const Signin = () => {
                   <div style={whitePlaceStyle}>
                     <Title level={2} style={{ color: '#0A103A', marginRight: '230px' }}>{ML('ad')}</Title>
                   </div>
+                  <Form 
+                    form={form} 
+                    onFinish={onFinish}
+                    labelCol={{
+                      span: 8,
+                    }}
+                    wrapperCol={{
+                      span: 16,
+                    }}
+                    >
                   <div style={whitePlaceStyle}>
+                  <Form.Item
+                    name="Name"
+                    rules = {[{required:true, message:ML('input5'), whitespace: true}]}
+                    >
                     <Input style={inputStyle} type='text' placeholder={ML('ad').props.children} value={name} onChange={handleNameChange} />
+                  </Form.Item>
                   </div>
                   <br>
                   </br>
@@ -231,7 +252,12 @@ const Signin = () => {
                     <Title level={2} style={{ color: '#0A103A', marginRight: '200px' }}>{ML('soyad')}</Title>
                   </div>
                   <div style={whitePlaceStyle}>
+                  <Form.Item
+                    name="surname"
+                    rules = {[{required:true, message:ML('input6'), whitespace: true}]}
+                  > 
                     <Input style={inputStyle} type='text' placeholder={ML('soyad').props.children} value={surname} onChange={handleSurnameChange} />
+                  </Form.Item>
                   </div>
                   <br>
                   </br>
@@ -241,9 +267,10 @@ const Signin = () => {
                   <br>
                   </br>
                   <div style={whitePlaceStyle}>
-                    <Button onClick={OnSignIn} size="large" style={signInButtonStyle} shape='round'>
+                    <Button size="large" style={signInButtonStyle} shape='round' type="primary" htmlType="submit">
                       {ML('kayıtol')}</Button>
                   </div>
+                  </Form>
                 </Col>
               </Row>
             </div>
@@ -251,6 +278,7 @@ const Signin = () => {
         </div>
       </Layout>
     </>
+    </body>
   );
 }
 

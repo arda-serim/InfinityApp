@@ -103,7 +103,6 @@ function Childedit() {
     setError();
   }
   const onFinish = () => {
-    console.log('deneme1')
      addChildHandler()
   };
 
