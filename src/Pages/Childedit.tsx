@@ -1,7 +1,7 @@
 import Navbar from '../Components/NavbarChildPage';
 import React from 'react';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { Col, Row, Slider, Spin, Form, Select } from 'antd';
+import { Col, Row, Slider, Spin, Form, Select, DatePicker } from 'antd';
 import { useState } from 'react';
 import { Button, Image, Space, Empty, Input, Radio, } from 'antd';
 import logo from '../images/logo_infinity.png';
@@ -30,8 +30,8 @@ const inputStyle = {
 };
 
 const contentStyle = {
-  witdh: '100%',
-  height: '100%',
+  witdh: '100vw',
+  height: '100vh',
   minHeight: '700px'
 };
 
@@ -109,20 +109,20 @@ function Childedit() {
     //@ts-ignore
     setError();
   }
-  const onFinish = () => {
-    addChildHandler()
-  };
 
-  const addChildHandler = async () => {
+
+  const onFinish = async (values: any) => {
+    console.log('Success:', values);
+    // walletAddress releaseTime name
     // @ts-ignore
-    const date = new Date(releaseTime);
+    const date = new Date(values.releaseTime);
 
     // @ts-ignore
     const releaseTimeInSeconds = Math.floor(date.getTime() / 1000);
 
     try {
       setIsLoading(true);
-      await addChild(name, releaseTimeInSeconds, address);
+      await addChild(values.name, releaseTimeInSeconds, values.walletAddress);
       setIsLoading(false);
       navigate("/parent");
     }
@@ -139,7 +139,11 @@ function Childedit() {
       }
       setIsLoading(false);
     }
-  }
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
     <Layout style={{ background: 'linear-gradient(179.94deg, #0A368B 50.02%, #3B82A0 99.95%)' }}>
       {
@@ -162,71 +166,64 @@ function Childedit() {
       <div>
         <Navbar />
       </div>
-      <Form
-        form={form}
-        onFinish={onFinish}
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-      >
-        <div style={contentStyle}>
-          <Content>
-            <div>
-              <Row gutter={[16, 8]}>
-                <div>
-                  <Col span={12}>
-                    <div style={fotoStyle}>
-                      <img src={edit} alt="edit" style={{ width: '530px', height: '400px' }} />
-                    </div>
-                  </Col>
-                </div>
-                <div>
-                  <Col span={12}>
-                    <div style={{ marginTop: '30%' }} >
-                      <Form.Item
-                        name="Name"
-                        rules={[{ required: true, message: ML('input1') }]}
-                      >
-                        <Input style={inputStyle} placeholder={ML('ad').props.children} onChange={(e: any) => setName(e.target.value)} />
-                      </Form.Item>
-                    </div>
-                    <div >
-                      <Form.Item name="date-picker" rules={[{ required: true, message: ML('input2') }]}>
-                        <Input style={inputStyle} placeholder={ML('erisimTarihi').props.children} type="date" onChange={(e: any) => setReleaseTime(e.target.value)} />
-                      </Form.Item>
-                    </div>
-                    <div >
-                      <Form.Item
-                        name="wallet adress"
-                        rules={[
-                          { required: true, message: ML('input3') },
-                          { min: 42, message: ML('input4') }
-                        ]}
-                      >
-                        <Input style={inputStyle} placeholder={ML('walletAdres').props.children} onChange={(e: any) => setAddress(e.target.value)} />
-                      </Form.Item>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '270px', marginTop: "7%" }}>
-                      <Button style={buttonStyle1} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
-                        {ML('vazgec')}
-                      </Button>
-                      <Form.Item>
-                        <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
-                          {ML('kaydet')}
-                        </Button>
-                      </Form.Item>
-                    </div>
+      {/* yukarıdaki navbar sayfanın %10 luk kısmını doldurğu için burada 90 lık ksımı dolduruyoruz */}
+      <Row style={{ height: "90vh" }}>
+        {/* sayfayı ikiye bölüyorum */}
+        <Col span={12} >
+          {/* Burada içerisine attığım resmin justify ile sağa sona gelmesini align ile dikeyde ortalamaya height 100% ile de bir yukarıdaki row'da verdim parentin tamamını kapsamasını sağlıyorum. */}
+          <Row justify='end' align='middle' style={{ height: "100%" }}>
+            <img src={edit} alt="edit" style={{ width: '530px', height: '400px' }} />
+          </Row>
+        </Col>
+        <Col span={12}>
+          <Form
+            name="basic"
+            // solda label kısımlarına 24 te 8 ayırıyorum
+            labelCol={{ span: 8 }}
+            // sağda input kısımlarına 24 te 12 ayırıyorum kalan 4 lük kısım sola geçiyor
+            wrapperCol={{ span: 12 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label={<span style={{ color: "white" }}>{ML('ad').props.children}</span>}
+              name="name"
+              rules={[{ required: true, message: 'Please input your username!' }]}
+            >
+              <Input />
+            </Form.Item>
 
-                  </Col>
-                </div>
-              </Row>
-            </div>
-          </Content>
-        </div>
-      </Form>
+            <Form.Item
+              label={<span style={{ color: "white" }}>{ML('erisimTarihi').props.children}</span>}
+              name="releaseTime"
+              rules={[{ required: true, message: ML('input2') }]}
+            >
+              <DatePicker style={{ width: "100%" }} />
+            </Form.Item>
+
+            <Form.Item
+              label={<span style={{ color: "white" }}>{ML('walletAdres').props.children}</span>}
+              name="walletAddress"
+              rules={[
+                { required: true, message: ML('input3') },
+                { min: 42, message: ML('input4') }
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button style={buttonStyle1} type="primary" shape="round" size={size} onClick={cancelAddingChildHandler}>
+                {ML('vazgec')}
+              </Button>
+              <Button style={buttonStyle} type="primary" htmlType="submit" shape="round" size={size} >
+                {ML('kaydet')}
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
     </Layout>
   );
 }
