@@ -132,20 +132,23 @@ const HomePage = () => {
    let navigate = useNavigate();
 
    // if there is session send to next page
-   // React.useEffect(() => {
+   React.useEffect(() => {
 
-   //    let session;
-   //    if (localStorage.getItem('user')) {
-   //       session = localStorage.getItem('user')
-   //    }
-   //    else if (sessionStorage.getItem('user')) {
-   //       session = sessionStorage.getItem('user')
-   //    }
-   //    if (session) {
-   //       let role = JSON.parse(session).role;
-   //       role === 'parent' ? navigate('/parent') : navigate('/ChildPage');
-   //    }
-   // }, []);
+      const handleContinueSession = async () => {
+
+         let role = await getRole();
+         if (role === 'admin') {
+            navigate('/admin');
+         } else if (role === 'child') {
+            navigate('/childpage');
+         }
+         else if (role === 'parent') {
+            navigate('/parent');
+         }
+      }
+      handleContinueSession();
+
+   }, []);
 
 
    const [errorMessage, setErrorMessage] = useState('');
@@ -233,49 +236,49 @@ const HomePage = () => {
                   </Row>
                </div>
                <div style={contentStyle}>
-               <Row gutter={[24, 8]}>
-                 
-                  <Col span={12}  >
-                     
-                     <div style={{width : '400px' , height : '400px' , borderRadius: '200px' , background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)',zIndex : 1  , marginLeft : '20%' , marginTop: '10%'}}>
-                     <img src={test1} style={{width: '300px' , height : '300px' , marginLeft: '10%' , marginTop : '10%', zIndex :2}}/>
-                     </div>
-                     
-                  </Col>
-                  <Col span={12} >
-                     <p style={{ color : 'white' , marginLeft : '20%' , fontSize : '20px' , marginTop : '10%'}}>
-                       {ML('why')}
-                     </p>
-                     <p style={{marginTop : '5%' , color : 'white' , marginRight : '20%' , fontSize : '20px'}} >
-                        <p>
-                       {ML('p1')}
+                  <Row gutter={[24, 8]}>
+
+                     <Col span={12}  >
+
+                        <div style={{ width: '400px', height: '400px', borderRadius: '200px', background: 'linear-gradient(180deg, #EFAA45 0%, rgba(217, 217, 217, 0) 100%)', zIndex: 1, marginLeft: '20%', marginTop: '10%' }}>
+                           <img src={test1} style={{ width: '300px', height: '300px', marginLeft: '10%', marginTop: '10%', zIndex: 2 }} />
+                        </div>
+
+                     </Col>
+                     <Col span={12} >
+                        <p style={{ color: 'white', marginLeft: '20%', fontSize: '20px', marginTop: '10%' }}>
+                           {ML('why')}
                         </p>
-                        <p>
-                        {ML('p2')}
+                        <p style={{ marginTop: '5%', color: 'white', marginRight: '20%', fontSize: '20px' }} >
+                           <p>
+                              {ML('p1')}
+                           </p>
+                           <p>
+                              {ML('p2')}
+                           </p>
+                           <p>
+                              {ML('p3')}
+                           </p>
+                           <p>
+                              {ML('p4')}
+                           </p>
+                           <p>
+                              {ML('p5')}
+                           </p>
+                           <p>
+                              {ML('p6')}
+                           </p>
                         </p>
-                        <p>
-                        {ML('p3')}
-                        </p>
-                        <p>
-                        {ML('p4')}
-                        </p>
-                        <p>
-                        {ML('p5')}
-                        </p>
-                        <p>
-                        {ML('p6')}
-                        </p>
-                        </p>
-                    
-                    
-                    
-                     
-                    
-                   
-                  </Col>
-                  
-              
-               </Row>
+
+
+
+
+
+
+                     </Col>
+
+
+                  </Row>
                </div>
 
 
