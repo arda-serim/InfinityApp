@@ -52,7 +52,7 @@ export const langs = {
         withdraweth : 'Ethereum çek',
         sendeth: 'Ethereum yatır',
         withdrawback : 'Geri çek',
-        para: 'Mevcut Para(ETH)',
+        para: 'Mevcut Bakiyesi(ETH)',
         gönderilen: 'Gönderilen Miktar(ETH)',
         tutar: 'Gönderilecek / Çekilecek Tutar',
         adres: 'Cüzdan Adresi',

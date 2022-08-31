@@ -15,11 +15,11 @@ interface DataType {
 const cardStyle = {
    display: "flex",
    width: "400px",
-   height: "400px",
+   height: "350px",
    justifyContent: "center",
    alignItems: "center",
    background: "rgba(255, 255, 255)",
-   borderRadius: 20,
+   borderRadius: 80,
    borderWidth: 0,
    paddingLeft: 20,
    marginTop: "1%",
@@ -76,8 +76,7 @@ const PieChartComponent = ({ data }: { data: Array<DataType> }) => {
    return (
       <div style={boxStyle} >
          <Card style={cardStyle}>
-            <span style={{ position: "absolute", left: 0, top: 0, right: 0, textAlign: "center" }}>Toplam dağılım</span>
-            <div style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}>
+            <div >
                <Pie {...config} />
             </div>
          </Card>
