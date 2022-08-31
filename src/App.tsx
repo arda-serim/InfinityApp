@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import ParentPage from "./Pages/ParentPage";
 import Signin from "./Pages/Signin";
@@ -18,7 +18,6 @@ import { Dropdown, Typography, Space, Menu } from "antd";
 import menu from "antd/lib/menu";
 import AdminPage from "./Pages/AdminPage";
 import { ethers } from "ethers";
-import { getRole } from "./contract/functions";
 
 
 
@@ -84,18 +83,8 @@ export function Language() {
 }
 
 function App() {
-  let navigate = useNavigate();
 
   useEffect(() => {
-
-    const handleAccountsChanged = async (accounts: any) => {
-      navigate('/');
-    }
-
-    // @ts-ignore
-    window.ethereum.on('accountsChanged', handleAccountsChanged);
-
-
     const reload = async () => {
       //@ts-ignore
       const provider = new ethers.providers.Web3Provider(window.ethereum);
